@@ -1,19 +1,23 @@
-// src/components/Footer.js
 import React from 'react';
 import './Footer.css';
-import logo from '../logo.svg';
+import mainEVImg from '../assets/images/mainEVImg.png';
 
-function Footer() {
+const Footer = () => {
   return (
-    <footer>
-      <img src={logo} alt="Company Logo" className="footer-logo" />
-      <div className="footer-text">
-        <p>COPYRIGHT &copy; CREEPER. All RIGHTS RESERVED.</p>
-        <p>경기도 용인시 기흥구 강남로 40 강남대학교</p>
+    <footer className='footer'>
+      <div className='contents'>
+        <img
+          src={mainEVImg}
+          width='60px'
+          alt=''></img>
+        <h2 className='copyright'>
+          COPYRIGHT © CREEPER. ALL RIGHTS RESERVED.
+          <br />
+          경기도 용인시 기흥구 강남로 40 강남대학교
+        </h2>
       </div>
-     
     </footer>
   );
-}
+};
 
 export default Footer;

@@ -1,13 +1,17 @@
-import React from "react";
-import logo3 from "../images/logo3.JPG";
-import { Searchbar } from "./Searchbar";
-import Hyundaimodel from "./Hyundaimodel";
-import Swipertest from "./Swipertest";
-import Kiamodel from "./Kiamodel";//승준 수정
+import React from 'react';
+
+import MainCar from './MainCar';
+import { Searchbar } from './Searchbar';
+import Hyundaimodel from './Hyundaimodel';
+import Swipertest from './Swipertest';
+import Kiamodel from './Kiamodel';
+
+// 스타일을 객체로 분리
+
 function Main() {
   return (
     <div>
-      <img src={logo3} width="100%" height="600px" alt="logo3" />
+      <MainCar />
       <Searchbar />
       <Hyundaimodel />
       <Kiamodel />

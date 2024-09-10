@@ -1,10 +1,9 @@
 .navbar {
   width: 100%;
-  background-color: black;
+  background-color: orange;
   padding: 15px 0px;
   display: flex;
-  align-items: center; /* 세로 가운데 정렬 */
-  border: 2px solid;
+  align-items: center;
 }
 
 .navbarMenu {
@@ -17,7 +16,7 @@
 }
 
 .navbar img {
-  margin-right: 20px; /* 로고와 메뉴 사이 간격 조정 */
+  margin: 20px; /* 로고와 메뉴 사이 간격 조정 */
 }
 
 .divider {
