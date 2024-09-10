@@ -1,45 +1,21 @@
-/* src/components/Footer.css */
-footer {
-  background-color: #CBCBCB;
-  color: #696969;
-  display: flex;
-  align-items: center; /* 세로 방향 중앙 정렬 */
+.footer {
+  height: 150px;
+  background-color: #dde0ea;
+}
+
+.contents {
   width: 100%;
-  height: 264px;
-  padding: 0 115px; /* 푸터의 좌우 패딩 설정 */
-  box-sizing: border-box; /* 패딩을 포함한 총 너비 계산 */
-  position: relative;
-}
-
-footer img.footer-logo {
-  height: 100px; /* 로고의 높이 설정 */
-  width: auto; /* 비율 유지 */
-  position: absolute;
-  left: 115px;
-}
-
-.footer-text {
+  max-width: 1500px; /* 전체 푸터의 최대 너비를 설정 */
+  height: 100%;
   display: flex;
-  flex-direction: column ;
-  align-items: flex-end;
+  align-items: center; /* 수직 가운데 정렬 */
+  justify-content: space-between; /* 양 끝에 배치 */
+  margin: 0 auto;
+  padding: 0 20px; /* 왼쪽과 오른쪽에 약간의 패딩을 추가 */
+}
+
+.copyright {
+  font-size: 12px;
   text-align: right;
-  position: absolute;
-  right: 115px;
-}
-
-.footer-text p:first-child {
-  font-family: "Wanted Sans";
-  font-size: 20px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: normal;
-  letter-spacing: -0.6px;
-  color: var(--Sub-Text1, #696969);
-  margin: 0; /* 기본 마진 제거 */
-}
-
-.footer-text p:last-child {
-  color: #989898;
-  font-weight: 500;
-  margin: 0;
+  white-space: pre-wrap; /* 줄바꿈 허용 */
 }

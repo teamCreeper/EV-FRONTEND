@@ -1,0 +1,11 @@
+.root {
+  font-family: 'Pretendard';
+}
+
+.App {
+  width: auto;
+  height: 3628px;
+
+  margin: 0;
+  padding: 0;
+}

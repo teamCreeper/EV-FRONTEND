@@ -1,20 +1,20 @@
-import React from "react";
-import hyundai from "../images/hyundai.png";
-import "./Hyundaimodel.css";
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import "swiper/css/navigation";
-import { Navigation } from "swiper/modules";
-import styled from "styled-components";
-import ioniq6 from "../images/ioniq6.png";
+import React from 'react';
+import hyundai from '../assets/images/hyundai.png';
+import './Hyundaimodel.css';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import { Navigation } from 'swiper/modules';
+import styled from 'styled-components';
+import ioniq6 from '../assets/images/ioniq6.png';
 
 const images = [
-  { id: 1, src: ioniq6, alt: "아이오닉6" },
-  { id: 2, src: ioniq6, alt: "아이오닉66" },
-  { id: 3, src: ioniq6, alt: "아이오닉666" },
-  { id: 4, src: ioniq6, alt: "아이오닉666" },
-  { id: 5, src: ioniq6, alt: "아이오닉6666" },
-  { id: 6, src: ioniq6, alt: "아이오닉66666" },
+  { id: 1, src: ioniq6, alt: '아이오닉6' },
+  { id: 2, src: ioniq6, alt: '아이오닉66' },
+  { id: 3, src: ioniq6, alt: '아이오닉666' },
+  { id: 4, src: ioniq6, alt: '아이오닉666' },
+  { id: 5, src: ioniq6, alt: '아이오닉6666' },
+  { id: 6, src: ioniq6, alt: '아이오닉66666' },
 ];
 
 const StyledSwiper = styled(Swiper)`
@@ -47,9 +47,7 @@ const StyledSwiper = styled(Swiper)`
     position: absolute; /* 부모인 .image-container를 기준으로 절대 위치 지정 */
     top: 200px; /* 캡션이 이미지 위에 정확한 위치에 오도록 설정 */
     left: 50%; /* 캡션을 수평으로 가운데 정렬 */
-    transform: translateX(
-      -50%
-    ); /* 캡션의 중심을 정확히 이미지 컨테이너의 수평 중앙에 맞추기 위해 왼쪽으로 50% 이동 */
+    transform: translateX(-50%); /* 캡션의 중심을 정확히 이미지 컨테이너의 수평 중앙에 맞추기 위해 왼쪽으로 50% 이동 */
     color: white; /* 캡션 텍스트의 색상을 검정색으로 설정 */
     padding: 5px 10px; /* 캡션 텍스트 주변에 약간의 여백을 추가 */
     font-size: 23px; /* 캡션 텍스트의 크기를 14px로 설정 */
@@ -63,40 +61,46 @@ const StyledSwiper = styled(Swiper)`
 
 function Hyundaimodel() {
   return (
-    <div className="hyundai1">
-      <h1 className="allmodel">전체 모델 보기</h1>
-      <div className="hyundaiswiper">
-        <div className="hyundailogo-container">
+    <div className='hyundai1'>
+      <h1 className='allmodel'>전체 모델 보기</h1>
+      <div className='hyundaiswiper'>
+        <div className='hyundailogo-container'>
           <img
             src={hyundai}
-            width="180px"
-            alt="hyundai"
-            className="hyundailogo"
+            width='180px'
+            alt='hyundai'
+            className='hyundailogo'
           />
-          <span className="hyundaikor">현대</span>
+          <span className='hyundaikor'>현대</span>
         </div>
-        <StyledSwiper navigation modules={[Navigation]} className="mySwiper">
+        <StyledSwiper
+          navigation
+          modules={[Navigation]}
+          className='mySwiper'>
           {images.map((_, idx) => {
             return (
               idx % 3 === 0 && (
                 <SwiperSlide key={idx}>
-                  <div className="image-container">
-                    <img src={images[idx].src} alt={images[idx].alt} />
-                    <div className="caption">{images[idx].alt}</div>
+                  <div className='image-container'>
+                    <img
+                      src={images[idx].src}
+                      alt={images[idx].alt}
+                    />
+                    <div className='caption'>{images[idx].alt}</div>
                   </div>
-                  <div className="image-container">
+                  <div className='image-container'>
                     <img
                       src={images[idx + 1]?.src}
                       alt={images[idx + 1]?.alt}
                     />
-                    <div className="caption">{images[idx + 1]?.alt}</div>
+                    <div className='caption'>{images[idx + 1]?.alt}</div>
                   </div>
-                  <div className="image-container">
+                  <div className='image-container'>
                     <img
                       src={images[idx + 2]?.src}
                       alt={images[idx + 2]?.alt}
                     />
-                    <div className="caption">{images[idx + 2]?.alt}</div>
+                    <div className='caption'>{images[idx + 2]?.alt}</div>
                   </div>
                 </SwiperSlide>
               )
