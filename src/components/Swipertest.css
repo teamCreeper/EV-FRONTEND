@@ -1,0 +1,10 @@
+.imgcar {
+  width: 100%;
+  background-color: white;
+  padding: 15px 0px;
+  display: flex;
+  align-items: center; /* 세로 가운데 정렬 */
+  border: 2px solid;
+  display: flex;
+  flex-direction: column;
+}

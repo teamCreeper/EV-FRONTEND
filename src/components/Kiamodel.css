@@ -1,0 +1,44 @@
+.kiaswiper {
+  width: 1700px;
+  height: 300px;
+  background-color: black;
+  padding: 15px 0;
+  display: flex;
+  align-items: center; /* 세로 가운데 정렬 */
+  justify-content: center; /* 수평 가운데 정렬 */
+  border: 1px solid; /* border 속성을 통일성 있게 수정 */
+  margin-top: 50px;
+  margin-left: 50px;
+  position: relative; /* 자식 요소의 절대 위치를 기준으로 설정 */
+  margin: auto;
+}
+
+.kiaswiper:hover,
+.kiaswiper:hover .swiper-slide {
+  background-color: gray; /* 슬라이드 영역에 마우스를 올렸을 때 배경색 변경 */
+  transition: background-color 0.3s ease;
+}
+
+.kiakor {
+  color: white;
+  font-size: 30px;
+  margin-left: 100px; /* 로고와 텍스트 사이의 간격 조절 */
+  display: block;
+}
+
+.kialogo {
+  margin-left: 100px;
+  display: block;
+}
+
+.kialogo-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 20px; /* 스와이퍼와의 간격 조절 */
+  margin-top: 40px;
+}
+
+.kia1 {
+  margin-top: 40px;
+}
