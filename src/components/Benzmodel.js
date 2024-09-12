@@ -1,20 +1,20 @@
 import React from "react";
-import kialogo from "../assets/images/kialogo.png";
-import "./Kiamodel.css";
+import benzlogo from "../assets/images/benzlogo.png";
+import "./Benzmodel.css";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import { Navigation } from "swiper/modules";
 import styled from "styled-components";
-import ev6 from "../assets/images/ev6.png";
-import niroev from "../assets/images/niroev.png";
-import ev9 from "../assets/images/ev9.png";
+import eqe from "../assets/images/EQE.png";
+import eqs from "../assets/images/EQS.png";
+import eqa from "../assets/images/EQA.png";
 import ioniq6 from "../assets/images/ioniq6.png";
 
 const images = [
-  { id: 1, src: ev6, alt: "EV6" },
-  { id: 2, src: niroev, alt: "니로 EV" },
-  { id: 3, src: ev9, alt: "EV9" },
+  { id: 1, src: eqe, alt: "EQE" },
+  { id: 2, src: eqs, alt: "EQS" },
+  { id: 3, src: eqa, alt: "EQA" },
   { id: 4, src: ioniq6, alt: "아이오닉666" },
   { id: 5, src: ioniq6, alt: "아이오닉6666" },
   { id: 6, src: ioniq6, alt: "아이오닉66666" },
@@ -37,19 +37,19 @@ const StyledSwiper = styled(Swiper)`
   }
 `;
 
-function Kiamodel() {
+function Benzmodel() {
   return (
-    <div className="kia1">
-      <div className="kiaswiper">
-        <div className="kialogo-container">
+    <div className="benz1">
+      <div className="benzswiper">
+        <div className="benzlogo-container">
           <img
-            src={kialogo}
+            src={benzlogo}
             width="180px"
             height="100px"
-            alt="kia"
-            className="kialogo"
+            alt="benz"
+            className="benzlogo"
           />
-          <span className="kiakor">기아</span>
+          <span className="benzkor">벤츠</span>
         </div>
         <StyledSwiper navigation modules={[Navigation]} className="mySwiper">
           {images.map((_, idx) => {
@@ -58,21 +58,21 @@ function Kiamodel() {
                 <SwiperSlide key={idx}>
                   <div className="image-container">
                     <img src={images[idx].src} alt={images[idx].alt} />
-                    <div className="kia-caption">{images[idx].alt}</div>
+                    <div className="benz-caption">{images[idx].alt}</div>
                   </div>
                   <div className="image-container">
                     <img
                       src={images[idx + 1]?.src}
                       alt={images[idx + 1]?.alt}
                     />
-                    <div className="kia-caption">{images[idx + 1]?.alt}</div>
+                    <div className="benz-caption">{images[idx + 1]?.alt}</div>
                   </div>
                   <div className="image-container">
                     <img
                       src={images[idx + 2]?.src}
                       alt={images[idx + 2]?.alt}
                     />
-                    <div className="kia-caption">{images[idx + 2]?.alt}</div>
+                    <div className="benz-caption">{images[idx + 2]?.alt}</div>
                   </div>
                 </SwiperSlide>
               )
@@ -84,4 +84,4 @@ function Kiamodel() {
   );
 }
 
-export default Kiamodel;
+export default Benzmodel;
