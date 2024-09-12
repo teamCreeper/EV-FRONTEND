@@ -1,4 +1,4 @@
-.kiaswiper {
+.benzswiper {
   width: 100%;
   height: auto;
   background-color: black;
@@ -12,13 +12,13 @@
   overflow: hidden;
 }
 
-.kiaswiper:hover,
-.kiaswiper:hover .swiper-slide {
+.benzswiper:hover,
+.benzswiper:hover .swiper-slide {
   background-color: gray; /* 슬라이드 영역에 마우스를 올렸을 때 배경색 변경 */
   transition: background-color 0.3s ease;
 }
 
-.kiakor {
+.benzkor {
   margin-top: 20px;
   color: white;
   font-size: 30px;
@@ -26,13 +26,14 @@
   display: block;
 }
 
-.kialogo {
+.benzlogo {
+  height: 140px;
   margin-top: 30px;
   margin-left: 100px;
   display: block;
 }
 
-.kialogo-container {
+.benzlogo-container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -40,21 +41,22 @@
   margin-top: 40px;
 }
 
-.kia1 {
+.benz1 {
+  height: auto;
   margin-top: 40px;
   display: flex;
   justify-content: center;
 }
 
-.kia-caption {
+.benz-caption {
   position: absolute;
-  bottom: 0px; /* 이미지 하단에 맞추기 위해 조정 */
+  bottom: 20px; /* 이미지 하단에 맞추기 위해 조정 */
   left: 50%;
   transform: translateX(-50%);
   color: white;
   padding: 5px 10px;
   font-size: 1.5rem;
-  width: 90%;
+  width: 100%;
   text-align: center;
   background-color: rgba(0, 0, 0, 0.5);
 }
