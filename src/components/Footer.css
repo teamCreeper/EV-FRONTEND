@@ -4,7 +4,7 @@
 }
 
 .contents {
-  width: 100%;
+  width: auto;
   max-width: 1500px; /* 전체 푸터의 최대 너비를 설정 */
   height: 100%;
   display: flex;

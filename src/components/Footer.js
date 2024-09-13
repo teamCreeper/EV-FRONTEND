@@ -1,12 +1,12 @@
 import React from "react";
 import "./Footer.css";
-import mainEVImg from "../assets/images/mainEVImg.png";
+import MainEVlogo from "../assets/images/MainEVlogo.png";
 
 const Footer = () => {
   return (
     <footer className="footer">
       <div className="contents">
-        <img src={mainEVImg} width="60px" alt=""></img>
+        <img src={MainEVlogo} width="60px" alt=""></img>
         <h2 className="copyright">
           COPYRIGHT © CREEPER. ALL RIGHTS RESERVED.
           <br />

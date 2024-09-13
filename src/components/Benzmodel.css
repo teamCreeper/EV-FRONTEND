@@ -27,8 +27,8 @@
 }
 
 .benzlogo {
-  height: 140px;
-  margin-top: 30px;
+  height: 180px;
+  margin-top: 10px;
   margin-left: 100px;
   display: block;
 }
@@ -56,7 +56,7 @@
   color: white;
   padding: 5px 10px;
   font-size: 1.5rem;
-  width: 100%;
+  width: 90%;
   text-align: center;
   background-color: rgba(0, 0, 0, 0.5);
 }
