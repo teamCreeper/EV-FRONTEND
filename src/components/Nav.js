@@ -24,7 +24,7 @@ function Nav() {
       <Link
         className='navbarMenu'
         to={'/Carbattery'}>
-        전기차 배터리비교
+        전기차 배터리 조회
       </Link>
       <span className='divider'>|</span>
       <Link

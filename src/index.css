@@ -5,12 +5,19 @@
   padding: 0;
 }
 
-body {
-  font-family: 'Pretendard', sans-serif;
-  font-size: 16px;
-  line-height: 1.5;
+@font-face {
+  font-family: 'Pretendard';
+  src: url('./assets//fonts/Pretendard-Medium.ttf') format('woff');
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+@font-face {
+  font-family: 'JalnanGothic';
+  src: url('./assets/fonts//JalnanGothic.ttf') format('woff');
+}
+
+body {
+  font-family: 'Pretendard', 'JalnanGothic';
+  font-size: 16px;
+  line-height: 1.5;
+  margin: 0;
 }
