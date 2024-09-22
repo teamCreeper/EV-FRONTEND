@@ -1,9 +1,17 @@
 /* Hyundaimodel.css */
 
+.allmodel {
+  margin-top: 50px;
+  font-size: 60px;
+  letter-spacing: 7.8px;
+  font-weight: 400px;
+  font-family: 'JalnanGothic';
+}
+
 .hyundaiswiper {
   width: 100%;
   height: auto;
-  background-color: black;
+  background-color: #373737;
   padding: 15px 0;
   display: flex;
   align-items: center;
@@ -14,24 +22,13 @@
   overflow: hidden;
 }
 
-.hyundaiswiper:hover,
-.hyundaiswiper:hover .swiper-slide {
-  background-color: gray;
-  transition: background-color 0.3s ease;
-}
-
 .hyundaikor {
+  font-family: 'JalnanGothic';
   margin-top: 20px;
   color: white;
   font-size: 30px;
   margin-left: 100px;
   display: block;
-}
-
-.allmodel {
-  margin-top: 50px;
-  margin-left: 80px;
-  margin-bottom: 50px;
 }
 
 .hyundailogo {
@@ -43,17 +40,30 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-right: 20px;
-  margin-top: 40px;
+  margin-right: 50px;
+  margin-top: 30px;
 }
 
 .image-container {
   position: relative;
   width: 100%;
-  height: 300px; /* 이미지와 캡션을 위한 고정 높이 설정 */
+  height: 250px; /* 이미지와 캡션을 위한 고정 높이 설정 */
   text-align: center;
   padding: 10px;
   box-sizing: border-box; /* padding을 포함하여 높이 설정 */
+}
+
+/* 이미지와 캡션에 hover 시 같은 효과 적용 */
+.image-container:hover {
+  background-color: gray;
+  transition: background-color 0.5s ease;
+}
+
+/* image-container가 hover되면 캡션도 같이 변경되도록 설정 */
+.image-container:hover .hyundai-caption {
+  background-color: gray;
+  color: #ffffff;
+  transition: background-color 0.5s ease;
 }
 
 .image-container img {
@@ -72,5 +82,5 @@
   font-size: 1.5rem;
   width: 90%;
   text-align: center;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: #373737;
 }

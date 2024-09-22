@@ -1,7 +1,7 @@
 .benzswiper {
   width: 100%;
   height: auto;
-  background-color: black;
+  background-color: #373737;
   padding: 15px 0;
   display: flex;
   align-items: center;
@@ -12,13 +12,8 @@
   overflow: hidden;
 }
 
-.benzswiper:hover,
-.benzswiper:hover .swiper-slide {
-  background-color: gray; /* 슬라이드 영역에 마우스를 올렸을 때 배경색 변경 */
-  transition: background-color 0.3s ease;
-}
-
 .benzkor {
+  font-family: 'JalnanGothic';
   margin-top: 20px;
   color: white;
   font-size: 30px;
@@ -27,8 +22,6 @@
 }
 
 .benzlogo {
-  height: 180px;
-  margin-top: 10px;
   margin-left: 100px;
   display: block;
 }
@@ -37,20 +30,41 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-right: 20px; /* 스와이퍼와의 간격 조절 */
-  margin-top: 40px;
+  margin-right: 50px;
+  margin-top: 30px;
 }
 
-.benz1 {
-  height: auto;
-  margin-top: 40px;
-  display: flex;
-  justify-content: center;
+.image-container {
+  position: relative;
+  width: 100%;
+  height: 250px; /* 이미지와 캡션을 위한 고정 높이 설정 */
+  text-align: center;
+  padding: 10px;
+  box-sizing: border-box; /* padding을 포함하여 높이 설정 */
+}
+
+/* 이미지와 캡션에 hover 시 같은 효과 적용 */
+.image-container:hover {
+  background-color: gray;
+  transition: background-color 0.5s ease;
+}
+
+/* image-container가 hover되면 캡션도 같이 변경되도록 설정 */
+.image-container:hover .benz-caption {
+  background-color: gray;
+  color: #ffffff;
+  transition: background-color 0.5s ease;
+}
+
+.image-container img {
+  max-width: 100%;
+  height: 100%; /* 이미지 높이 고정 */
+  object-fit: cover; /* 이미지 비율 유지 및 캡션과 맞춤 */
 }
 
 .benz-caption {
   position: absolute;
-  bottom: 20px; /* 이미지 하단에 맞추기 위해 조정 */
+  bottom: 0px; /* 이미지 하단에 맞추기 위해 조정 */
   left: 50%;
   transform: translateX(-50%);
   color: white;
@@ -58,5 +72,5 @@
   font-size: 1.5rem;
   width: 90%;
   text-align: center;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: #373737;
 }
