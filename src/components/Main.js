@@ -15,8 +15,6 @@ function Main() {
   return (
     <div>
       <MainCar />
-
-      <div style={{ backgroundColor: 'yellow' }}>여기위에 흰색 여백 어디서 나온건지 1시간동안 찾았는데 못찾겠음 수정좀 </div>
       <Searchbar />
 
       {/* Swiper */}
