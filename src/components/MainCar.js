@@ -5,7 +5,7 @@ import mainCarTextImg from '../assets/images/mainCarTextImg.png';
 
 function MainCar() {
   return (
-    <div>
+    <div style={styles.mainCardiv}>
       <div style={styles.textContainer}>
         <img
           src={mainCarTextImg}
@@ -41,6 +41,10 @@ const styles = {
   },
   mainCarImg: {
     width: '100%',
+  },
+  mainCardiv: {
+    display: 'flex',
+    flexDirection: 'column',
   },
 };
 
