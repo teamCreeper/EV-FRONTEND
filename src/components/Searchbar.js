@@ -1,24 +1,28 @@
 import React from 'react';
 import './Searchbar.css';
 
-export function Searchbar({ value, onChange }) {
+export function Searchbar({ value, onChange, onSearch }) {
+  const handleSubmit = (e) => {
+    e.preventDefault(); // 기본 제출 동작 방지
+    onSearch(); // 검색 함수 호출
+  };
+  
   return (
-    <div className='searchbar'>
+    <form className='searchbar' onSubmit={handleSubmit}> 
       <span className='search'>전기차 모델 검색</span>
-      <input
+
+      <div className='input-group'>
+        <input
         type='search'
         className='input1'
-        placeholder='제조사'
         value={value}
         onChange={onChange}
       />
-      <input
-        type='search'
-        className='input2'
-        placeholder='차종 검색'
-        value={value}
-        onChange={onChange}
-      />
-    </div>
+
+      <button type='submit' className='search-btn'>
+        검색
+      </button>
+      </div>
+    </form>
   );
 }

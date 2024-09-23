@@ -8,8 +8,8 @@
   padding: 30px 0px;
   display: flex;
   align-items: center; /* 세로 가운데 정렬 */
-  justify-content: left;
   margin-top: -5px;
+  justify-content: space-between; /* 양 끝에 배치 */
 }
 .search {
   font-size: 25px;
@@ -21,13 +21,26 @@
 
 .input1 {
   margin-top: 20px;
-  margin-left: 30px;
-  width: 130px;
-  height: 30px;
-}
-.input2 {
-  margin-top: 20px;
-  margin-left: 30px;
+  margin-left: 10px;
   width: 500px;
   height: 30px;
+  border: 1px solid white;
+  background-color: #373737;
+  color: white;
+}
+
+.search-btn {
+  margin-top: 20px;
+  margin-left: 0;
+  height: 30px; 
+  padding: 0 20px;
+  background-color: #D9D9D9;
+  color: black;
+  font-weight: bold;
+  border: 1px solid white;
+  cursor: pointer;
+}
+
+.input-group {
+  margin-right: 120px;
 }
