@@ -1,39 +1,18 @@
 .navbar {
   width: 100%;
-  background-color: black; /* 기본 배경색 */
+  background-color: black;
   padding: 15px 0px;
   display: flex;
   align-items: center;
-  transition: background-color 0.3s; /* 배경색 변화에 부드러운 전환 추가 */
-}
-
-.navbar.active {
-  background-color: white; /* 클릭 시 배경색 변경 */
 }
 
 .navbarMenu {
-  color: white; /* 기본 메뉴 글자색 */
+  color: white;
   font-size: 25px;
   margin: 8px;
   text-decoration: none;
   margin-left: 50px;
   margin-top: 100px;
-  padding: 10px 15px; /* 클릭 가능 영역 확장 */
-  transition: background-color 0.3s, color 0.3s; /* 배경색과 색상 변화에 부드러운 전환 추가 */
-}
-
-.navbarMenu.active {
-  background-color: #E2E2E2; /* 클릭한 메뉴의 배경색 */
-  border-radius: 30px;
-  color: black; /* 클릭한 메뉴의 텍스트 색상 */
-}
-
-.navbar.active .navbarMenu {
-  color: black; /* 모든 메뉴의 글자색을 검정색으로 변경 */
-}
-
-.navbar.active .divider {
-  color: black; /* 구분선 색상도 검정색으로 변경 */
 }
 
 .navbar img {
@@ -41,7 +20,7 @@
 }
 
 .divider {
-  color: white; /* 기본 구분선 색상 */
+  color: white;
   margin: 0 8px;
   font-size: 25px;
   margin-left: 40px;
