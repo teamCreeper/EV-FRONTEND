@@ -1,8 +1,8 @@
-import { Link } from 'react-router-dom';
-import React, { useState } from 'react';
-import './Nav.css';
-import logo1 from '../assets/images/mainEVImg.png';
-import logo2 from '../assets/images/mainEVImg3.png'; // 새로운 로고 이미지
+import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import "./Nav.css";
+import logo1 from "../assets/images/mainEVImg.png";
+import logo2 from "../assets/images/mainEVImg2.png"; // 새로운 로고 이미지
 
 function Nav() {
   const [activeMenu, setActiveMenu] = useState(null);
@@ -11,9 +11,9 @@ function Nav() {
   const handleMenuClick = (menu) => {
     setActiveMenu(menu);
     // 클릭한 메뉴에 따라 로고 변경
-    if (menu === 'Cartype' || menu === 'Carbattery' || menu === 'Carnews') {
+    if (menu === "Cartype" || menu === "Carbattery" || menu === "Carnews") {
       setLogo(logo2); // 메뉴 클릭에 따라 로고 변경
-    } 
+    }
   };
 
   const handleLogoClick = () => {
@@ -22,30 +22,30 @@ function Nav() {
   };
 
   return (
-    <div className={`navbar ${activeMenu ? 'active' : ''}`}>
-      <Link className='navbarlogo' to='/' onClick={handleLogoClick}>
-        <img src={logo} width='100px' alt='logo' />
+    <div className={`navbar ${activeMenu ? "active" : ""}`}>
+      <Link className="navbarlogo" to="/" onClick={handleLogoClick}>
+        <img src={logo} width="100px" alt="logo" />
       </Link>
       <Link
-        className={`navbarMenu ${activeMenu === 'Cartype' ? 'active' : ''}`}
-        to='/Cartype'
-        onClick={() => handleMenuClick('Cartype')}
+        className={`navbarMenu ${activeMenu === "Cartype" ? "active" : ""}`}
+        to="/Cartype"
+        onClick={() => handleMenuClick("Cartype")}
       >
         전기차 종류
       </Link>
-      <span className={`divider ${activeMenu ? 'active' : ''}`}>|</span>
+      <span className={`divider ${activeMenu ? "active" : ""}`}>|</span>
       <Link
-        className={`navbarMenu ${activeMenu === 'Carbattery' ? 'active' : ''}`}
-        to='/Carbattery'
-        onClick={() => handleMenuClick('Carbattery')}
+        className={`navbarMenu ${activeMenu === "Carbattery" ? "active" : ""}`}
+        to="/Carbattery"
+        onClick={() => handleMenuClick("Carbattery")}
       >
         전기차 배터리 조회
       </Link>
-      <span className={`divider ${activeMenu ? 'active' : ''}`}>|</span>
+      <span className={`divider ${activeMenu ? "active" : ""}`}>|</span>
       <Link
-        className={`navbarMenu ${activeMenu === 'Carnews' ? 'active' : ''}`}
-        to='/Carnews'
-        onClick={() => handleMenuClick('Carnews')}
+        className={`navbarMenu ${activeMenu === "Carnews" ? "active" : ""}`}
+        to="/Carnews"
+        onClick={() => handleMenuClick("Carnews")}
       >
         전기차 관련뉴스
       </Link>
