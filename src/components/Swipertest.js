@@ -4,7 +4,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import { Navigation } from 'swiper/modules';
 import styled from 'styled-components';
-import ioniq6 from '../assets/images/ioniq6.png';
+import ioniq6 from '../assets/images/아이오닉6.png';
 
 const images = [
   { id: 1, src: ioniq6, alt: '아이오닉6' },
