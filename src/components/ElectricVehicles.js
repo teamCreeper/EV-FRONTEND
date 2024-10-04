@@ -3,14 +3,20 @@ import 아이오닉5 from '../assets/images/아이오닉5.png';
 import 아이오닉6 from '../assets/images/아이오닉6.png';
 import 코나일렉트릭 from '../assets/images/코나일렉트릭.png';
 import 아이오닉일렉트릭 from '../assets/images/아이오닉일렉트릭.png';
+import 포터EV from '../assets/images/포터EV.png';
+import 봉고EV from '../assets/images/봉고EV.png';
+import ElectrifiedGV70 from '../assets/images/Electrified GV70.png';
+import GV60 from '../assets/images/GV60.png';
+import ElectrifiedG80 from '../assets/images/Electrified G80.png';
 
 // Kia model:
-import EV6 from '../assets/images/EV6.png';
-import EV9 from '../assets/images/EV9.png';
-import NiroEV from '../assets/images/NiroEV.png';
+import EV6 from '../assets/images/ev6.png';
+import EV9 from '../assets/images/ev9.png';
+import NiroEV from '../assets/images/niroev.png';
 
 // Mercedes-Benz model:
 import EQA from '../assets/images/EQA.png';
+import EQB from '../assets/images/EQB.png';
 import EQS from '../assets/images/EQS.png';
 import EQE from '../assets/images/EQE.png';
 
@@ -19,7 +25,7 @@ import iX3 from '../assets/images/BMW ix3.png';
 import i4 from '../assets/images/BMW i4.png';
 import i5 from '../assets/images/BMW i5.png';
 import i7 from '../assets/images/BMW i7.png';
-// import iX from '../assets/images/BMW iX.png';
+import iX from '../assets/images/BMW iX.png';
 
 // Audi model:
 import Q4Etron from '../assets/images/Q4 E-tron.png';
@@ -32,12 +38,12 @@ const electricVehicles = [
   { car_num: 102, brand: 'Hyundai', name: '아이오닉 6', image: 아이오닉6 },
   { car_num: 103, brand: 'Hyundai', name: '코나 일렉트릭', image: 코나일렉트릭 },
   { car_num: 104, brand: 'Hyundai', name: '아이오닉 일렉트릭', image: 아이오닉일렉트릭 },
-  { car_num: 105, brand: 'Hyundai', name: '포터EV', image: '../assets/images/포터EV.png' },
-  { car_num: 106, brand: 'Hyundai', name: '봉고EV', image: '../assets/images/봉고EV.png' },
+  { car_num: 105, brand: 'Hyundai', name: '포터EV', image: 포터EV},
+  { car_num: 106, brand: 'Hyundai', name: '봉고EV', image: 봉고EV },
   { car_num: 107, brand: 'Hyundai', name: 'EV9', image: EV9 },
-  { car_num: 108, brand: 'Hyundai', name: 'GV60', image: '../assets/images/GV60.png' },
-  { car_num: 109, brand: 'Hyundai', name: 'Electrified GV70', image: '../assets/images/Electrified GV70.png' },
-  { car_num: 110, brand: 'Hyundai', name: 'Electrified G80', image: '../assets/images/Electrified G80.png' },
+  { car_num: 108, brand: 'Hyundai', name: 'GV60', image: GV60 },
+  { car_num: 109, brand: 'Hyundai', name: 'Electrified GV70', image: ElectrifiedGV70 },
+  { car_num: 110, brand: 'Hyundai', name: 'Electrified G80', image: ElectrifiedG80 },
 
   // brand: 'Kia'
   { car_num: 201, brand: 'Kia', name: 'EV6', image: EV6 },
@@ -50,13 +56,13 @@ const electricVehicles = [
 
   // brand: 'Mercedes-Benz'
   { car_num: 401, brand: 'Mercedes-Benz', name: 'EQA', image: EQA },
-  { car_num: 402, brand: 'Mercedes-Benz', name: 'EQB', image: '../assets/images/EQB.png' },
+  { car_num: 402, brand: 'Mercedes-Benz', name: 'EQB', image: EQB },
   { car_num: 403, brand: 'Mercedes-Benz', name: 'EQE', image: EQE },
   { car_num: 404, brand: 'Mercedes-Benz', name: 'EQS', image: EQS },
 
   // brand: 'BMW'
   { car_num: 501, brand: 'BMW', name: 'i4', image: i4 },
-  { car_num: 502, brand: 'BMW', name: 'iX', image: '../assets/images/IX.png' },
+  { car_num: 502, brand: 'BMW', name: 'iX', image: iX },
   { car_num: 503, brand: 'BMW', name: 'iX3', image: iX3 },
   { car_num: 504, brand: 'BMW', name: 'i7', image: i7 },
 
