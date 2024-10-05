@@ -2,17 +2,12 @@ import React, { useState } from 'react';
 import MainCar from './MainCar';
 import { Searchbar } from './Searchbar';
 import axios from 'axios';
-
-import './Main.css';
-
 import CarSwiper from './CarSwiper';
-
 import hyundailogo from '../assets/images/hyundailogo.png';
 import kialogo from '../assets/images/kialogo.png';
 import audilogo from '../assets/images/audilogo.png';
 import bmwlogo from '../assets/images/bmwlogo.png';
 import benzlogo from '../assets/images/benzlogo.png';
-
 import electricVehicles from './ElectricVehicles.js'; // 더미 데이터 가져오기
 
 function Main() {
@@ -70,46 +65,22 @@ function Main() {
   return (
     <div>
       <MainCar />
-      <Searchbar
-        value={searchValue}
-        onChange={(e) => setSearchValue(e.target.value)}
-        onSearch={handleSearch}
-      />
-      <div className='swiperContainer'>
+      <Searchbar value={searchValue} onChange={(e) => setSearchValue(e.target.value)} onSearch={handleSearch} />
+      <div style={styles.swiperContainer}>
         {loading ? (
           <div>로딩 중...</div>
         ) : errorMessage ? (
-          <div className='error'>{errorMessage}</div>
+          <div className="error">{errorMessage}</div>
         ) : showAllBrands ? (
           // 전체 모델 보여주기
           <>
-            <div className='allmodel'>전체 모델 보기</div>
+            <div style={styles.allmodel}>전체 모델 보기</div>
 
-            <CarSwiper
-              logo={hyundailogo}
-              brand='Hyundai'
-              images={hyundaiVehicles}
-            />
-            <CarSwiper
-              logo={kialogo}
-              brand='Kia'
-              images={kiaVehicles}
-            />
-            <CarSwiper
-              logo={benzlogo}
-              brand='Benz'
-              images={benzVehicles}
-            />
-            <CarSwiper
-              logo={bmwlogo}
-              brand='BMW'
-              images={bmwVehicles}
-            />
-            <CarSwiper
-              logo={audilogo}
-              brand='Audi'
-              images={audiVehicles}
-            />
+            <CarSwiper logo={hyundailogo} brand="Hyundai" images={hyundaiVehicles} />
+            <CarSwiper logo={kialogo} brand="Kia" images={kiaVehicles} />
+            <CarSwiper logo={benzlogo} brand="Benz" images={benzVehicles} />
+            <CarSwiper logo={bmwlogo} brand="BMW" images={bmwVehicles} />
+            <CarSwiper logo={audilogo} brand="Audi" images={audiVehicles} />
           </>
         ) : (
           // 검색 결과로 해당 모델만 보여주기
@@ -119,5 +90,23 @@ function Main() {
     </div>
   );
 }
+
+// 스타일 객체 정의
+const styles = {
+  swiperContainer: {
+    marginLeft: '80px',
+    marginRight: '80px',
+    marginBottom: '100px',
+  },
+  allmodel: {
+    marginTop: '120px',
+    marginBottom: '120px',
+    marginLeft: '50px',
+    fontSize: '60px',
+    letterSpacing: '7.8px',
+    fontWeight: 400,
+    fontFamily: 'JalnanGothic',
+  },
+};
 
 export default Main;
