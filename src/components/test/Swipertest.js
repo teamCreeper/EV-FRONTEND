@@ -4,7 +4,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import { Navigation } from 'swiper/modules';
 import styled from 'styled-components';
-import ioniq6 from '../assets/images/아이오닉6.png';
+import ioniq6 from '../../assets/images/아이오닉6.png';
 
 const images = [
   { id: 1, src: ioniq6, alt: '아이오닉6' },
@@ -57,42 +57,27 @@ const StyledSwiper = styled(Swiper)`
 
 const Swipertest = () => {
   return (
-    <StyledSwiper
-      navigation
-      modules={[Navigation]}
-      className='mySwiper'>
+    <StyledSwiper navigation modules={[Navigation]} className="mySwiper">
       {images.map((_, idx) => {
         // 각 슬라이드에 4개의 이미지를 넣음
         return (
           idx % 4 === 0 && (
             <SwiperSlide key={idx}>
-              <div className='image-container'>
-                <img
-                  src={images[idx].src}
-                  alt={images[idx].alt}
-                />
-                <div className='caption'>{images[idx].alt}</div>
+              <div className="image-container">
+                <img src={images[idx].src} alt={images[idx].alt} />
+                <div className="caption">{images[idx].alt}</div>
               </div>
-              <div className='image-container'>
-                <img
-                  src={images[idx + 1]?.src}
-                  alt={images[idx + 1]?.alt}
-                />
-                <div className='caption'>{images[idx + 1]?.alt}</div>
+              <div className="image-container">
+                <img src={images[idx + 1]?.src} alt={images[idx + 1]?.alt} />
+                <div className="caption">{images[idx + 1]?.alt}</div>
               </div>
-              <div className='image-container'>
-                <img
-                  src={images[idx + 2]?.src}
-                  alt={images[idx + 2]?.alt}
-                />
-                <div className='caption'>{images[idx + 2]?.alt}</div>
+              <div className="image-container">
+                <img src={images[idx + 2]?.src} alt={images[idx + 2]?.alt} />
+                <div className="caption">{images[idx + 2]?.alt}</div>
               </div>
-              <div className='image-container'>
-                <img
-                  src={images[idx + 3]?.src}
-                  alt={images[idx + 3]?.alt}
-                />
-                <div className='caption'>{images[idx + 3]?.alt}</div>
+              <div className="image-container">
+                <img src={images[idx + 3]?.src} alt={images[idx + 3]?.alt} />
+                <div className="caption">{images[idx + 3]?.alt}</div>
               </div>
             </SwiperSlide>
           )
