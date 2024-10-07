@@ -1,6 +1,6 @@
-import React from "react";
-import electricVehicles from "./ElectricVehicles.js"; // 더미 데이터 가져오기
-import hyundailogo from "../assets/images/hyundailogo.png";
+import React from 'react';
+import electricVehicles from './ElectricVehicles.js'; // 더미 데이터 가져오기
+import hyundailogo from '../assets/images/hyundailogo.png';
 function Cartype() {
   // 차량 정보를 찾기 (car_num이 101인 아이오닉5)
   const vehicle = electricVehicles.find((v) => v.car_num === 101);
@@ -14,7 +14,7 @@ function Cartype() {
             <img
               src={hyundailogo}
               alt={vehicle.brand}
-              style={{ width: "100%", height: "auto" }}
+              style={{ width: '100%', height: 'auto' }}
             />
           </div>
           <div style={styles.brandname}>{vehicle.brand}</div>
@@ -24,7 +24,7 @@ function Cartype() {
         <img
           src={vehicle.image}
           alt={vehicle.name}
-          style={{ width: "100%", height: "auto" }}
+          style={{ width: '100%', height: 'auto' }}
         />
       </div>
       <div style={styles.ContainerStyle}>
@@ -59,61 +59,61 @@ function Cartype() {
 
 const styles = {
   CartypetopContainer: {
-    marginLeft: "80px",
-    marginRight: "80px",
-    backgroundColor: "rgb(80,80,80)",
-    display: "flex",
-    justifyContent: "space-between", // 양쪽 끝으로 정렬
-    alignItems: "center", // 수직 정렬
-    padding: "10px 0", // 위아래 패딩 추가 (선택사항)
+    marginLeft: '80px',
+    marginRight: '80px',
+    backgroundColor: 'rgb(80,80,80)',
+    display: 'flex',
+    justifyContent: 'space-between', // 양쪽 끝으로 정렬
+    alignItems: 'center', // 수직 정렬
+    padding: '10px 0', // 위아래 패딩 추가 (선택사항)
   },
   CartypetopCarname: {
-    fontSize: "70px",
-    marginLeft: "40px",
+    fontSize: '70px',
+    marginLeft: '40px',
     fontWeight: 400,
-    fontFamily: "JalnanGothic",
-    color: "white",
+    fontFamily: 'JalnanGothic',
+    color: 'white',
   },
   brandContainer: {
-    display: "flex", // 브랜드 로고와 네임을 가로로 정렬
-    alignItems: "center", // 수직 중앙 정렬
-    justifyContent: "flex-end",
-    marginRight: "40px",
+    display: 'flex', // 브랜드 로고와 네임을 가로로 정렬
+    alignItems: 'center', // 수직 중앙 정렬
+    justifyContent: 'flex-end',
+    marginRight: '40px',
   },
   brandname: {
-    fontSize: "40px",
-    marginLeft: "20px", // 로고와 네임 사이의 여백
+    fontSize: '40px',
+    marginLeft: '20px', // 로고와 네임 사이의 여백
     fontWeight: 400,
-    fontFamily: "JalnanGothic",
-    color: "white",
+    fontFamily: 'JalnanGothic',
+    color: 'white',
   },
   brandlogo: {
-    width: "30%",
+    width: '30%',
   },
   CarImage: {
-    marginLeft: "80px",
-    marginRight: "80px",
-    backgroundColor: "white",
+    marginLeft: '80px',
+    marginRight: '80px',
+    backgroundColor: 'white',
   },
   ContainerStyle: {
-    marginLeft: "80px",
-    marginRight: "80px",
-    display: "grid",
-    gridTemplateColumns: "repeat(2, 1fr)",
-    gridTemplateRows: "repeat(2, 1fr)",
-    gap: "20px",
-    padding: "20px",
+    marginLeft: '80px',
+    marginRight: '80px',
+    display: 'grid',
+    gridTemplateColumns: 'repeat(2, 1fr)',
+    gridTemplateRows: 'repeat(2, 1fr)',
+    gap: '20px',
+    padding: '20px',
   },
 
   itemStyle: {
-    backgroundColor: "#f5f5f5",
-    padding: "20px",
-    borderRadius: "10px",
-    boxShadow: "0 2px 10px rgba(0, 0, 0, 0.1)",
+    backgroundColor: '#f5f5f5',
+    padding: '20px',
+    borderRadius: '10px',
+    boxShadow: '0 2px 10px rgba(0, 0, 0, 0.1)',
   },
   title: {
-    fontSize: "20px",
-    fontFamily: "JalnanGothic",
+    fontSize: '20px',
+    fontFamily: 'JalnanGothic',
   },
 };
 export default Cartype;

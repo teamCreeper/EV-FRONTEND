@@ -10,9 +10,9 @@ import GV60 from '../assets/images/GV60.png';
 import ElectrifiedG80 from '../assets/images/Electrified G80.png';
 
 // Kia model:
-import EV6 from '../assets/images/ev6.png';
-import EV9 from '../assets/images/ev9.png';
-import NiroEV from '../assets/images/niroev.png';
+import EV6 from '../assets/images/EV6.png';
+import EV9 from '../assets/images/EV9.png';
+import NiroEV from '../assets/images/NiroEV.png';
 
 // Mercedes-Benz model:
 import EQA from '../assets/images/EQA.png';
@@ -38,7 +38,7 @@ const electricVehicles = [
   { car_num: 102, brand: 'Hyundai', name: '아이오닉 6', image: 아이오닉6 },
   { car_num: 103, brand: 'Hyundai', name: '코나 일렉트릭', image: 코나일렉트릭 },
   { car_num: 104, brand: 'Hyundai', name: '아이오닉 일렉트릭', image: 아이오닉일렉트릭 },
-  { car_num: 105, brand: 'Hyundai', name: '포터EV', image: 포터EV},
+  { car_num: 105, brand: 'Hyundai', name: '포터EV', image: 포터EV },
   { car_num: 106, brand: 'Hyundai', name: '봉고EV', image: 봉고EV },
   { car_num: 107, brand: 'Hyundai', name: 'EV9', image: EV9 },
   { car_num: 108, brand: 'Hyundai', name: 'GV60', image: GV60 },
