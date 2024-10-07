@@ -1,11 +1,11 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import React from 'react';
-import Carbattery from './components/Carbattery';
-import Carnews from './components/Carnews';
-import Cartype from './components/Cartype';
-import Main from './components/Main';
-import Nav from './components/Nav';
-import Footer from './components/Footer';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import React from "react";
+import Carbattery from "./components/Carbattery";
+import Carnews from "./components/Carnews";
+import Cartype from "./components/Cartype";
+import Main from "./components/Main";
+import Nav from "./components/Nav";
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -30,11 +30,11 @@ function App() {
 // 스타일 객체 정의
 const styles = {
   root: {
-    fontFamily: 'Pretendard',
+    fontFamily: "Pretendard",
   },
   app: {
-    width: 'auto',
-    height: 'auto',
+    width: "auto",
+    height: "auto",
     margin: 0,
     padding: 0,
   },
