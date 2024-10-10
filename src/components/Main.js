@@ -9,10 +9,10 @@ import audilogo from '../assets/images/audilogo.png';
 import bmwlogo from '../assets/images/bmwlogo.png';
 import benzlogo from '../assets/images/benzlogo.png';
 import electricVehicles from './ElectricVehicles.js'; // 더미 데이터 가져오기
-
+import SearchResult from './SearchResult.js';
 function Main() {
   const [searchValue, setSearchValue] = useState(''); // 검색 값에 대한 상태
-  const [Component, setComponent] = useState(null); // 어떤 컴포넌트를 보여줄지에 대한 상태
+  const [searchResults, setSearchResults] = useState([]);
   const [loading, setLoading] = useState(false); // 서버 통신을 위한 로딩 상태
   const [errorMessage, setErrorMessage] = useState(''); // 에러 메세지 관리하는 상태
   const [showAllBrands, setShowAllBrands] = useState(true); // 모든 브랜드를 보여줄지 여부를 관리하는 상태
@@ -30,34 +30,41 @@ function Main() {
     }
 
     setLoading(true);
-    setErrorMessage(''); // 이전 에러 메시지 초기화
+    setErrorMessage('');
 
     axios
-      .post('http://localhost:8080/api/search', null, {
+      .get('https://port-0-java-springboot-m0uuimo09c0b9ce4.sel4.cloudtype.app/api/cars', {
         params: {
-          carName: searchValue, // POST 요청의 쿼리 파라미터로 carName 전송
+          carName: searchValue, // 검색어를 전달
         },
       })
-      .then(async (response) => {
-        const jsFileName = response.data.jsFile;
-        console.log(jsFileName);
-        if (!jsFileName) {
-          setErrorMessage('해당 모델에 맞는 JS 파일을 찾을 수 없습니다.');
-          setLoading(false);
-          return;
-        }
-        try {
-          const { default: LoadedComponent } = await import(`./${jsFileName}`);
-          setComponent(() => LoadedComponent);
-          setShowAllBrands(false); // 검색 결과가 있으면 모든 브랜드를 숨김
-        } catch (error) {
-          setErrorMessage('컴포넌트를 로드하는 데 실패했습니다.');
-        } finally {
-          setLoading(false);
+      .then((response) => {
+        const vehicles = response.data; // 데이터에서 자동차 리스트 가져오기
+        const filteredVehicles = vehicles.filter((vehicle) => vehicle.name.toLowerCase().includes(searchValue.toLowerCase()));
+
+        if (!filteredVehicles || filteredVehicles.length === 0) {
+          setErrorMessage('검색 결과가 없습니다.');
+          setShowAllBrands(true); // 검색 결과 없을 때 브랜드 전체 보기로 전환
+        } else {
+          // 이미지를 더미 데이터에서 찾기
+          const vehiclesWithImages = filteredVehicles.map((vehicle) => {
+            const matchingVehicle = electricVehicles.find(
+              (v) => v.name === vehicle.name // 차량 이름을 기준으로 이미지 찾기
+            );
+            return {
+              ...vehicle,
+              image: matchingVehicle ? matchingVehicle.image : null, // 이미지가 있으면 추가
+              logo: matchingVehicle ? matchingVehicle.logo : null, // 로고 추가
+            };
+          });
+          setSearchResults(vehiclesWithImages); // 이미지가 포함된 차량 정보 설정
+          setShowAllBrands(false); // 검색 결과가 있을 때 브랜드 목록 숨김
         }
       })
       .catch((error) => {
         setErrorMessage('검색에 실패했습니다. 다시 시도해주세요.');
+      })
+      .finally(() => {
         setLoading(false);
       });
   };
@@ -65,26 +72,53 @@ function Main() {
   return (
     <div>
       <MainCar />
-      <Searchbar value={searchValue} onChange={(e) => setSearchValue(e.target.value)} onSearch={handleSearch} />
+      <Searchbar
+        value={searchValue}
+        onChange={(e) => setSearchValue(e.target.value)}
+        onSearch={handleSearch}
+      />
       <div style={styles.swiperContainer}>
         {loading ? (
           <div>로딩 중...</div>
         ) : errorMessage ? (
-          <div className="error">{errorMessage}</div>
+          <div className='error'>{errorMessage}</div>
         ) : showAllBrands ? (
           // 전체 모델 보여주기
           <>
             <div style={styles.allmodel}>전체 모델 보기</div>
 
-            <CarSwiper logo={hyundailogo} brand="Hyundai" images={hyundaiVehicles} />
-            <CarSwiper logo={kialogo} brand="Kia" images={kiaVehicles} />
-            <CarSwiper logo={benzlogo} brand="Benz" images={benzVehicles} />
-            <CarSwiper logo={bmwlogo} brand="BMW" images={bmwVehicles} />
-            <CarSwiper logo={audilogo} brand="Audi" images={audiVehicles} />
+            <CarSwiper
+              logo={hyundailogo}
+              brand='Hyundai'
+              images={hyundaiVehicles}
+            />
+            <CarSwiper
+              logo={kialogo}
+              brand='Kia'
+              images={kiaVehicles}
+            />
+            <CarSwiper
+              logo={benzlogo}
+              brand='Benz'
+              images={benzVehicles}
+            />
+            <CarSwiper
+              logo={bmwlogo}
+              brand='BMW'
+              images={bmwVehicles}
+            />
+            <CarSwiper
+              logo={audilogo}
+              brand='Audi'
+              images={audiVehicles}
+            />
           </>
         ) : (
-          // 검색 결과로 해당 모델만 보여주기
-          Component && <Component />
+          // 검색 결과 보여주기
+          <SearchResult
+            results={searchResults}
+            searchTerm={searchValue}
+          />
         )}
       </div>
     </div>

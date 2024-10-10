@@ -110,6 +110,9 @@ const styles = {
     padding: '20px',
     borderRadius: '10px',
     boxShadow: '0 2px 10px rgba(0, 0, 0, 0.1)',
+    aspectRatio: '1 / 1', // 추가: 가로와 세로 비율을 1:1로 설정
+    display: 'flex', // 내부 콘텐츠 수직 중앙 정렬을 위한 설정
+    flexDirection: 'column',
   },
   title: {
     fontSize: '20px',
