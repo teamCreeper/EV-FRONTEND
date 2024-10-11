@@ -1,7 +1,7 @@
 // Brand logo:
 import 현대로고 from '../assets/images/hyundailogo2.png';
 import 기아로고 from '../assets/images/kialogo2.png';
-import 아우디로고 from '../assets/images/audilogo.png';
+import 아우디로고 from '../assets/images/audilogo2.png';
 import BMW로고 from '../assets/images/bmwlogo.png';
 import 벤츠로고 from '../assets/images/benzlogo.png';
 
@@ -47,7 +47,7 @@ const electricVehicles = [
   { car_num: 104, brand: 'Hyundai', name: '아이오닉 일렉트릭', image: 아이오닉일렉트릭, logo: 현대로고 },
   { car_num: 105, brand: 'Hyundai', name: '포터EV', image: 포터EV, logo: 현대로고 },
   { car_num: 106, brand: 'Hyundai', name: '봉고EV', image: 봉고EV, logo: 현대로고 },
-  { car_num: 107, brand: 'Hyundai', name: 'EV9', image: EV9, logo: 현대로고 },
+  { car_num: 107, brand: 'Kia', name: 'EV9', image: EV9, logo: 기아로고 },
   { car_num: 108, brand: 'Hyundai', name: 'GV60', image: GV60, logo: 현대로고 },
   { car_num: 109, brand: 'Hyundai', name: 'Electrified GV70', image: ElectrifiedGV70, logo: 현대로고 },
   { car_num: 110, brand: 'Hyundai', name: 'Electrified G80', image: ElectrifiedG80, logo: 현대로고 },
