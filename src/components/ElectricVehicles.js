@@ -1,7 +1,7 @@
 // Brand logo:
-import 현대로고 from '../assets/images/hyundailogo2.png';
-import 기아로고 from '../assets/images/kialogo2.png';
-import 아우디로고 from '../assets/images/audilogo2.png';
+import 현대로고 from '../assets/images/hyundailogo.png';
+import 기아로고 from '../assets/images/kialogo.png';
+import 아우디로고 from '../assets/images/audilogo.png';
 import BMW로고 from '../assets/images/bmwlogo.png';
 import 벤츠로고 from '../assets/images/benzlogo.png';
 

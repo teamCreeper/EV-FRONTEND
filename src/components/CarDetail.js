@@ -1,9 +1,17 @@
 import React from 'react';
+import { useParams } from 'react-router-dom';
+
 import electricVehicles from './ElectricVehicles.js'; // 더미 데이터 가져오기
 import hyundailogo from '../assets/images/hyundailogo.png';
-function Cartype() {
-  // 차량 정보를 찾기 (car_num이 101인 아이오닉5)
-  const vehicle = electricVehicles.find((v) => v.car_num === 101);
+
+function CarDetail() {
+  const { car_num } = useParams(); // URL에서 car_num을 가져오기
+  const vehicle = electricVehicles.find((v) => v.car_num === parseInt(car_num));
+  console.log('CarDeatil Vehicle: ', vehicle);
+
+  if (!vehicle) {
+    return <div>해당 차량 정보를 찾을 수 없습니다.</div>;
+  }
 
   return (
     <div>
@@ -12,7 +20,7 @@ function Cartype() {
         <div style={styles.brandContainer}>
           <div style={styles.brandlogo}>
             <img
-              src={hyundailogo}
+              src={vehicle.logo}
               alt={vehicle.brand}
               style={{ width: '100%', height: 'auto' }}
             />
@@ -119,4 +127,4 @@ const styles = {
     fontFamily: 'JalnanGothic',
   },
 };
-export default Cartype;
+export default CarDetail;

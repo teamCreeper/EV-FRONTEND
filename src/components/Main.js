@@ -1,15 +1,19 @@
 import React, { useState } from 'react';
+import axios from 'axios';
+
 import MainCar from './MainCar';
 import { Searchbar } from './Searchbar';
-import axios from 'axios';
 import CarSwiper from './CarSwiper';
+
 import hyundailogo from '../assets/images/hyundailogo.png';
 import kialogo from '../assets/images/kialogo.png';
 import audilogo from '../assets/images/audilogo.png';
 import bmwlogo from '../assets/images/bmwlogo.png';
 import benzlogo from '../assets/images/benzlogo.png';
+
 import electricVehicles from './ElectricVehicles.js'; // 더미 데이터 가져오기
 import SearchResult from './SearchResult.js';
+
 function Main() {
   const [searchValue, setSearchValue] = useState(''); // 검색 값에 대한 상태
   const [searchResults, setSearchResults] = useState([]);
@@ -77,13 +81,14 @@ function Main() {
         onChange={(e) => setSearchValue(e.target.value)}
         onSearch={handleSearch}
       />
-      <div style={styles.swiperContainer}>
+      <div
+        id='car-swiper-section'
+        style={styles.swiperContainer}>
         {loading ? (
           <div>로딩 중...</div>
         ) : errorMessage ? (
           <div className='error'>{errorMessage}</div>
         ) : showAllBrands ? (
-          // 전체 모델 보여주기
           <>
             <div style={styles.allmodel}>전체 모델 보기</div>
 
@@ -114,7 +119,6 @@ function Main() {
             />
           </>
         ) : (
-          // 검색 결과 보여주기
           <SearchResult
             results={searchResults}
             searchTerm={searchValue}
