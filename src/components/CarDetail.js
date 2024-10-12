@@ -1,13 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-
 import electricVehicles from './ElectricVehicles.js'; // 더미 데이터 가져오기
-import hyundailogo from '../assets/images/hyundailogo.png';
 
 function CarDetail() {
   const { car_num } = useParams(); // URL에서 car_num을 가져오기
   const vehicle = electricVehicles.find((v) => v.car_num === parseInt(car_num));
-  console.log('CarDeatil Vehicle: ', vehicle);
+
+  // 페이지 렌더링 시 스크롤을 맨 위로 이동시키는 useEffect
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' }); // 부드럽게 스크롤
+  }, []);
 
   if (!vehicle) {
     return <div>해당 차량 정보를 찾을 수 없습니다.</div>;
@@ -19,21 +21,13 @@ function CarDetail() {
         <div style={styles.CartypetopCarname}>{vehicle.name}</div>
         <div style={styles.brandContainer}>
           <div style={styles.brandlogo}>
-            <img
-              src={vehicle.logo}
-              alt={vehicle.brand}
-              style={{ width: '100%', height: 'auto' }}
-            />
+            <img src={vehicle.logo} alt={vehicle.brand} style={{ width: '100%', height: 'auto' }} />
           </div>
           <div style={styles.brandname}>{vehicle.brand}</div>
         </div>
       </div>
       <div style={styles.CarImage}>
-        <img
-          src={vehicle.image}
-          alt={vehicle.name}
-          style={{ width: '100%', height: 'auto' }}
-        />
+        <img src={vehicle.image} alt={vehicle.name} style={{ width: '100%', height: 'auto' }} />
       </div>
       <div style={styles.ContainerStyle}>
         <div style={styles.itemStyle}>
@@ -127,4 +121,5 @@ const styles = {
     fontFamily: 'JalnanGothic',
   },
 };
+
 export default CarDetail;

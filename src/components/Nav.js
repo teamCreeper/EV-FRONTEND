@@ -12,7 +12,9 @@ function Nav() {
       // 전기차 종류 메뉴 클릭 시에는 activeMenu를 업데이트하지 않음
       setActiveMenu(menu);
       if (menu === 'Carbattery' || menu === 'Carnews') {
-        setLogo(logo2); // 다른 메뉴 클릭 시 로고 변경
+        setLogo(logo2); // Carbattery 또는 Carnews 클릭 시 로고 변경
+      } else {
+        setLogo(logo1); // 다른 메뉴 클릭 시 기본 로고로 변경
       }
     }
   };
@@ -34,65 +36,61 @@ function Nav() {
 
   const isMenuActive = (menu) => activeMenu === menu;
 
+  const navBarBackground = activeMenu === 'Carbattery' || activeMenu === 'Carnews' ? 'white' : 'black';
+  const navBarTextColor = activeMenu === 'Carbattery' || activeMenu === 'Carnews' ? 'black' : 'white';
+
   return (
-    <div
-      className={`navbar ${activeMenu ? 'active' : ''}`}
-      style={{ ...styles.navbar, ...(activeMenu ? styles.navbarActive : {}) }}>
-      <Link
-        className='navbarlogo'
-        to='/'
-        onClick={handleLogoClick}
-        style={styles.navbarlogo}>
-        <img
-          src={logo}
-          width='100px'
-          alt='logo'
-          style={styles.logoImage}
-        />
+    <div className="navbar" style={{ ...styles.navbar, backgroundColor: navBarBackground }}>
+      <Link className="navbarlogo" to="/" onClick={handleLogoClick} style={styles.navbarlogo}>
+        <img src={logo} width="100px" alt="logo" style={styles.logoImage} />
       </Link>
-      <div
-        className='navbarMenu'
-        onClick={handleScrollToCarType} // 스크롤 이동 함수 호출
+      <Link
+        to="/"
+        onClick={handleLogoClick}
         style={{
           ...styles.navbarMenu,
-          backgroundColor: 'transparent', // 전기차 종류 클릭 시 스타일 유지
-          color: activeMenu === null ? 'white' : 'black',
-          borderRadius: isMenuActive('Carbattery') ? '15px' : '0',
-        }}>
-        전기차 종류
-      </div>
-      <span
-        className='divider'
-        style={styles.divider}>
+          color: navBarTextColor,
+        }}
+      >
+        <div
+          className="navbarMenu"
+          onClick={handleScrollToCarType} // 스크롤 이동 함수 호출
+          style={{ color: navBarTextColor }}
+        >
+          전기차 종류
+        </div>
+      </Link>
+
+      <span className="divider" style={{ ...styles.divider, color: navBarTextColor }}>
         |
       </span>
       <Link
-        className='navbarMenu'
-        to='/Carbattery'
+        className="navbarMenu"
+        to="/Carbattery"
         onClick={() => handleMenuClick('Carbattery')}
         style={{
           ...styles.navbarMenu,
           backgroundColor: isMenuActive('Carbattery') ? 'rgb(80,80,80)' : 'transparent',
-          color: isMenuActive('Carbattery') ? 'white' : activeMenu === null ? 'white' : 'black',
+          color: isMenuActive('Carbattery') ? 'white' : navBarTextColor,
           borderRadius: isMenuActive('Carbattery') ? '15px' : '0',
-        }}>
+        }}
+      >
         전기차 배터리 조회
       </Link>
-      <span
-        className='divider'
-        style={styles.divider}>
+      <span className="divider" style={{ ...styles.divider, color: navBarTextColor }}>
         |
       </span>
       <Link
-        className='navbarMenu'
-        to='/Carnews'
+        className="navbarMenu"
+        to="/Carnews"
         onClick={() => handleMenuClick('Carnews')}
         style={{
           ...styles.navbarMenu,
           backgroundColor: isMenuActive('Carnews') ? 'rgb(80,80,80)' : 'transparent',
-          color: isMenuActive('Carnews') ? 'white' : activeMenu === null ? 'white' : 'black',
+          color: isMenuActive('Carnews') ? 'white' : navBarTextColor,
           borderRadius: isMenuActive('Carnews') ? '15px' : '0',
-        }}>
+        }}
+      >
         전기차 관련뉴스
       </Link>
     </div>
@@ -105,10 +103,10 @@ export default Nav;
 const styles = {
   navbar: {
     width: '100%',
-    backgroundColor: 'black',
     padding: '15px 0px',
     display: 'flex',
     alignItems: 'center',
+    transition: 'background-color 0.5s', // 배경색 전환 애니메이션
   },
   navbarMenu: {
     fontSize: '25px',
@@ -117,11 +115,10 @@ const styles = {
     marginLeft: '50px',
     marginTop: '100px',
     padding: '10px 15px',
-    transition: 'background-color 0.3s, color 0.3s',
+    transition: 'background-color 0.5s, color 0.5s', // 배경색과 글자색 전환 애니메이션
   },
 
   divider: {
-    color: 'white',
     margin: '0 8px',
     fontSize: '25px',
     marginLeft: '40px',
