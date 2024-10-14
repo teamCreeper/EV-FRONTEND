@@ -39,7 +39,7 @@ import Q4Etron from '../assets/images/Q4 E-tron.png';
 import Etron from '../assets/images/E-tron.png';
 import EtronGT from '../assets/images/E-tron GT.png';
 
-const electricVehicles = [
+const CarImageDB = [
   // brand: 'Hyundai'
   { car_num: 101, brand: 'Hyundai', name: '아이오닉 5', image: 아이오닉5, logo: 현대로고 },
   { car_num: 102, brand: 'Hyundai', name: '아이오닉 6', image: 아이오닉6, logo: 현대로고 },
@@ -47,15 +47,15 @@ const electricVehicles = [
   { car_num: 104, brand: 'Hyundai', name: '아이오닉 일렉트릭', image: 아이오닉일렉트릭, logo: 현대로고 },
   { car_num: 105, brand: 'Hyundai', name: '포터EV', image: 포터EV, logo: 현대로고 },
   { car_num: 106, brand: 'Hyundai', name: '봉고EV', image: 봉고EV, logo: 현대로고 },
-  { car_num: 107, brand: 'Kia', name: 'EV9', image: EV9, logo: 기아로고 },
-  { car_num: 108, brand: 'Hyundai', name: 'GV60', image: GV60, logo: 현대로고 },
-  { car_num: 109, brand: 'Hyundai', name: 'Electrified GV70', image: ElectrifiedGV70, logo: 현대로고 },
-  { car_num: 110, brand: 'Hyundai', name: 'Electrified G80', image: ElectrifiedG80, logo: 현대로고 },
+  { car_num: 107, brand: 'Hyundai', name: 'GV60', image: GV60, logo: 현대로고 },
+  { car_num: 108, brand: 'Hyundai', name: 'Electrified GV70', image: ElectrifiedGV70, logo: 현대로고 },
+  { car_num: 109, brand: 'Hyundai', name: 'Electrified G80', image: ElectrifiedG80, logo: 현대로고 },
 
   // brand: 'Kia'
   { car_num: 201, brand: 'Kia', name: 'EV6', image: EV6, logo: 기아로고 },
-  { car_num: 202, brand: 'Kia', name: '니로EV', image: NiroEV, logo: 기아로고 },
-  { car_num: 203, brand: 'Kia', name: '쏘울EV', image: 아이오닉5, logo: 기아로고 },
+  { car_num: 202, brand: 'Kia', name: 'EV9', image: EV9, logo: 기아로고 },
+  { car_num: 203, brand: 'Kia', name: '니로EV', image: NiroEV, logo: 기아로고 },
+  { car_num: 204, brand: 'Kia', name: '쏘울EV', image: 아이오닉5, logo: 기아로고 },
 
   // brand: 'Tesla'
   { car_num: 301, brand: 'Tesla', name: '모델3', image: '../assets/images/모델3.png' },
@@ -90,4 +90,4 @@ const electricVehicles = [
   { car_num: 1601, brand: 'BYD', name: '이모션', image: '../assets/images/이모션.png' },
 ];
 
-export default electricVehicles;
+export default CarImageDB;
