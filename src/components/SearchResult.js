@@ -1,5 +1,5 @@
 import React from 'react';
-import electricVehicles from './ElectricVehicles.js'; // 더미 데이터 가져오기
+import CarImageDB from './CarImageDB.js'; // 더미 데이터 가져오기
 
 function SearchResult({ results, searchTerm }) {
   return (
@@ -9,13 +9,12 @@ function SearchResult({ results, searchTerm }) {
       <div style={styles.resultContainer}>
         {results.map((vehicle) => {
           // 더미 데이터에서 차량 이미지와 로고 찾기
-          const matchingVehicle = electricVehicles.find((v) => v.name === vehicle.name);
+          const matchingVehicle = CarImageDB.find((v) => v.name === vehicle.name);
 
           return (
             <div
               key={vehicle.car_num}
-              style={styles.card}
-            >
+              style={styles.card}>
               {/* 차량 이미지 표시 */}
               {matchingVehicle && matchingVehicle.image && (
                 <img
@@ -57,6 +56,7 @@ const styles = {
     marginTop: '40px',
   },
   card: {
+    backgroundColor: 'orange',
     border: '1px solid #ddd',
     borderRadius: '10px',
     padding: '20px',
