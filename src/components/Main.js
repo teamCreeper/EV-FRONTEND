@@ -11,7 +11,7 @@ import audilogo from '../assets/images/audilogo.png';
 import bmwlogo from '../assets/images/bmwlogo.png';
 import benzlogo from '../assets/images/benzlogo.png';
 
-import CarImageDB from './CarImageDB.js'; // 더미 데이터 가져오기
+import electricVehicles from './ElectricVehicles.js'; // 더미 데이터 가져오기
 import SearchResult from './SearchResult.js';
 
 function Main() {
@@ -21,27 +21,13 @@ function Main() {
   const [errorMessage, setErrorMessage] = useState(''); // 에러 메세지 관리하는 상태
   const [showAllBrands, setShowAllBrands] = useState(true); // 모든 브랜드를 보여줄지 여부를 관리하는 상태
 
-  const hyundaiVehicles = CarImageDB.filter((vehicle) => vehicle.brand === 'Hyundai');
-  const kiaVehicles = CarImageDB.filter((vehicle) => vehicle.brand === 'Kia');
-  const audiVehicles = CarImageDB.filter((vehicle) => vehicle.brand === 'Audi');
-  const bmwVehicles = CarImageDB.filter((vehicle) => vehicle.brand === 'BMW');
-  const benzVehicles = CarImageDB.filter((vehicle) => vehicle.brand === 'Mercedes-Benz');
+  const hyundaiVehicles = electricVehicles.filter((vehicle) => vehicle.brand === 'Hyundai');
+  const kiaVehicles = electricVehicles.filter((vehicle) => vehicle.brand === 'Kia');
+  const audiVehicles = electricVehicles.filter((vehicle) => vehicle.brand === 'Audi');
+  const bmwVehicles = electricVehicles.filter((vehicle) => vehicle.brand === 'BMW');
+  const benzVehicles = electricVehicles.filter((vehicle) => vehicle.brand === 'Mercedes-Benz');
 
-  // API로부터 데이터를 가져오는 함수
-  const fetchCarsFromAPI = async (carName) => {
-    try {
-      const response = await axios.get('https://port-0-java-springboot-m0uuimo09c0b9ce4.sel4.cloudtype.app/api/cars', {
-        params: {
-          carName, // 검색어를 전달
-        },
-      });
-      return response.data; // 데이터에서 자동차 리스트 반환
-    } catch (error) {
-      throw new Error('API 호출 실패');
-    }
-  };
-
-  const handleSearch = async () => {
+  const handleSearch = () => {
     if (!searchValue) {
       setErrorMessage('검색어를 입력해주세요.');
       return;
@@ -50,34 +36,43 @@ function Main() {
     setLoading(true);
     setErrorMessage('');
 
-    try {
-      const vehicles = await fetchCarsFromAPI(searchValue); // API로부터 데이터를 가져옴
-      const filteredVehicles = vehicles.filter((vehicle) => vehicle.name.toLowerCase().includes(searchValue.toLowerCase()));
+    axios
+      .get('https://port-0-java-springboot-m0uuimo09c0b9ce4.sel4.cloudtype.app/api/cars', {
+        params: {
+          carName: searchValue, // 검색어를 전달
+        },
+      })
+      .then((response) => {
+        const vehicles = response.data; // 데이터에서 자동차 리스트 가져오기
+        const filteredVehicles = vehicles.filter((vehicle) => vehicle.name.toLowerCase().includes(searchValue.toLowerCase()));
 
-      if (!filteredVehicles || filteredVehicles.length === 0) {
-        setErrorMessage('검색 결과가 없습니다.');
-        setShowAllBrands(true); // 검색 결과 없을 때 브랜드 전체 보기로 전환
-      } else {
-        // 이미지를 더미 데이터에서 찾기
-        const vehiclesWithImages = filteredVehicles.map((vehicle) => {
-          const matchingVehicle = CarImageDB.find(
-            (v) => v.name === vehicle.name // 차량 이름을 기준으로 이미지 찾기
-          );
-          return {
-            ...vehicle,
-            image: matchingVehicle ? matchingVehicle.image : null, // 이미지가 있으면 추가
-            logo: matchingVehicle ? matchingVehicle.logo : null, // 로고 추가
-          };
-        });
-        setSearchResults(vehiclesWithImages); // 이미지가 포함된 차량 정보 설정
-        setShowAllBrands(false); // 검색 결과가 있을 때 브랜드 목록 숨김
-      }
-    } catch (error) {
-      setErrorMessage('검색에 실패했습니다. 다시 시도해주세요.');
-    } finally {
-      setLoading(false);
-    }
+        if (!filteredVehicles || filteredVehicles.length === 0) {
+          setErrorMessage('검색 결과가 없습니다.');
+          setShowAllBrands(true); // 검색 결과 없을 때 브랜드 전체 보기로 전환
+        } else {
+          // 이미지를 더미 데이터에서 찾기
+          const vehiclesWithImages = filteredVehicles.map((vehicle) => {
+            const matchingVehicle = electricVehicles.find(
+              (v) => v.name === vehicle.name // 차량 이름을 기준으로 이미지 찾기
+            );
+            return {
+              ...vehicle,
+              image: matchingVehicle ? matchingVehicle.image : null, // 이미지가 있으면 추가
+              logo: matchingVehicle ? matchingVehicle.logo : null, // 로고 추가
+            };
+          });
+          setSearchResults(vehiclesWithImages); // 이미지가 포함된 차량 정보 설정
+          setShowAllBrands(false); // 검색 결과가 있을 때 브랜드 목록 숨김
+        }
+      })
+      .catch((error) => {
+        setErrorMessage('검색에 실패했습니다. 다시 시도해주세요.');
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
+
   return (
     <div>
       <MainCar />

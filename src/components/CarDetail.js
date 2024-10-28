@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import CarImageDB from './CarImageDB.js'; // 더미 데이터 가져오기
+import electricVehicles from './ElectricVehicles.js'; // 더미 데이터 가져오기
 
 function CarDetail() {
   const { car_num } = useParams(); // URL에서 car_num을 가져오기
-  const vehicle = CarImageDB.find((v) => v.car_num === parseInt(car_num));
+  const vehicle = electricVehicles.find((v) => v.car_num === parseInt(car_num));
 
   // 페이지 렌더링 시 스크롤을 맨 위로 이동시키는 useEffect
   useEffect(() => {
@@ -20,22 +20,14 @@ function CarDetail() {
       <div style={styles.CartypetopContainer}>
         <div style={styles.CartypetopCarname}>{vehicle.name}</div>
         <div style={styles.brandContainer}>
-          <div>
-            <img
-              src={vehicle.logo}
-              alt={vehicle.brand}
-              style={{ width: '100px', height: 'auto' }}
-            />
+          <div style={styles.brandlogo}>
+            <img src={vehicle.logo} alt={vehicle.brand} style={{ width: '100%', height: 'auto' }} />
           </div>
           <div style={styles.brandname}>{vehicle.brand}</div>
         </div>
       </div>
       <div style={styles.CarImage}>
-        <img
-          src={vehicle.image}
-          alt={vehicle.name}
-          style={{ width: '800px', height: 'auto' }}
-        />
+        <img src={vehicle.image} alt={vehicle.name} style={{ width: '100%', height: 'auto' }} />
       </div>
       <div style={styles.ContainerStyle}>
         <div style={styles.itemStyle}>
@@ -97,14 +89,13 @@ const styles = {
     fontFamily: 'JalnanGothic',
     color: 'white',
   },
+  brandlogo: {
+    width: '30%',
+  },
   CarImage: {
-    marginTop: '100px',
-    marginBottom: '100px',
-
+    marginLeft: '80px',
+    marginRight: '80px',
     backgroundColor: 'white',
-    display: 'flex',
-
-    justifyContent: 'center',
   },
   ContainerStyle: {
     marginLeft: '80px',
