@@ -37,7 +37,7 @@ function Main() {
     setErrorMessage('');
 
     axios
-      .get('https://port-0-java-springboot-m0uuimo09c0b9ce4.sel4.cloudtype.app/api/cars', {
+      .get('https://port-0-java-springboot-m0uuimo09c0b9ce4.sel4.cloudtype.app/api/searchCar', {
         params: {
           carName: searchValue, // 검색어를 전달
         },

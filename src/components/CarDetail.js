@@ -20,14 +20,22 @@ function CarDetail() {
       <div style={styles.CartypetopContainer}>
         <div style={styles.CartypetopCarname}>{vehicle.name}</div>
         <div style={styles.brandContainer}>
-          <div style={styles.brandlogo}>
-            <img src={vehicle.logo} alt={vehicle.brand} style={{ width: '100%', height: 'auto' }} />
+        <div>
+            <img
+              src={vehicle.logo}
+              alt={vehicle.brand}
+              style={{ width: '100px', height: 'auto' }}
+            />
           </div>
           <div style={styles.brandname}>{vehicle.brand}</div>
         </div>
       </div>
       <div style={styles.CarImage}>
-        <img src={vehicle.image} alt={vehicle.name} style={{ width: '100%', height: 'auto' }} />
+      <img
+          src={vehicle.image}
+          alt={vehicle.name}
+          style={{ width: '800px', height: 'auto' }}
+        />
       </div>
       <div style={styles.ContainerStyle}>
         <div style={styles.itemStyle}>
@@ -93,9 +101,11 @@ const styles = {
     width: '30%',
   },
   CarImage: {
-    marginLeft: '80px',
-    marginRight: '80px',
+    marginTop: '100px',
+    marginBottom: '100px',
     backgroundColor: 'white',
+    display: 'flex',
+    justifyContent: 'center',
   },
   ContainerStyle: {
     marginLeft: '80px',
