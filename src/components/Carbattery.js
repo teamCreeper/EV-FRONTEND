@@ -1,17 +1,15 @@
 import React from "react";
-import { useParams } from "react-router-dom";
 import { useState } from "react";
+import { useParams } from "react-router-dom";
 import axios from "axios";
 import electricVehicles from "./ElectricVehicles";
 
 import China from '../assets/images/CN.png';
 import Korea from '../assets/images/KR.png';
-function Carbattery() {
-  // URL에서 car_num 가져오기
-  const { car_num } = useParams();
 
-  // 더미 데이터 (서버가 열려 있지 않아 임시로 사용)
-  const companies = electricVehicles;
+function Carbattery() {
+
+  const companies = electricVehicles;// 더미 데이터 (서버가 열려 있지 않아 임시로 사용)
   // 차량을 battery_manufacturer로 그룹화
   const groupedVehicles = companies.reduce((acc, vehicle) => {
     const { battery_manufacturer } = vehicle;
@@ -40,7 +38,7 @@ function Carbattery() {
   const [showKoreanOnly, setShowKoreanOnly] = useState(false); // 국산 배터리만 보기 체크박스 상태
 
 
-  const Card = ({ manufacturer, vehicles = [] }) => {
+  const Card = ({ manufacturer, vehicles = []}) => {
     const getCountryFlagSrc = (battery_country) => {
       switch (battery_country) {
         case 'China':
@@ -50,24 +48,27 @@ function Carbattery() {
           return Korea; // 기본 국기 경로
       }
     };
-    
-     // 국산 배터리만 보기 상태에 따라 차량 필터링
-  const filteredVehicles = showKoreanOnly 
-  ? vehicles.filter(v => v.battery_country === 'Korea') 
-  : vehicles;
 
     // 보여줄 차량 목록 결정
-    const displayedVehicles = showAll ? filteredVehicles : filteredVehicles.slice(0, 4);
+    const displayedVehicles = showAll ? vehicles : vehicles.slice(0, 4);
 
     return (
     <div style={styles.card}>
       <div style={styles.header}>
-      <img src={getCountryFlagSrc(filteredVehicles[0]?.battery_country)} alt={`${filteredVehicles[0]?.battery_country} 국기`} style={styles.flag} />
+      <img 
+      src={getCountryFlagSrc(vehicles[0]?.battery_country)}
+      alt={`${vehicles[0]?.battery_country} 국기`}
+      style={styles.flag} />
       <h2>{manufacturer}</h2>
       </div>
       <div style={styles.vehicleContainer}>
           {displayedVehicles.map((vehicle, index) => (
-          <div key={index} style={styles.vehicleItem}>
+          <div key={index}
+          style={styles.vehicleItem}
+          onClick={() => {
+            // 페이지 이동 처리
+            window.location.href = `/CarDetail/${vehicle.car_num}`;
+          }}          >
             <img src={vehicle.image} alt={vehicle.name} style={styles.vehicleImage} />
             <div style={styles.vehicleText}>
               <div style={{ display: 'flex', alignItems: 'center' }}>
