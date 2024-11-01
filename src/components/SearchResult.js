@@ -1,5 +1,5 @@
 import React from 'react';
-import electricVehicles from './ElectricVehicles.js';
+import electricVehicles from './ElectricVehicles.js'; // 더미 데이터 가져오기
 
 function SearchResult({ results, searchTerm, onCarClick }) {
   return (
@@ -14,8 +14,8 @@ function SearchResult({ results, searchTerm, onCarClick }) {
             <div
               key={vehicle.car_num}
               style={styles.card}
-              onClick={() => onCarClick(vehicle.carId)}
-              className='card'
+              onClick={() => onCarClick(vehicle.carId)} // 클릭 시 차량 상세로 이동
+              className='card' // 애니메이션 효과를 위한 클래스 추가
             >
               {matchingVehicle && matchingVehicle.image && (
                 <img
@@ -61,7 +61,7 @@ const styles = {
     textAlign: 'center',
     width: '300px',
     boxShadow: '0 2px 10px rgba(0, 0, 0, 0.1)',
-    transition: 'transform 0.3s ease, background-color 0.3s ease',
+    transition: 'transform 0.3s ease, background-color 0.3s ease', // 애니메이션 효과 추가
   },
   vehicleImage: {
     width: '100%',
@@ -72,18 +72,21 @@ const styles = {
   vehicleInfo: {
     marginTop: '10px',
     display: 'flex',
-    justifyContent: 'space-between',
+    justifyContent: 'space-between', // 양쪽 끝으로 정렬
     alignItems: 'center',
   },
   brandContainer: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'flex-end',
-    gap: '10px',
+    display: 'flex', // flexbox 적용
+    alignItems: 'center', // 수평 정렬 가운데로 맞추기
+    justifyContent: 'flex-end', // 양쪽 끝으로 정렬
+    gap: '10px', // 로고와 텍스트 사이 간격
   },
   vehicleLogo: {
-    width: '25%',
+    width: '25%', // 로고 크기 고정
     height: 'auto',
+  },
+  vehiclename: {
+    fontSize: '20px',
   },
   searchResultText: {
     marginTop: '60px',
