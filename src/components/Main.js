@@ -45,11 +45,6 @@ function Main() {
   };
 
   const handleSearch = () => {
-    if (!searchValue) {
-      setErrorMessage('검색어를 입력해주세요.');
-      return;
-    }
-
     setLoading(true);
     setErrorMessage('');
 
