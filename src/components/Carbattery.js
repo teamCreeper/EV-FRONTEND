@@ -8,8 +8,19 @@ import China from '../assets/images/CN.png';
 import Korea from '../assets/images/KR.png';
 
 function Carbattery() {
-
+  const [expandedCompanies, setExpandedCompanies] = useState({}); // 각 회사별 확장 상태 관리
+  const [currentPages, setCurrentPages] = useState({}); // 각 회사별 현재 페이지 관리
+  const vehiclesPerPage = 16;
   const companies = electricVehicles;// 더미 데이터 (서버가 열려 있지 않아 임시로 사용)
+  const [showKoreanOnly, setShowKoreanOnly] = useState(false); // 국산 배터리만 보기 체크박스 상태
+
+  // 더보기 버튼을 눌렀을 때 동작
+const handleMoreButtonClick = (manufacturer) => {
+  setExpandedCompanies((prevState) => ({
+    ...prevState,
+    [manufacturer]: !prevState[manufacturer],
+  }));
+};
   // 차량을 battery_manufacturer로 그룹화
   const groupedVehicles = companies.reduce((acc, vehicle) => {
     const { battery_manufacturer } = vehicle;
@@ -33,12 +44,31 @@ function Carbattery() {
   //       console.error("데이터 가져오기 실패:", error);
   //     });
   // };
-
-  const [showAll, setShowAll] = useState(false); // 차량 목록 표시 여부
-  const [showKoreanOnly, setShowKoreanOnly] = useState(false); // 국산 배터리만 보기 체크박스 상태
-
+  const handlePageChange = (manufacturer, direction) => {
+    setCurrentPages((prevState) => {
+      const currentPage = currentPages[manufacturer] || 1;
+      const newPage = direction === "next" ? currentPage + 1 : currentPage - 1;
+      return { ...prevState, [manufacturer]: newPage };
+    });
+  };
 
   const Card = ({ manufacturer, vehicles = []}) => {
+    const isExpanded = expandedCompanies[manufacturer] || false; // 현재 회사의 확장 상태
+  const currentPage = currentPages[manufacturer] || 1; // 현재 페이지
+  const indexOfLastVehicle = currentPage * vehiclesPerPage;
+  const indexOfFirstVehicle = indexOfLastVehicle - vehiclesPerPage;
+  
+  const displayedVehicles = isExpanded
+    ? vehicles.slice(indexOfFirstVehicle, indexOfLastVehicle)
+    : vehicles.slice(0, 4);
+
+    const totalPages = Math.ceil(vehicles.length / vehiclesPerPage);
+
+    const vehicleContainerStyle = {
+      ...styles.vehicleContainer,
+      gridTemplateColumns: isExpanded ? 'repeat(4, 1fr)' : 'repeat(2, 1fr)',
+    };
+
     const getCountryFlagSrc = (battery_country) => {
       switch (battery_country) {
         case 'China':
@@ -49,9 +79,6 @@ function Carbattery() {
       }
     };
 
-    // 보여줄 차량 목록 결정
-    const displayedVehicles = showAll ? vehicles : vehicles.slice(0, 4);
-
     return (
     <div style={styles.card}>
       <div style={styles.header}>
@@ -61,14 +88,16 @@ function Carbattery() {
       style={styles.flag} />
       <h2>{manufacturer}</h2>
       </div>
-      <div style={styles.vehicleContainer}>
-          {displayedVehicles.map((vehicle, index) => (
+      <div style={vehicleContainerStyle}> {/* 수정된 부분 */}
+      {displayedVehicles.map((vehicle, index) => (
           <div key={index}
           style={styles.vehicleItem}
           onClick={() => {
             // 페이지 이동 처리
             window.location.href = `/CarDetail/${vehicle.car_num}`;
-          }}          >
+          }}
+          className='card' // 애니메이션 효과를 위한 클래스 추가
+          >
             <img src={vehicle.image} alt={vehicle.name} style={styles.vehicleImage} />
             <div style={styles.vehicleText}>
               <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -81,15 +110,46 @@ function Carbattery() {
         ))}
       </div>
       {vehicles.length > 4 && (
-        <div style={{textAlign: 'center', marginTop: '20px'}}>
-          <button style={styles.moreButton} onClick={() => setShowAll(!showAll)}>
-            {showAll ? '접기' : '더보기'}
+        <div style={{ textAlign: "center", marginTop: "20px" }}>
+          <button
+            style={styles.moreButton}
+            onClick={() => handleMoreButtonClick(manufacturer)}
+          >
+            {isExpanded ? "접기" : "더보기"}
           </button>
-          </div>
+        </div>
+      )}
+      {isExpanded && totalPages > 1 && (
+        <div style={{ textAlign: "center", marginTop: "20px" }}>
+          <button
+            style={{
+             ...styles.paginationButton,
+             ...(currentPage === 1 ? styles.paginationButtonDisabled : {}),
+            }}
+            onClick={() => handlePageChange(manufacturer, "prev")}
+            disabled={currentPage === 1}
+          >
+            
+            &lt;
+          </button>
+          <span>{` ${currentPage} / ${totalPages} `}</span>
+          <button
+            style={{
+              ...styles.paginationButton,
+              ...(currentPage === totalPages ? styles.paginationButtonDisabled : {}),
+            }}
+            onClick={() => handlePageChange(manufacturer, "next")}
+            disabled={currentPage === totalPages}
+          >
+            &gt;
+          </button>
+      </div>
         )}
-    </div>
+      </div>
   );
 };
+
+const isAnyCardExpanded = Object.values(expandedCompanies).some(expanded => expanded); // 최소 하나의 카드가 확장된 상태인지 확인
 
   return (
     <div style={{ marginTop: '50px' }}>
@@ -108,8 +168,15 @@ function Carbattery() {
       </div>
 
       <div style={{ marginTop: '50px' }}>
-        <div style={styles.cardGrid}>
-        {Object.entries(groupedVehicles).map(([manufacturer, vehicles]) => {
+      <div style={{
+        ...styles.cardGrid,
+        gridTemplateColumns: isAnyCardExpanded ? '1fr' : 'repeat(2, 1fr)', // 조건부 그리드 템플릿
+      }}>        {Object.entries(groupedVehicles).map(([manufacturer, vehicles]) => {
+           // 다른 카드 숨기기: 현재 확장된 카드만 보여줌
+        const isExpanded = expandedCompanies[manufacturer] || false;
+        if (Object.values(expandedCompanies).includes(true) && !isExpanded) {
+          return null;
+        }
           // 국산 배터리만 보기 상태에 따라 차량 필터링
           const filteredVehicles = showKoreanOnly 
             ? vehicles.filter(v => v.battery_country === 'Korea') 
@@ -170,7 +237,8 @@ const styles = {
     padding: '20px',
     boxShadow: '0 2px 10px rgba(0, 0, 0, 0.1)',
     padding: '20px',
-    backgroundColor: 'orange',
+    backgroundColor: 'white',
+    transition: 'transform 0.3s ease, background-color 0.3s ease', // 애니메이션 효과 추가
   },
   header: {
     display: 'flex',
@@ -193,6 +261,7 @@ const styles = {
   },
   vehicleItem: {
     textAlign: 'center',
+    borderRadius: '10px',
   },
   vehicleImage: {
     width: '100%',
@@ -213,12 +282,25 @@ const styles = {
   moreButton: {
     marginTop: '20px',
     padding: '10px 20px',
-    backgroundColor: 'orange',
+    backgroundColor: 'white',
     borderTop: 0,
     borderRight: 0,
     borderLeft: 0,
     borderBottom: '1px solid black',
     cursor: 'pointer',
+  },
+  paginationButton: {
+    padding: '10px 15px',
+    backgroundColor: 'white', // 버튼 배경색
+    color: 'black', // 글자색
+    border: 'none', // 테두리 제거
+    borderRadius: '5px', // 모서리 둥글게
+    cursor: 'pointer', // 포인터 커서
+    transition: 'background-color 0.3s', // 호버 시 배경색 변화
+  },
+  paginationButtonDisabled: {
+    backgroundColor: 'white', // 비활성화 상태 배경색
+    color: 'black', // 비활성화 상태 글자색
   },
 };
 
