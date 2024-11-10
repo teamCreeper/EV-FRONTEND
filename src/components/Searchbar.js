@@ -1,10 +1,76 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
-export function Searchbar({ value, onChange, onSearch, selectedBrand, onBrandChange }) {
+export function Searchbar({ value, onChange, onSearch, selectedBrand, onBrandChange, vehicles }) {
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  const [suggestions, setSuggestions] = useState([]);
+  const [hoveredIndex, setHoveredIndex] = useState(null);
+
+  const suggestionsRef = useRef(null); // 자동완성 목록 참조
+
   const handleSubmit = (e) => {
     e.preventDefault(); // 기본 제출 동작 방지
     onSearch(); // 검색 함수 호출
   };
+
+  const handleClickOutside = (e) => {
+    if (suggestionsRef.current && !suggestionsRef.current.contains(e.target)) {
+      setShowSuggestions(false); // 자동완성 목록 외부 클릭 시 숨기기
+    }
+  };
+
+  useEffect(() => {
+    // 컴포넌트가 마운트될 때 이벤트 리스너를 추가하고, 언마운트될 때 제거
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
+  const handleSuggestionClick = (suggestion) => {
+    onChange({ target: { value: suggestion } });
+    setShowSuggestions(false); // 클릭 후 자동완성 목록 숨기기
+    onSearch(suggestion);
+  };
+
+  const handleSuggestionMouseEnter = (index) => {
+    setHoveredIndex(index);
+  };
+
+  const handleSuggestionMouseLeave = () => {
+    setHoveredIndex(null);
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === 'ArrowDown') {
+      // 아래 화살표: hoveredIndex 증가
+      setHoveredIndex((prevIndex) => Math.min(prevIndex + 1, suggestions.length - 1));
+    } else if (e.key === 'ArrowUp') {
+      // 위 화살표: hoveredIndex 감소
+      setHoveredIndex((prevIndex) => Math.max(prevIndex - 1, 0));
+    } else if (e.key === 'Enter' && hoveredIndex !== null) {
+      // Enter 키: 선택된 항목으로 검색
+      onChange({ target: { value: suggestions[hoveredIndex] } });
+      onSearch(suggestions[hoveredIndex]);
+      setShowSuggestions(false);
+    }
+  };
+
+  useEffect(() => {
+    if (value) {
+      const filteredSuggestions = vehicles
+        .map((vehicle) => vehicle.name) // 차량 이름 목록
+        .filter((vehicleName) => vehicleName.toLowerCase().includes(value.toLowerCase())); // 검색어 포함되는 차량 이름 필터링
+      setSuggestions(filteredSuggestions);
+
+      if (filteredSuggestions.some((suggestion) => suggestion.toLowerCase() === value.toLowerCase() || filteredSuggestions.length === 0)) {
+        setShowSuggestions(false); // 검색어와 일치하면 자동완성 목록 숨기기
+      } else {
+        setShowSuggestions(true); // 검색어와 일치하지 않으면 자동완성 목록 표시
+      }
+    } else {
+      setShowSuggestions(false); // 검색어가 비어있으면 자동완성 목록 숨기기
+    }
+  }, [value, vehicles]);
 
   return (
     <form
@@ -14,7 +80,6 @@ export function Searchbar({ value, onChange, onSearch, selectedBrand, onBrandCha
       <span style={styles.search}>전기차 모델 검색</span>
 
       <div style={styles.inputGroup}>
-        {/* 제조사 드롭다운 추가 */}
         <select
           style={styles.dropdown}
           value={selectedBrand}
@@ -28,12 +93,14 @@ export function Searchbar({ value, onChange, onSearch, selectedBrand, onBrandCha
           <option value='5'>BMW</option>
           <option value='6'>벤츠</option>
         </select>
-        {/* 검색 입력과 버튼 */}
+
         <input
           type='search'
           style={styles.input1}
           value={value}
           onChange={onChange}
+          onFocus={() => setShowSuggestions(true)} // 입력 시 자동완성 목록 표시
+          onKeyDown={handleKeyDown} // 키보드 이벤트 처리
         />
         <button
           type='submit'
@@ -41,20 +108,42 @@ export function Searchbar({ value, onChange, onSearch, selectedBrand, onBrandCha
         >
           검색
         </button>
+        {showSuggestions && suggestions.length > 0 && (
+          <ul
+            style={styles.suggestionsList}
+            ref={suggestionsRef} // 자동완성 목록에 ref 연결
+          >
+            {suggestions.map((suggestion, index) => (
+              <li
+                key={index}
+                style={{
+                  ...styles.suggestionItem,
+                  ...(hoveredIndex === index ? styles.suggestionItemHover : {}), // 선택된 항목에 스타일 적용
+                }}
+                onClick={() => handleSuggestionClick(suggestion)}
+                onMouseEnter={() => handleSuggestionMouseEnter(index)}
+                onMouseLeave={handleSuggestionMouseLeave}
+              >
+                {suggestion}
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
     </form>
   );
 }
-// 스타일 객체 정의
+
 const styles = {
   searchbar: {
     width: '100%',
     backgroundColor: '#373737',
     padding: '30px 0px',
     display: 'flex',
-    alignItems: 'center', // 세로 가운데 정렬
+    alignItems: 'center',
     marginTop: '-5px',
-    justifyContent: 'space-between', // 양 끝에 배치
+    justifyContent: 'space-between',
+    position: 'relative',
   },
   search: {
     fontSize: '25px',
@@ -68,6 +157,7 @@ const styles = {
     display: 'flex',
     alignItems: 'center',
     gap: '10px',
+    position: 'relative',
   },
   dropdown: {
     width: '100px',
@@ -94,5 +184,28 @@ const styles = {
     fontWeight: 'bold',
     border: '1px solid white',
     cursor: 'pointer',
+  },
+  suggestionsList: {
+    position: 'absolute',
+    top: '100%',
+    left: '110px',
+    backgroundColor: '#444444',
+    color: '#fff',
+    width: '400px',
+    maxHeight: '245px',
+    overflow: 'auto',
+    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+    listStyleType: 'none',
+    padding: '0',
+    margin: '0',
+  },
+  suggestionItem: {
+    padding: '10px 12px',
+    cursor: 'pointer',
+    borderBottom: '1px solid #444',
+    height: '20px',
+  },
+  suggestionItemHover: {
+    backgroundColor: '#555',
   },
 };
