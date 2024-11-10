@@ -1,6 +1,7 @@
 // Brand logo:
 import 현대로고 from '../assets/images/hyundailogo2.png';
 import 기아로고 from '../assets/images/kialogo2.png';
+import 제네시스로고 from '../assets/images/genesislogo.png';
 import 아우디로고 from '../assets/images/audilogo2.png';
 import BMW로고 from '../assets/images/bmwlogo.png';
 import 벤츠로고 from '../assets/images/benzlogo.png';
@@ -56,9 +57,9 @@ const electricVehicles = [
   { car_num: 107, brandId: 1, brand: 'Hyundai', name: '봉고EV', image: 봉고EV, logo: 현대로고 },
 
   // brand : 'GENESIS' DB와 연동된 데이터 (우선)
-  { car_num: 201, brandId: 2, brand: 'Hyundai', name: 'Electrified GV60', image: GV60, logo: 현대로고 },
-  { car_num: 202, brandId: 2, brand: 'Hyundai', name: 'Electrified GV70', image: ElectrifiedGV70, logo: 현대로고 },
-  { car_num: 203, brandId: 2, brand: 'Hyundai', name: 'Electrified G80', image: ElectrifiedG80, logo: 현대로고 },
+  { car_num: 201, brandId: 2, brand: 'Genesis', name: 'Electrified GV60', image: GV60, logo: 제네시스로고 },
+  { car_num: 202, brandId: 2, brand: 'Genesis', name: 'Electrified GV70', image: ElectrifiedGV70, logo: 제네시스로고 },
+  { car_num: 203, brandId: 2, brand: 'Genesis', name: 'Electrified G80', image: ElectrifiedG80, logo: 제네시스로고 },
 
   // brand: 'KIA' DB와 연동된 데이터 (우선)
   { car_num: 301, brandId: 3, brand: 'Kia', name: 'EV3', image: EV3, logo: 기아로고 },
