@@ -34,7 +34,7 @@ function SearchResult({ results, searchTerm, onCarClick }) {
                       style={styles.vehicleLogo}
                     />
                   )}
-                  <p>{vehicle.carBrandId <= 2 ? 'Hyundai' : vehicle.carBrandId === 3 ? 'Kia' : '브랜드정보없음'}</p>
+                  <p>{vehicle.carBrand.brandId === 1 ? 'Hyundai' : vehicle.carBrand.brandId === 2 ? 'Genesis' : vehicle.carBrand.brandId === 3 ? 'Kia' : '브랜드정보없음'}</p>
                 </div>
               </div>
             </div>
@@ -74,6 +74,7 @@ const styles = {
     display: 'flex',
     justifyContent: 'space-between', // 양쪽 끝으로 정렬
     alignItems: 'center',
+    whiteSpace: 'nowrap', // 텍스트를 한 줄로 유지
   },
   brandContainer: {
     display: 'flex', // flexbox 적용

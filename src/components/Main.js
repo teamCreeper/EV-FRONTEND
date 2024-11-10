@@ -53,7 +53,7 @@ function Main() {
       .then((response) => {
         const vehicles = response.data;
         const filteredVehicles = vehicles.filter((vehicle) => {
-          const matchesBrand = selectedBrand === '0' || vehicle.carBrandId === parseInt(selectedBrand);
+          const matchesBrand = selectedBrand === '0' || vehicle.carBrand.brandId === parseInt(selectedBrand);
           const matchesSearchValue = searchValue ? vehicle.carName.toLowerCase().includes(searchValue.toLowerCase()) : true;
           return matchesBrand && matchesSearchValue;
         });
