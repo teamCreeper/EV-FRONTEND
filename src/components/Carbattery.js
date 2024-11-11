@@ -1,8 +1,7 @@
-import React from "react";
-import { useState } from "react";
-import { useParams } from "react-router-dom";
-import axios from "axios";
-import electricVehicles from "./ElectricVehicles";
+import React from 'react';
+import { useState } from 'react';
+import axios from 'axios';
+import electricVehicles from './ElectricVehicles';
 
 import China from '../assets/images/CN.png';
 import Korea from '../assets/images/KR.png';
@@ -11,16 +10,16 @@ function Carbattery() {
   const [expandedCompanies, setExpandedCompanies] = useState({}); // 각 회사별 확장 상태 관리
   const [currentPages, setCurrentPages] = useState({}); // 각 회사별 현재 페이지 관리
   const vehiclesPerPage = 16;
-  const companies = electricVehicles;// 더미 데이터 (서버가 열려 있지 않아 임시로 사용)
+  const companies = electricVehicles; // 더미 데이터 (서버가 열려 있지 않아 임시로 사용)
   const [showKoreanOnly, setShowKoreanOnly] = useState(false); // 국산 배터리만 보기 체크박스 상태
 
   // 더보기 버튼을 눌렀을 때 동작
-const handleMoreButtonClick = (manufacturer) => {
-  setExpandedCompanies((prevState) => ({
-    ...prevState,
-    [manufacturer]: !prevState[manufacturer],
-  }));
-};
+  const handleMoreButtonClick = (manufacturer) => {
+    setExpandedCompanies((prevState) => ({
+      ...prevState,
+      [manufacturer]: !prevState[manufacturer],
+    }));
+  };
   // 차량을 battery_manufacturer로 그룹화
   const groupedVehicles = companies.reduce((acc, vehicle) => {
     const { battery_manufacturer } = vehicle;
@@ -47,20 +46,18 @@ const handleMoreButtonClick = (manufacturer) => {
   const handlePageChange = (manufacturer, direction) => {
     setCurrentPages((prevState) => {
       const currentPage = currentPages[manufacturer] || 1;
-      const newPage = direction === "next" ? currentPage + 1 : currentPage - 1;
+      const newPage = direction === 'next' ? currentPage + 1 : currentPage - 1;
       return { ...prevState, [manufacturer]: newPage };
     });
   };
 
-  const Card = ({ manufacturer, vehicles = []}) => {
+  const Card = ({ manufacturer, vehicles = [] }) => {
     const isExpanded = expandedCompanies[manufacturer] || false; // 현재 회사의 확장 상태
-  const currentPage = currentPages[manufacturer] || 1; // 현재 페이지
-  const indexOfLastVehicle = currentPage * vehiclesPerPage;
-  const indexOfFirstVehicle = indexOfLastVehicle - vehiclesPerPage;
-  
-  const displayedVehicles = isExpanded
-    ? vehicles.slice(indexOfFirstVehicle, indexOfLastVehicle)
-    : vehicles.slice(0, 4);
+    const currentPage = currentPages[manufacturer] || 1; // 현재 페이지
+    const indexOfLastVehicle = currentPage * vehiclesPerPage;
+    const indexOfFirstVehicle = indexOfLastVehicle - vehiclesPerPage;
+
+    const displayedVehicles = isExpanded ? vehicles.slice(indexOfFirstVehicle, indexOfLastVehicle) : vehicles.slice(0, 4);
 
     const totalPages = Math.ceil(vehicles.length / vehiclesPerPage);
 
@@ -80,83 +77,77 @@ const handleMoreButtonClick = (manufacturer) => {
     };
 
     return (
-    <div style={styles.card}>
-      <div style={styles.header}>
-      <img 
-      src={getCountryFlagSrc(vehicles[0]?.battery_country)}
-      alt={`${vehicles[0]?.battery_country} 국기`}
-      style={styles.flag} />
-      <h2>{manufacturer}</h2>
-      </div>
-      <div style={vehicleContainerStyle}> {/* 수정된 부분 */}
-      {displayedVehicles.map((vehicle, index) => (
-          <div key={index}
-          style={styles.vehicleItem}
-          onClick={() => {
-            // 페이지 이동 처리
-            window.location.href = `/CarDetail/${vehicle.car_num}`;
-          }}
-          className='card' // 애니메이션 효과를 위한 클래스 추가
-          >
-            <img src={vehicle.image} alt={vehicle.name} style={styles.vehicleImage} />
-            <div style={styles.vehicleText}>
-              <div style={{ display: 'flex', alignItems: 'center' }}>
-                <img src={vehicle.logo} alt={`${vehicle.brand} 로고`} style={styles.logo} />
-                <p style={styles.brand}>{vehicle.brand}</p>
-              </div>
-              <p style={styles.name}>{vehicle.name}</p>
-            </div>
-          </div>
-        ))}
-      </div>
-      {vehicles.length > 4 && (
-        <div style={{ textAlign: "center", marginTop: "20px" }}>
-          <button
-            style={styles.moreButton}
-            onClick={() => handleMoreButtonClick(manufacturer)}
-          >
-            {isExpanded ? "접기" : "더보기"}
-          </button>
+      <div style={styles.card}>
+        <div style={styles.header}>
+          <img src={getCountryFlagSrc(vehicles[0]?.battery_country)} alt={`${vehicles[0]?.battery_country} 국기`} style={styles.flag} />
+          <h2>{manufacturer}</h2>
         </div>
-      )}
-      {isExpanded && totalPages > 1 && (
-        <div style={{ textAlign: "center", marginTop: "20px" }}>
-          <button
-            style={{
-             ...styles.paginationButton,
-             ...(currentPage === 1 ? styles.paginationButtonDisabled : {}),
-            }}
-            onClick={() => handlePageChange(manufacturer, "prev")}
-            disabled={currentPage === 1}
-          >
-            
-            &lt;
-          </button>
-          <span>{` ${currentPage} / ${totalPages} `}</span>
-          <button
-            style={{
-              ...styles.paginationButton,
-              ...(currentPage === totalPages ? styles.paginationButtonDisabled : {}),
-            }}
-            onClick={() => handlePageChange(manufacturer, "next")}
-            disabled={currentPage === totalPages}
-          >
-            &gt;
-          </button>
-      </div>
+        <div style={vehicleContainerStyle}>
+          {' '}
+          {/* 수정된 부분 */}
+          {displayedVehicles.map((vehicle, index) => (
+            <div
+              key={index}
+              style={styles.vehicleItem}
+              onClick={() => {
+                // 페이지 이동 처리
+                window.location.href = `/CarDetail/${vehicle.car_num}`;
+              }}
+              className="card" // 애니메이션 효과를 위한 클래스 추가
+            >
+              <img src={vehicle.image} alt={vehicle.name} style={styles.vehicleImage} />
+              <div style={styles.vehicleText}>
+                <div style={{ display: 'flex', alignItems: 'center' }}>
+                  <img src={vehicle.logo} alt={`${vehicle.brand} 로고`} style={styles.logo} />
+                  <p style={styles.brand}>{vehicle.brand}</p>
+                </div>
+                <p style={styles.name}>{vehicle.name}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+        {vehicles.length > 4 && (
+          <div style={{ textAlign: 'center', marginTop: '20px' }}>
+            <button style={styles.moreButton} onClick={() => handleMoreButtonClick(manufacturer)}>
+              {isExpanded ? '접기' : '더보기'}
+            </button>
+          </div>
+        )}
+        {isExpanded && totalPages > 1 && (
+          <div style={{ textAlign: 'center', marginTop: '20px' }}>
+            <button
+              style={{
+                ...styles.paginationButton,
+                ...(currentPage === 1 ? styles.paginationButtonDisabled : {}),
+              }}
+              onClick={() => handlePageChange(manufacturer, 'prev')}
+              disabled={currentPage === 1}>
+              &lt;
+            </button>
+            <span>{` ${currentPage} / ${totalPages} `}</span>
+            <button
+              style={{
+                ...styles.paginationButton,
+                ...(currentPage === totalPages ? styles.paginationButtonDisabled : {}),
+              }}
+              onClick={() => handlePageChange(manufacturer, 'next')}
+              disabled={currentPage === totalPages}>
+              &gt;
+            </button>
+          </div>
         )}
       </div>
-  );
-};
+    );
+  };
 
-const isAnyCardExpanded = Object.values(expandedCompanies).some(expanded => expanded); // 최소 하나의 카드가 확장된 상태인지 확인
+  const isAnyCardExpanded = Object.values(expandedCompanies).some((expanded) => expanded); // 최소 하나의 카드가 확장된 상태인지 확인
 
   return (
     <div style={{ marginTop: '50px' }}>
       <div style={styles.container}>
         <div style={styles.title}>전기차 배터리 조회</div>
         <div style={styles.checkboxContainer}>
-        <input
+          <input
             type="checkbox"
             id="made-in-Korea"
             style={styles.checkbox}
@@ -168,28 +159,23 @@ const isAnyCardExpanded = Object.values(expandedCompanies).some(expanded => expa
       </div>
 
       <div style={{ marginTop: '50px' }}>
-      <div style={{
-        ...styles.cardGrid,
-        gridTemplateColumns: isAnyCardExpanded ? '1fr' : 'repeat(2, 1fr)', // 조건부 그리드 템플릿
-      }}>        {Object.entries(groupedVehicles).map(([manufacturer, vehicles]) => {
-           // 다른 카드 숨기기: 현재 확장된 카드만 보여줌
-        const isExpanded = expandedCompanies[manufacturer] || false;
-        if (Object.values(expandedCompanies).includes(true) && !isExpanded) {
-          return null;
-        }
-          // 국산 배터리만 보기 상태에 따라 차량 필터링
-          const filteredVehicles = showKoreanOnly 
-            ? vehicles.filter(v => v.battery_country === 'Korea') 
-            : vehicles;
+        <div
+          style={{
+            ...styles.cardGrid,
+            gridTemplateColumns: isAnyCardExpanded ? '1fr' : 'repeat(2, 1fr)', // 조건부 그리드 템플릿
+          }}>
+          {' '}
+          {Object.entries(groupedVehicles).map(([manufacturer, vehicles]) => {
+            // 다른 카드 숨기기: 현재 확장된 카드만 보여줌
+            const isExpanded = expandedCompanies[manufacturer] || false;
+            if (Object.values(expandedCompanies).includes(true) && !isExpanded) {
+              return null;
+            }
+            // 국산 배터리만 보기 상태에 따라 차량 필터링
+            const filteredVehicles = showKoreanOnly ? vehicles.filter((v) => v.battery_country === 'Korea') : vehicles;
 
-          // 필터링된 차량이 있는 경우에만 카드 표시
-          return filteredVehicles.length > 0 ? (
-            <Card
-              key={manufacturer}
-              manufacturer={manufacturer}
-              vehicles={filteredVehicles}
-            />
-          ) : null;
+            // 필터링된 차량이 있는 경우에만 카드 표시
+            return filteredVehicles.length > 0 ? <Card key={manufacturer} manufacturer={manufacturer} vehicles={filteredVehicles} /> : null;
           })}
         </div>
       </div>
@@ -270,10 +256,10 @@ const styles = {
   vehicleText: {
     marginTop: '10px',
   },
-  brand:{
+  brand: {
     margin: 0,
     display: 'flex',
-   },
+  },
   name: {
     margin: 0,
     display: 'flex',
