@@ -204,7 +204,7 @@ const styles = {
   suggestionsList: {
     position: 'absolute',
     top: '100%',
-    left: '110px',
+    left: '170px',
     backgroundColor: '#444444',
     color: '#fff',
     width: '400px',

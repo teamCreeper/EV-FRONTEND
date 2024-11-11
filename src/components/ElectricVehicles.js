@@ -25,6 +25,7 @@ import EV3 from '../assets/images/EV3.png';
 import EV6 from '../assets/images/EV6.png';
 import EV9 from '../assets/images/EV9.png';
 import NiroEV from '../assets/images/NiroEV.png';
+import SoulEV from '../assets/images/SoulEV.png';
 
 // Mercedes-Benz model:
 import EQA from '../assets/images/EQA.png';
@@ -46,8 +47,8 @@ import EtronGT from '../assets/images/E-tron GT.png';
 
 const electricVehicles = [
   // brand: 'HYUNDAI' DB와 연동된 데이터 (우선)
-  { car_num: 101, brandId: 1, brand: 'Hyundai', name: '아이오닉 5', image: 아이오닉5, logo: 현대로고 },
-  { car_num: 102, brandId: 1, brand: 'Hyundai', name: '아이오닉 6', image: 아이오닉6, logo: 현대로고 },
+  { car_num: 101, brandId: 1, brand: 'Hyundai', name: '아이오닉5', image: 아이오닉5, logo: 현대로고 },
+  { car_num: 102, brandId: 1, brand: 'Hyundai', name: '아이오닉6', image: 아이오닉6, logo: 현대로고 },
   { car_num: 103, brandId: 1, brand: 'Hyundai', name: '코나 일렉트릭', image: 코나일렉트릭, logo: 현대로고 },
   { car_num: 104, brandId: 1, brand: 'Hyundai', name: '포터2', image: 포터EV, logo: 현대로고 },
   { car_num: 105, brandId: 1, brand: 'Hyundai', name: '캐스퍼', image: 캐스퍼, logo: 현대로고 },
@@ -66,7 +67,7 @@ const electricVehicles = [
   { car_num: 302, brandId: 3, brand: 'Kia', name: 'EV6', image: EV6, logo: 기아로고 },
   { car_num: 303, brandId: 3, brand: 'Kia', name: 'EV9', image: EV9, logo: 기아로고 },
   { car_num: 304, brandId: 3, brand: 'Kia', name: '니로EV', image: NiroEV, logo: 기아로고 },
-  { car_num: 305, brandId: 3, brand: 'Kia', name: '쏘울EV', image: 아이오닉5, logo: 기아로고 },
+  { car_num: 305, brandId: 3, brand: 'Kia', name: '쏘울EV', image: SoulEV, logo: 기아로고 },
 
   // brand: 'Tesla'
   { car_num: 401, brandId: 4, brand: 'Tesla', name: '모델3', image: '../assets/images/모델3.png' },
