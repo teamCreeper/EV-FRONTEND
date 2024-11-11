@@ -44,7 +44,12 @@ function Nav() {
 
   return (
     <div className="navbar" style={{ ...styles.navbar, backgroundColor: navBarBackground }}>
-      <Link to="/" onClick={handleLogoClick} style={styles.navbarlogo}>
+      <Link
+        to="/"
+        onClick={() => {
+          handleLogoClick();
+        }}
+        style={styles.navbarlogo}>
         <img src={logo} width="100px" alt="logo" style={styles.logoImage} />
       </Link>
       <Link to="/" onClick={handleLogoClick} style={{ ...styles.navbarMenu, color: navBarTextColor }}>

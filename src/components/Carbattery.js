@@ -16,28 +16,28 @@ function Carbattery() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("https://port-0-java-springboot-m0uuimo09c0b9ce4.sel4.cloudtype.app/api/carBatteryInfo",);
-        const serverVehicles = response.data.map(vehicle => {
+        const response = await axios.get('https://port-0-java-springboot-m0uuimo09c0b9ce4.sel4.cloudtype.app/api/carBatteryInfo');
+        const serverVehicles = response.data.map((vehicle) => {
           // 더미 데이터에서 해당 차량에 대한 정보 찾기
-          const dummyVehicle = electricVehicles.find(ev => ev.car_num === vehicle.carId);
-          
+          const dummyVehicle = electricVehicles.find((ev) => ev.car_num === vehicle.carId);
+
           return {
             ...vehicle,
             car_num: vehicle.carId,
-            battery_country: vehicle.batteryBrandCountry !== "NO DATA" ? vehicle.batteryBrandCountry : "알 수 없음",
-            battery_manufacturer: vehicle.batteryBrandName !== "NO DATA" ? vehicle.batteryBrandName : "알 수 없음",
-            name: vehicle.carName || "정보 없음",
-            brand: dummyVehicle ? dummyVehicle.brand : "정보 없음", // 더미 데이터에서 brand를 가져옵니다.
+            battery_country: vehicle.batteryBrandCountry !== 'NO DATA' ? vehicle.batteryBrandCountry : '알 수 없음',
+            battery_manufacturer: vehicle.batteryBrandName !== 'NO DATA' ? vehicle.batteryBrandName : '알 수 없음',
+            name: vehicle.carName || '정보 없음',
+            brand: dummyVehicle ? dummyVehicle.brand : '정보 없음', // 더미 데이터에서 brand를 가져옵니다.
             logo: dummyVehicle ? dummyVehicle.logo : null, // 더미 데이터에서 logo를 가져옵니다.
             image: dummyVehicle ? dummyVehicle.image : null, // 더미 데이터에서 image를 가져옵니다.
-            batteryType: vehicle.batteryType || "정보 없음",
-            capacity: vehicle.capacity || "정보 없음",
-            charge_time: vehicle.charge_time || "정보 없음",
+            batteryType: vehicle.batteryType || '정보 없음',
+            capacity: vehicle.capacity || '정보 없음',
+            charge_time: vehicle.charge_time || '정보 없음',
           };
         });
         setVehicles(serverVehicles);
       } catch (error) {
-        console.error("데이터 가져오기 실패:", error);
+        console.error('데이터 가져오기 실패:', error);
       }
     };
 
@@ -108,11 +108,10 @@ function Carbattery() {
         <div style={vehicleContainerStyle}>
           {displayedVehicles.map((vehicle, index) => (
             <div
-            key={vehicle.carId}
-            style={styles.vehicleItem}
-            onClick={() => handleVehicleClick(vehicle.car_num)} // 클릭 시 상세페이지로 이동
-            className="card"
-            >
+              key={vehicle.carId}
+              style={styles.vehicleItem}
+              onClick={() => handleVehicleClick(vehicle.car_num)} // 클릭 시 상세페이지로 이동
+              className="card">
               <img src={vehicle.image} alt={vehicle.name} style={styles.vehicleImage} />
               <div style={styles.vehicleText}>
                 <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -229,7 +228,7 @@ const styles = {
     border: '1px solid #ddd',
     padding: '20px',
     boxShadow: '0 2px 10px rgba(0, 0, 0, 0.1)',
-    padding: '20px',
+    // padding: '20px',
     backgroundColor: 'white',
     transition: 'transform 0.3s ease, background-color 0.3s ease', // 애니메이션 효과 추가
   },
@@ -298,4 +297,3 @@ const styles = {
 };
 
 export default Carbattery;
-
