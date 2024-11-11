@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 
+import refreshImg from '../assets/images/refresh.png'; // 새로고침 이미지 가져오기
+
 export function Searchbar({ value, onChange, onSearch, selectedBrand, onBrandChange, vehicles }) {
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [suggestions, setSuggestions] = useState([]);
@@ -72,40 +74,48 @@ export function Searchbar({ value, onChange, onSearch, selectedBrand, onBrandCha
     }
   }, [value, vehicles]);
 
+  // 새로고침 버튼
+  const handleRefreshClick = () => {
+    localStorage.setItem('scrollPosition', 1000); // 원하는 Y 좌표 설정
+    window.location.reload(); // 페이지 새로고침
+  };
+
+  // useEffect를 통해 컴포넌트가 마운트될 때 스크롤 위치 설정
+  useEffect(() => {
+    const scrollPosition = localStorage.getItem('scrollPosition');
+    if (scrollPosition) {
+      window.scrollTo({ top: parseInt(scrollPosition), behavior: 'smooth' });
+      localStorage.removeItem('scrollPosition'); // 저장된 스크롤 위치 제거
+    }
+  }, []);
+
   return (
-    <form
-      style={styles.searchbar}
-      onSubmit={handleSubmit}
-    >
+    <form style={styles.searchbar} onSubmit={handleSubmit}>
       <span style={styles.search}>전기차 모델 검색</span>
 
       <div style={styles.inputGroup}>
-        <select
-          style={styles.dropdown}
-          value={selectedBrand}
-          onChange={(e) => onBrandChange(e.target.value)}
-        >
-          <option value='0'>전체</option>
-          <option value='1'>현대</option>
-          <option value='2'>제네시스</option>
-          <option value='3'>기아</option>
-          <option value='4'>아우디</option>
-          <option value='5'>BMW</option>
-          <option value='6'>벤츠</option>
+        <button type="button" style={styles.refreshBtn} onClick={handleRefreshClick}>
+          <img src={refreshImg} style={{ height: '30px' }} alt="refresh" />
+        </button>
+        <select style={styles.dropdown} value={selectedBrand} onChange={(e) => onBrandChange(e.target.value)}>
+          <option value="0">전체</option>
+          <option value="1">현대</option>
+          <option value="2">제네시스</option>
+          <option value="3">기아</option>
+          <option value="4">아우디</option>
+          <option value="5">BMW</option>
+          <option value="6">벤츠</option>
         </select>
 
         <input
-          type='search'
+          type="search"
           style={styles.input1}
           value={value}
           onChange={onChange}
           onFocus={() => setShowSuggestions(true)} // 입력 시 자동완성 목록 표시
           onKeyDown={handleKeyDown} // 키보드 이벤트 처리
         />
-        <button
-          type='submit'
-          style={styles.searchBtn}
-        >
+        <button type="submit" style={styles.searchBtn}>
           검색
         </button>
         {showSuggestions && suggestions.length > 0 && (
@@ -122,8 +132,7 @@ export function Searchbar({ value, onChange, onSearch, selectedBrand, onBrandCha
                 }}
                 onClick={() => handleSuggestionClick(suggestion)}
                 onMouseEnter={() => handleSuggestionMouseEnter(index)}
-                onMouseLeave={handleSuggestionMouseLeave}
-              >
+                onMouseLeave={handleSuggestionMouseLeave}>
                 {suggestion}
               </li>
             ))}
@@ -151,6 +160,13 @@ const styles = {
     marginTop: '10px',
     color: 'white',
     fontWeight: 'bold',
+  },
+  refreshBtn: {
+    height: '30px',
+    padding: '0 10px',
+    backgroundColor: 'transparent',
+    border: '0',
+    cursor: 'pointer',
   },
   inputGroup: {
     marginRight: '120px',

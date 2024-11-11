@@ -15,26 +15,22 @@ function SearchResult({ results, searchTerm, onCarClick }) {
               key={vehicle.car_num}
               style={styles.card}
               onClick={() => onCarClick(vehicle.carId)} // 클릭 시 차량 상세로 이동
-              className='card' // 애니메이션 효과를 위한 클래스 추가
+              className="card" // 애니메이션 효과를 위한 클래스 추가
             >
-              {matchingVehicle && matchingVehicle.image && (
-                <img
-                  src={matchingVehicle.image}
-                  alt={vehicle.name}
-                  style={styles.vehicleImage}
-                />
-              )}
+              {matchingVehicle && matchingVehicle.image && <img src={matchingVehicle.image} alt={vehicle.name} style={styles.vehicleImage} />}
               <div style={styles.vehicleInfo}>
                 <h3>{vehicle.name}</h3>
                 <div style={styles.brandContainer}>
-                  {matchingVehicle && matchingVehicle.logo && (
-                    <img
-                      src={matchingVehicle.logo}
-                      alt={vehicle.brand}
-                      style={styles.vehicleLogo}
-                    />
-                  )}
-                  <p>{vehicle.carBrand.brandId === 1 ? 'Hyundai' : vehicle.carBrand.brandId === 2 ? 'Genesis' : vehicle.carBrand.brandId === 3 ? 'Kia' : '브랜드정보없음'}</p>
+                  {matchingVehicle && matchingVehicle.logo && <img src={matchingVehicle.logo} alt={vehicle.brand} style={styles.vehicleLogo} />}
+                  <p>
+                    {vehicle.carBrand.brandId === 1
+                      ? 'Hyundai'
+                      : vehicle.carBrand.brandId === 2
+                      ? 'Genesis'
+                      : vehicle.carBrand.brandId === 3
+                      ? 'Kia'
+                      : '브랜드정보없음'}
+                  </p>
                 </div>
               </div>
             </div>
@@ -91,8 +87,8 @@ const styles = {
   },
   searchResultText: {
     marginTop: '60px',
-    marginLeft: '60px',
-    fontSize: '60px',
+    marginLeft: '30px',
+    fontSize: '50px',
   },
 };
 

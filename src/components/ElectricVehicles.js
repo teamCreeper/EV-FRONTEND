@@ -35,7 +35,7 @@ import EQE from '../assets/images/EQE.png';
 // BMW model:
 import iX3 from '../assets/images/BMW ix3.png';
 import i4 from '../assets/images/BMW i4.png';
-import i5 from '../assets/images/BMW i5.png';
+// import i5 from '../assets/images/BMW i5.png'; // 오류떠서 잠시 주석처리
 import i7 from '../assets/images/BMW i7.png';
 import iX from '../assets/images/BMW iX.png';
 
@@ -57,9 +57,9 @@ const electricVehicles = [
   { car_num: 107, brandId: 1, brand: 'Hyundai', name: '봉고EV', image: 봉고EV, logo: 현대로고 },
 
   // brand : 'GENESIS' DB와 연동된 데이터 (우선)
-  { car_num: 201, brandId: 2, brand: 'Genesis', name: 'Electrified GV60', image: GV60, logo: 제네시스로고 },
-  { car_num: 202, brandId: 2, brand: 'Genesis', name: 'Electrified GV70', image: ElectrifiedGV70, logo: 제네시스로고 },
-  { car_num: 203, brandId: 2, brand: 'Genesis', name: 'Electrified G80', image: ElectrifiedG80, logo: 제네시스로고 },
+  { car_num: 201, brandId: 2, brand: 'Hyundai', name: 'Electrified GV60', image: GV60, logo: 제네시스로고 },
+  { car_num: 202, brandId: 2, brand: 'Hyundai', name: 'Electrified GV70', image: ElectrifiedGV70, logo: 제네시스로고 },
+  { car_num: 203, brandId: 2, brand: 'Hyundai', name: 'Electrified G80', image: ElectrifiedG80, logo: 제네시스로고 },
 
   // brand: 'KIA' DB와 연동된 데이터 (우선)
   { car_num: 301, brandId: 3, brand: 'Kia', name: 'EV3', image: EV3, logo: 기아로고 },
