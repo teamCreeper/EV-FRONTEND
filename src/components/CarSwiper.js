@@ -54,51 +54,71 @@ const LogoContainer = styled.div`
 `;
 
 function CarSwiper({ logo, brand, images }) {
+  // 이미지 배열을 3배로 늘려 반복
+  const repeatedImages = [...images, ...images, ...images];
+
   return (
     <Container>
       <LogoContainer>
-        <img src={logo} alt={brand} />
+        <img
+          src={logo}
+          alt={brand}
+        />
         <span>{brand}</span>
       </LogoContainer>
-      <StyledSwiper navigation modules={[Navigation]} loop={true} className="mySwiper">
-        {images.map(
+      <StyledSwiper
+        navigation
+        modules={[Navigation]}
+        loop={true}
+        className='mySwiper'
+      >
+        {repeatedImages.map(
           (image, idx) =>
             idx % 3 === 0 && (
               <SwiperSlide key={idx}>
                 {/* 첫 번째 이미지 */}
-                <Link to={`/CarDetail/${images[idx]?.car_num}`} style={{ textDecoration: 'none' }}>
-                  <div className="image-container">
+                <Link
+                  to={`/CarDetail/${repeatedImages[idx]?.car_num}`}
+                  style={{ textDecoration: 'none' }}
+                >
+                  <div className='image-container'>
                     <img
-                      src={images[idx]?.image}
-                      alt={images[idx]?.name}
+                      src={repeatedImages[idx]?.image}
+                      alt={repeatedImages[idx]?.name}
                       style={{ maxWidth: '100%', height: '200px', objectFit: 'contain', margin: '0' }}
                     />
-                    <div style={{ color: 'white', textAlign: 'center' }}>{images[idx]?.name}</div>
+                    <div style={{ color: 'white', textAlign: 'center' }}>{repeatedImages[idx]?.name}</div>
                   </div>
                 </Link>
                 {/* 두 번째 이미지 */}
-                {images[idx + 1] && (
-                  <Link to={`/CarDetail/${images[idx + 1]?.car_num}`} style={{ textDecoration: 'none' }}>
-                    <div className="image-container">
+                {repeatedImages[idx + 1] && (
+                  <Link
+                    to={`/CarDetail/${repeatedImages[idx + 1]?.car_num}`}
+                    style={{ textDecoration: 'none' }}
+                  >
+                    <div className='image-container'>
                       <img
-                        src={images[idx + 1]?.image}
-                        alt={images[idx + 1]?.name}
+                        src={repeatedImages[idx + 1]?.image}
+                        alt={repeatedImages[idx + 1]?.name}
                         style={{ maxWidth: '100%', height: '200px', objectFit: 'contain' }}
                       />
-                      <div style={{ color: 'white', textAlign: 'center' }}>{images[idx + 1]?.name}</div>
+                      <div style={{ color: 'white', textAlign: 'center' }}>{repeatedImages[idx + 1]?.name}</div>
                     </div>
                   </Link>
                 )}
                 {/* 세 번째 이미지 */}
-                {images[idx + 2] && (
-                  <Link to={`/CarDetail/${images[idx + 2]?.car_num}`} style={{ textDecoration: 'none' }}>
-                    <div className="image-container">
+                {repeatedImages[idx + 2] && (
+                  <Link
+                    to={`/CarDetail/${repeatedImages[idx + 2]?.car_num}`}
+                    style={{ textDecoration: 'none' }}
+                  >
+                    <div className='image-container'>
                       <img
-                        src={images[idx + 2]?.image}
-                        alt={images[idx + 2]?.name}
+                        src={repeatedImages[idx + 2]?.image}
+                        alt={repeatedImages[idx + 2]?.name}
                         style={{ maxWidth: '100%', height: '200px', objectFit: 'contain' }}
                       />
-                      <div style={{ color: 'white', textAlign: 'center' }}>{images[idx + 2]?.name}</div>
+                      <div style={{ color: 'white', textAlign: 'center' }}>{repeatedImages[idx + 2]?.name}</div>
                     </div>
                   </Link>
                 )}
