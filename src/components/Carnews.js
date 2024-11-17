@@ -87,17 +87,14 @@ function Carnews() {
         <div style={styles.title}>전기차 관련뉴스</div>
         <div style={styles.searchBarContainer}>
           <input
-            type='text'
-            placeholder='전기차 관련 뉴스 검색어 입력'
+            type="text"
+            placeholder="전기차 관련 뉴스 검색어 입력"
             value={searchTerm}
             onChange={handleSearchChange}
             onKeyDown={handleKeyPress} // Enter 키 입력 감지
             style={styles.searchInput}
           />
-          <button
-            onClick={handleSearchSubmit}
-            style={styles.searchButton}
-          >
+          <button onClick={handleSearchSubmit} style={styles.searchButton}>
             검색
           </button>
         </div>
@@ -105,13 +102,10 @@ function Carnews() {
 
       <div style={styles.newsContainer}>
         {news.map((article, index) => (
-          <div
-            key={index}
-            style={styles.newsCard}
-          >
+          <div key={index} style={styles.newsCard}>
             <img
               src={article.urlToImage}
-              alt='News'
+              alt="News"
               style={styles.newsImage}
               onClick={(e) => {
                 e.stopPropagation(); // 클릭 이벤트가 부모 요소로 전파되는 것을 막음
@@ -129,8 +123,7 @@ function Carnews() {
                 onClick={(e) => {
                   e.stopPropagation(); // 클릭 이벤트가 부모 요소로 전파되는 것을 막음
                   handleShowModal(article); // 타이틀 클릭 시 모달 띄우기
-                }}
-              >
+                }}>
                 {article.title}
               </h3>
               <p
@@ -143,8 +136,7 @@ function Carnews() {
                 onClick={(e) => {
                   e.stopPropagation(); // 클릭 이벤트가 부모 요소로 전파되는 것을 막음
                   handleShowModal(article); // 내용 클릭 시 모달 띄우기
-                }}
-              >
+                }}>
                 {article.description}
               </p>
               <p style={styles.newsDate}>{new Date(article.publishedAt).toLocaleDateString()}</p>
@@ -153,8 +145,7 @@ function Carnews() {
                   e.stopPropagation(); // 클릭 이벤트가 부모 요소로 전파되는 것을 막음
                   handleShowModal(article); // '더보기' 버튼 클릭 시 모달 띄우기
                 }}
-                style={styles.readMore}
-              >
+                style={styles.readMore}>
                 더보기
               </button>
             </div>
@@ -164,20 +155,13 @@ function Carnews() {
 
       {modalVisible && (
         <div style={styles.modal}>
-          <button
-            onClick={handleCloseModal}
-            style={styles.closeButton}
-          >
-            X
-          </button>
           <div style={styles.modalContent}>
-            <iframe
-              src={selectedArticle?.url}
-              width='100%'
-              height='600px'
-              style={{ ...styles.iframe, border: 'none' }}
-              title='News Article'
-            />
+            <div style={styles.modalHeader}>
+              <button onClick={handleCloseModal} style={styles.closeButton}>
+                X
+              </button>
+            </div>
+            <iframe src={selectedArticle?.url} width="100%" height="600px" style={{ ...styles.iframe, border: 'none' }} title="News Article" />
           </div>
         </div>
       )}
@@ -286,28 +270,39 @@ const styles = {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    zIndex: 9999,
+    zIndex: 1,
   },
   modalContent: {
+    display: 'flex',
+    flexDirection: 'column', // 자식 요소를 세로로 정렬
     backgroundColor: 'white',
     width: '80%',
     height: '80%',
     borderRadius: '8px',
     position: 'relative',
+    zIndex: 2,
   },
+
+  modalHeader: {
+    display: 'flex', // 닫기 버튼을 위한 flexbox
+    justifyContent: 'flex-end', // 닫기 버튼을 오른쪽으로 정렬
+    padding: '10px', // 상단 여백 추가
+    backgroundColor: 'rgba(0,0,0,0)', // (선택 사항) 헤더 영역 배경색
+    borderBottom: '1px solid #ccc', // (선택 사항) 헤더 하단 경계선
+  },
+
   closeButton: {
-    position: 'absolute',
-    top: '10px', // 필요에 따라 조정
-    right: '10px', // 필요에 따라 조정
-    backgroundColor: 'yellow',
+    backgroundColor: 'rgb(80,80,80)',
     color: 'white',
     fontWeight: 'bold',
+    fontSize: '15px',
     border: 'none',
+    borderRadius: '50%',
     cursor: 'pointer',
-    padding: '5px', // 버튼의 내부 여백을 줄임
-    fontSize: '20px', // 폰트 크기를 줄임
-    zIndex: 10000, // 버튼이 iframe 위에 표시되도록 zIndex 추가
+    width: '40px',
+    height: '40px',
   },
+
   iframe: {
     width: '100%',
     height: '100%',
