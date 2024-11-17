@@ -86,17 +86,20 @@ function CarDetail() {
       <div style={styles.optionContainer}>
         <label
           htmlFor='carOptions'
-          style={styles.optionLabel}>
+          style={styles.optionLabel}
+        >
           옵션 선택:
         </label>
         <select
           id='carOptions'
           onChange={handleOptionChange}
-          style={styles.optionSelect}>
+          style={styles.optionSelect}
+        >
           {vehicleDetails.map((detail, index) => (
             <option
               key={index}
-              value={index}>
+              value={index}
+            >
               {`${detail.motoType}, ${detail.useableBattery}, ${detail.carPrice} 만원`}
             </option>
           ))}
@@ -154,8 +157,8 @@ function CarDetail() {
 
 const styles = {
   CartypetopContainer: {
-    marginLeft: '80px',
-    marginRight: '80px',
+    marginLeft: '150px',
+    marginRight: '150px',
     backgroundColor: 'rgb(80,80,80)',
     display: 'flex',
     justifyContent: 'space-between',
@@ -190,7 +193,7 @@ const styles = {
     justifyContent: 'center',
   },
   optionContainer: {
-    marginLeft: '80px',
+    marginLeft: '150px',
     marginBottom: '20px',
   },
   optionLabel: {
@@ -202,12 +205,12 @@ const styles = {
     padding: '5px',
   },
   ContainerStyle: {
-    marginLeft: '80px',
-    marginRight: '80px',
+    marginLeft: '150px',
+    marginRight: '150px',
     display: 'grid',
     gridTemplateColumns: 'repeat(2, 1fr)',
     gridTemplateRows: 'repeat(2, 1fr)',
-    gap: '20px',
+    gap: '50px',
     padding: '20px',
   },
   itemStyle: {
@@ -215,7 +218,7 @@ const styles = {
     padding: '20px',
     borderRadius: '10px',
     boxShadow: '0 2px 10px rgba(0, 0, 0, 0.1)',
-    aspectRatio: '1 / 1',
+    aspectRatio: '1 / 0.4',
     display: 'flex',
     flexDirection: 'column',
   },
