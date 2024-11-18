@@ -64,42 +64,29 @@ function CarDetail() {
         <div style={styles.CartypetopCarname}>{vehicle.name}</div>
         <div style={styles.brandContainer}>
           <div>
-            <img
-              src={vehicle.logo}
-              alt={vehicle.brand}
-              style={{ width: '100px', height: 'auto' }}
-            />
+            {/* 차량 로고 car_num 200이하 or 300이상 400이하 일경우 == 현대 기아 제네시스 면 */}
+            {car_num < 200 || 300 < car_num < 400 ? (
+              <img src={vehicle.logo2} alt={vehicle.brand} style={{ width: '100px', height: 'auto' }} />
+            ) : (
+              <img src={vehicle.logo} alt={vehicle.brand} style={{ width: '100px', height: 'auto' }} />
+            )}
           </div>
           {/* 자동차 브랜드 이름 넣을까말까 안넣는게 깔삼해보이긴 함 */}
           {/* <div style={styles.brandname}>{vehicle.brand}</div> */}
         </div>
       </div>
       <div style={styles.CarImage}>
-        <img
-          src={vehicle.image}
-          alt={vehicle.name}
-          style={{ width: '800px', height: 'auto' }}
-        />
+        <img src={vehicle.image} alt={vehicle.name} style={{ width: '800px', height: 'auto' }} />
       </div>
 
       {/* 옵션 선택 드롭다운 */}
       <div style={styles.optionContainer}>
-        <label
-          htmlFor='carOptions'
-          style={styles.optionLabel}
-        >
+        <label htmlFor="carOptions" style={styles.optionLabel}>
           옵션 선택:
         </label>
-        <select
-          id='carOptions'
-          onChange={handleOptionChange}
-          style={styles.optionSelect}
-        >
+        <select id="carOptions" onChange={handleOptionChange} style={styles.optionSelect}>
           {vehicleDetails.map((detail, index) => (
-            <option
-              key={index}
-              value={index}
-            >
+            <option key={index} value={index}>
               {`${detail.motoType}, ${detail.useableBattery}, ${detail.carPrice} 만원`}
             </option>
           ))}

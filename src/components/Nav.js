@@ -3,27 +3,24 @@ import React, { useState, useEffect } from 'react';
 import logo1 from '../assets/images/mainEVImg.png';
 import logo2 from '../assets/images/mainEVImg2.png';
 
-function Nav() {
+function Nav({ activeMenu, setActiveMenu }) {
   const location = useLocation();
-  const [activeMenu, setActiveMenu] = useState(null);
   const [logo, setLogo] = useState(logo1);
 
   useEffect(() => {
-    setLogo(
-      location.pathname.startsWith('/CarDetail') || location.pathname.startsWith('/Carbattery') || location.pathname.startsWith('/Carnews')
-        ? logo2
-        : logo1
-    );
-  }, [location.pathname]);
+    // 경로에 따라 로고 및 네비게이션 색상 업데이트
+    const isDetailOrBatteryOrNewsPage =
+      activeMenu === 'CarDetail' ||
+      location.pathname.startsWith('/CarDetail') ||
+      location.pathname.startsWith('/Carbattery') ||
+      location.pathname.startsWith('/Carnews');
 
-  const handleMenuClick = (menu) => {
-    setActiveMenu(menu);
-    if (menu === 'Carbattery' || menu === 'Carnews') {
-      setLogo(logo2);
-    } else {
-      setLogo(logo1);
-    }
-  };
+    console.log('{Nav} activeMenu:', activeMenu);
+    console.log('{Nav} isDetailOrBatteryOrNewsPage:', isDetailOrBatteryOrNewsPage);
+
+    // 로고 업데이트
+    setLogo(isDetailOrBatteryOrNewsPage ? logo2 : logo1);
+  }, [activeMenu, location, setActiveMenu]);
 
   const handleLogoClick = () => {
     setActiveMenu(null);
@@ -33,23 +30,32 @@ function Nav() {
   const handleScrollToCarType = () => {
     const section = document.getElementById('car-swiper-section');
     if (section) {
-      const yOffset = -70;
+      const yOffset = -300;
       const y = section.getBoundingClientRect().top + window.pageYOffset + yOffset;
       window.scrollTo({ top: y, behavior: 'smooth' });
     }
   };
 
-  const navBarBackground = location.pathname.startsWith('/CarDetail') || activeMenu === 'Carbattery' || activeMenu === 'Carnews' ? 'white' : 'black';
+  // activeMenu 상태가 true이거나 특정 경로에 따라 네비게이션 바의 스타일 결정
+  const navBarBackground =
+    activeMenu ||
+    location.pathname.startsWith('/CarDetail') ||
+    location.pathname.startsWith('/Carbattery') ||
+    location.pathname.startsWith('/Carnews')
+      ? 'white'
+      : 'black';
   const navBarTextColor = navBarBackground === 'white' ? 'black' : 'white';
+
+  const getMenuStyle = (menu) => ({
+    ...styles.navbarMenu,
+    backgroundColor: activeMenu === menu ? 'rgb(80,80,80)' : 'transparent',
+    color: activeMenu === menu ? 'white' : navBarTextColor,
+    borderRadius: '15px',
+  });
 
   return (
     <div className="navbar" style={{ ...styles.navbar, backgroundColor: navBarBackground }}>
-      <Link
-        to="/"
-        onClick={() => {
-          handleLogoClick();
-        }}
-        style={styles.navbarlogo}>
+      <Link to="/" onClick={handleLogoClick} style={styles.navbarlogo}>
         <img src={logo} width="100px" alt="logo" style={styles.logoImage} />
       </Link>
       <Link to="/" onClick={handleLogoClick} style={{ ...styles.navbarMenu, color: navBarTextColor }}>
@@ -58,29 +64,13 @@ function Nav() {
 
       <span style={{ ...styles.divider, color: navBarTextColor }}>|</span>
 
-      <Link
-        to="/Carbattery"
-        onClick={() => handleMenuClick('Carbattery')}
-        style={{
-          ...styles.navbarMenu,
-          backgroundColor: activeMenu === 'Carbattery' ? 'rgb(80,80,80)' : 'transparent',
-          color: activeMenu === 'Carbattery' ? 'white' : navBarTextColor,
-          borderRadius: activeMenu === 'Carbattery' ? '15px' : '15px', // 둥근 테두리 유지
-        }}>
+      <Link to="/Carbattery" onClick={() => setActiveMenu('Carbattery')} style={getMenuStyle('Carbattery')}>
         전기차 배터리 조회
       </Link>
 
       <span style={{ ...styles.divider, color: navBarTextColor }}>|</span>
 
-      <Link
-        to="/Carnews"
-        onClick={() => handleMenuClick('Carnews')}
-        style={{
-          ...styles.navbarMenu,
-          backgroundColor: activeMenu === 'Carnews' ? 'rgb(80,80,80)' : 'transparent',
-          color: activeMenu === 'Carnews' ? 'white' : navBarTextColor,
-          borderRadius: activeMenu === 'Carnews' ? '15px' : '15px', // 둥근 테두리 유지
-        }}>
+      <Link to="/Carnews" onClick={() => setActiveMenu('Carnews')} style={getMenuStyle('Carnews')}>
         전기차 관련뉴스
       </Link>
     </div>
@@ -88,6 +78,7 @@ function Nav() {
 }
 
 export default Nav;
+
 const styles = {
   navbar: {
     width: '100%',
