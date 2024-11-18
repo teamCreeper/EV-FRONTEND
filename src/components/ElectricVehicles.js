@@ -1,6 +1,10 @@
 // Brand logo:
-import 현대로고 from '../assets/images/hyundailogo2.png';
-import 기아로고 from '../assets/images/kialogo2.png';
+import 현대로고_black from '../assets/images/hyundailogo2.png';
+import 현대로고_white from '../assets/images/hyundailogo.png';
+
+import 기아로고_black from '../assets/images/kialogo2.png';
+import 기아로고_white from '../assets/images/kialogo.png';
+
 import 제네시스로고 from '../assets/images/genesislogo.png';
 import 아우디로고 from '../assets/images/audilogo2.png';
 import BMW로고 from '../assets/images/bmwlogo.png';
@@ -47,15 +51,15 @@ import EtronGT from '../assets/images/E-tron GT.png';
 
 const electricVehicles = [
   // brand: 'HYUNDAI' DB와 연동된 데이터 (우선)
-  { car_num: 101, brandId: 1, brand: 'Hyundai', name: '아이오닉5', image: 아이오닉5, logo: 현대로고 },
-  { car_num: 102, brandId: 1, brand: 'Hyundai', name: '아이오닉6', image: 아이오닉6, logo: 현대로고 },
-  { car_num: 103, brandId: 1, brand: 'Hyundai', name: '코나 일렉트릭', image: 코나일렉트릭, logo: 현대로고 },
-  { car_num: 104, brandId: 1, brand: 'Hyundai', name: '포터2', image: 포터EV, logo: 현대로고 },
-  { car_num: 105, brandId: 1, brand: 'Hyundai', name: '캐스퍼', image: 캐스퍼, logo: 현대로고 },
+  { car_num: 101, brandId: 1, brand: 'Hyundai', name: '아이오닉5', image: 아이오닉5, logo: 현대로고_black, logo2: 현대로고_white },
+  { car_num: 102, brandId: 1, brand: 'Hyundai', name: '아이오닉6', image: 아이오닉6, logo: 현대로고_black, logo2: 현대로고_white },
+  { car_num: 103, brandId: 1, brand: 'Hyundai', name: '코나 일렉트릭', image: 코나일렉트릭, logo: 현대로고_black, logo2: 현대로고_white },
+  { car_num: 104, brandId: 1, brand: 'Hyundai', name: '포터2', image: 포터EV, logo: 현대로고_black, logo2: 현대로고_white },
+  { car_num: 105, brandId: 1, brand: 'Hyundai', name: '캐스퍼', image: 캐스퍼, logo: 현대로고_black, logo2: 현대로고_white },
 
   // 아직 DB와 연동되지 않은 데이터
-  { car_num: 106, brandId: 1, brand: 'Hyundai', name: '아이오닉 일렉트릭', image: 아이오닉일렉트릭, logo: 현대로고 },
-  { car_num: 107, brandId: 1, brand: 'Hyundai', name: '봉고EV', image: 봉고EV, logo: 현대로고 },
+  { car_num: 106, brandId: 1, brand: 'Hyundai', name: '아이오닉 일렉트릭', image: 아이오닉일렉트릭, logo: 현대로고_black, logo2: 현대로고_white },
+  { car_num: 107, brandId: 1, brand: 'Hyundai', name: '봉고EV', image: 봉고EV, logo: 현대로고_black, logo2: 현대로고_white },
 
   // brand : 'GENESIS' DB와 연동된 데이터 (우선)
   { car_num: 201, brandId: 2, brand: 'Hyundai', name: 'Electrified GV60', image: GV60, logo: 제네시스로고 },
@@ -63,11 +67,11 @@ const electricVehicles = [
   { car_num: 203, brandId: 2, brand: 'Hyundai', name: 'Electrified G80', image: ElectrifiedG80, logo: 제네시스로고 },
 
   // brand: 'KIA' DB와 연동된 데이터 (우선)
-  { car_num: 301, brandId: 3, brand: 'Kia', name: 'EV3', image: EV3, logo: 기아로고 },
-  { car_num: 302, brandId: 3, brand: 'Kia', name: 'EV6', image: EV6, logo: 기아로고 },
-  { car_num: 303, brandId: 3, brand: 'Kia', name: 'EV9', image: EV9, logo: 기아로고 },
-  { car_num: 304, brandId: 3, brand: 'Kia', name: '니로EV', image: NiroEV, logo: 기아로고 },
-  { car_num: 305, brandId: 3, brand: 'Kia', name: '쏘울EV', image: SoulEV, logo: 기아로고 },
+  { car_num: 301, brandId: 3, brand: 'Kia', name: 'EV3', image: EV3, logo: 기아로고_black, logo2: 기아로고_white },
+  { car_num: 302, brandId: 3, brand: 'Kia', name: 'EV6', image: EV6, logo: 기아로고_black, logo2: 기아로고_white },
+  { car_num: 303, brandId: 3, brand: 'Kia', name: 'EV9', image: EV9, logo: 기아로고_black, logo2: 기아로고_white },
+  { car_num: 304, brandId: 3, brand: 'Kia', name: '니로EV', image: NiroEV, logo: 기아로고_black, logo2: 기아로고_white },
+  { car_num: 305, brandId: 3, brand: 'Kia', name: '쏘울EV', image: SoulEV, logo: 기아로고_black, logo2: 기아로고_white },
 
   // brand: 'Tesla'
   { car_num: 401, brandId: 4, brand: 'Tesla', name: '모델3', image: '../assets/images/모델3.png' },

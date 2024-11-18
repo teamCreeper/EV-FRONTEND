@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { useNavigate } from 'react-router-dom'; // 추가
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 import MainCar from './MainCar';
@@ -25,7 +25,7 @@ const brandNames = {
   6: '벤츠',
 };
 
-function Main() {
+function Main({ setActiveMenu }) {
   const [searchValue, setSearchValue] = useState(''); // 검색어 상태
   const [selectedBrand, setSelectedBrand] = useState('0'); // 브랜드 선택, 초기값 '0' (전체)
   const [searchResults, setSearchResults] = useState([]); // 검색 결과
@@ -40,8 +40,11 @@ function Main() {
   const bmwVehicles = electricVehicles.filter((vehicle) => vehicle.brand === 'BMW');
   const benzVehicles = electricVehicles.filter((vehicle) => vehicle.brand === 'Mercedes-Benz');
 
-  const navigate = useNavigate(); // 추가
+  const navigate = useNavigate();
+
   const handleCarClick = (carId) => {
+    setActiveMenu('CarDetail'); // 차량 상세 페이지로 이동 시 Nav 상태 업데이트
+    console.log(`차량 상세페이지로 이동합니다:`);
     navigate(`/carDetail/${carId}`);
   };
 
@@ -116,48 +119,21 @@ function Main() {
         onBrandChange={handleBrandChange}
         vehicles={electricVehicles} // 차량 데이터를 Searchbar에 전달
       />
-      <div
-        id='car-swiper-section'
-        style={styles.swiperContainer}
-      >
+      <div id="car-swiper-section" style={styles.swiperContainer}>
         {loading ? (
           <div>로딩 중...</div>
         ) : errorMessage ? (
-          <div className='error'>{errorMessage}</div>
+          <div className="error">{errorMessage}</div>
         ) : searchResults.length > 0 ? (
-          <SearchResult
-            results={searchResults}
-            searchTerm={searchTerm}
-            onCarClick={handleCarClick}
-          />
+          <SearchResult results={searchResults} searchTerm={searchTerm} onCarClick={handleCarClick} />
         ) : !hasSearched ? (
           <>
             <div style={styles.allmodel}>전체 모델 보기</div>
-            <CarSwiper
-              logo={hyundailogo}
-              brand='Hyundai'
-              images={hyundaiVehicles}
-            />
-            <CarSwiper
-              logo={kialogo}
-              brand='Kia'
-              images={kiaVehicles}
-            />
-            <CarSwiper
-              logo={benzlogo}
-              brand='Benz'
-              images={benzVehicles}
-            />
-            <CarSwiper
-              logo={bmwlogo}
-              brand='BMW'
-              images={bmwVehicles}
-            />
-            <CarSwiper
-              logo={audilogo}
-              brand='Audi'
-              images={audiVehicles}
-            />
+            <CarSwiper logo={hyundailogo} brand="Hyundai" images={hyundaiVehicles} />
+            <CarSwiper logo={kialogo} brand="Kia" images={kiaVehicles} />
+            <CarSwiper logo={benzlogo} brand="Benz" images={benzVehicles} />
+            <CarSwiper logo={bmwlogo} brand="BMW" images={bmwVehicles} />
+            <CarSwiper logo={audilogo} brand="Audi" images={audiVehicles} />
           </>
         ) : (
           <div>검색 결과가 없습니다.</div>
