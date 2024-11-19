@@ -31,7 +31,7 @@ function CarDetail() {
     //   "ztoHundred": "8.5 sec"
     // },
     axios
-      .get('https://port-0-java-spr ingboot-m0uuimo09c0b9ce4.sel4.cloudtype.app/api/carDetail', {
+      .get('https://port-0-java-springboot-m0uuimo09c0b9ce4.sel4.cloudtype.app/api/carDetail', {
         params: {
           carId: car_num, // carId 전달
         },
@@ -65,10 +65,10 @@ function CarDetail() {
         <div style={styles.brandContainer}>
           <div>
             {/* 차량 로고 car_num 200이하 or 300이상 400이하 일경우 == 현대 기아 제네시스 면 */}
-            {(car_num >= 200 && car_num < 300) || (car_num >= 400 && car_num < 500) ? (
-              <img src={vehicle.logo} alt={vehicle.brand} style={{ width: '100px', height: 'auto' }} />
-            ) : (
+            {car_num < 200 || 300 < car_num < 400 ? (
               <img src={vehicle.logo2} alt={vehicle.brand} style={{ width: '100px', height: 'auto' }} />
+            ) : (
+              <img src={vehicle.logo} alt={vehicle.brand} style={{ width: '100px', height: 'auto' }} />
             )}
           </div>
           {/* 자동차 브랜드 이름 넣을까말까 안넣는게 깔삼해보이긴 함 */}
