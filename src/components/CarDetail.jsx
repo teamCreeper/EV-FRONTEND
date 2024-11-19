@@ -67,13 +67,13 @@ function CarDetail() {
             {/* 차량 로고 car_num 200이하 or 300이상 400이하 일경우 == 현대 기아 제네시스 면 */}
             {(car_num >= 200 && car_num < 300) || (car_num >= 400 && car_num < 500) ? (
               <img
-                src={vehicle.logo2}
+                src={vehicle.logo}
                 alt={vehicle.brand}
                 style={{ width: '100px', height: 'auto' }}
               />
             ) : (
               <img
-                src={vehicle.logo}
+                src={vehicle.logo2}
                 alt={vehicle.brand}
                 style={{ width: '100px', height: 'auto' }}
               />
