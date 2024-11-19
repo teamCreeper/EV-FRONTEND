@@ -1,31 +1,37 @@
-import React from 'react';
-import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import electricVehicles from './ElectricVehicles.js'; // 더미 데이터 가져오기
-import China from '../assets/images/CN.png';
-import Korea from '../assets/images/KR.png';
+import React from 'react'
+import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
+import axios from 'axios'
+import electricVehicles from './ElectricVehicles.js' // 더미 데이터 가져오기
+import China from '../assets/images/CN.png'
+import Korea from '../assets/images/KR.png'
 
 function Carbattery() {
-  const [expandedCompanies, setExpandedCompanies] = useState({}); // 각 회사별 확장 상태 관리
-  const [currentPages, setCurrentPages] = useState({}); // 각 회사별 현재 페이지 관리
-  const [vehicles, setVehicles] = useState([]); // 서버에서 불러온 차량 데이터 상태
-  const vehiclesPerPage = 16;
-  const [showKoreanOnly, setShowKoreanOnly] = useState(false); // 국산 배터리만 보기 체크박스 상태
+  const [expandedCompanies, setExpandedCompanies] = useState({}) // 각 회사별 확장 상태 관리
+  const [currentPages, setCurrentPages] = useState({}) // 각 회사별 현재 페이지 관리
+  const [vehicles, setVehicles] = useState([]) // 서버에서 불러온 차량 데이터 상태
+  const vehiclesPerPage = 16
+  const [showKoreanOnly, setShowKoreanOnly] = useState(false) // 국산 배터리만 보기 체크박스 상태
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('https://port-0-java-springboot-m0uuimo09c0b9ce4.sel4.cloudtype.app/api/carBatteryInfo');
+        const response = await axios.get(
+          'https://port-0-java-springboot-m0uuimo09c0b9ce4.sel4.cloudtype.app/api/carBatteryInfo'
+        )
         const serverVehicles = response.data.map((vehicle) => {
           // 더미 데이터에서 해당 차량에 대한 정보 찾기
-          const dummyVehicle = electricVehicles.find((ev) => ev.car_num === vehicle.carId);
+          const dummyVehicle = electricVehicles.find((ev) => ev.car_num === vehicle.carId)
 
           return {
             ...vehicle,
             car_num: vehicle.carId,
-            battery_country: vehicle.batteryBrandCountry !== 'NO DATA' ? vehicle.batteryBrandCountry : '알 수 없음',
-            battery_manufacturer: vehicle.batteryBrandName !== 'NO DATA' ? vehicle.batteryBrandName : '알 수 없음',
+            battery_country:
+              vehicle.batteryBrandCountry !== 'NO DATA'
+                ? vehicle.batteryBrandCountry
+                : '알 수 없음',
+            battery_manufacturer:
+              vehicle.batteryBrandName !== 'NO DATA' ? vehicle.batteryBrandName : '알 수 없음',
             name: vehicle.carName || '정보 없음',
             brand: dummyVehicle ? dummyVehicle.brand : '정보 없음', // 더미 데이터에서 brand를 가져옵니다.
             logo: dummyVehicle ? dummyVehicle.logo : null, // 더미 데이터에서 logo를 가져옵니다.
@@ -33,76 +39,81 @@ function Carbattery() {
             batteryType: vehicle.batteryType || '정보 없음',
             capacity: vehicle.capacity || '정보 없음',
             charge_time: vehicle.charge_time || '정보 없음',
-          };
-        });
-        setVehicles(serverVehicles);
+          }
+        })
+        setVehicles(serverVehicles)
       } catch (error) {
-        console.error('데이터 가져오기 실패:', error);
+        console.error('데이터 가져오기 실패:', error)
       }
-    };
-
-    fetchData();
-  }, []);
+    }
+    fetchData()
+  }, [])
 
   // 더보기 버튼을 눌렀을 때 동작
   const handleMoreButtonClick = (manufacturer) => {
     setExpandedCompanies((prevState) => ({
       ...prevState,
       [manufacturer]: !prevState[manufacturer],
-    }));
-  };
+    }))
+  }
 
   const handlePageChange = (manufacturer, direction) => {
     setCurrentPages((prevState) => {
-      const currentPage = currentPages[manufacturer] || 1;
-      const newPage = direction === 'next' ? currentPage + 1 : currentPage - 1;
-      return { ...prevState, [manufacturer]: newPage };
-    });
-  };
+      const currentPage = currentPages[manufacturer] || 1
+      const newPage = direction === 'next' ? currentPage + 1 : currentPage - 1
+      return { ...prevState, [manufacturer]: newPage }
+    })
+  }
 
   const getCountryFlagSrc = (battery_country) => {
     switch (battery_country) {
       case 'China':
-        return China;
+        return China
       default:
-        return Korea;
+        return Korea
     }
-  };
+  }
 
-  const navigate = useNavigate();
+  const navigate = useNavigate()
   const handleVehicleClick = (car_num) => {
-    navigate(`/CarDetail/${car_num}`);
-  };
+    navigate(`/CarDetail/${car_num}`)
+  }
 
   // 차량을 battery_manufacturer로 그룹화
   const groupedVehicles = vehicles.reduce((acc, vehicle) => {
-    const { battery_manufacturer } = vehicle;
+    const { battery_manufacturer } = vehicle
     if (!acc[battery_manufacturer]) {
-      acc[battery_manufacturer] = [];
+      acc[battery_manufacturer] = []
     }
-    acc[battery_manufacturer].push(vehicle);
-    return acc;
-  }, {});
+    acc[battery_manufacturer].push(vehicle)
+    return acc
+  }, {})
 
   const Card = ({ manufacturer, vehicles = [] }) => {
-    const isExpanded = expandedCompanies[manufacturer] || false; // 현재 회사의 확장 상태
-    const currentPage = currentPages[manufacturer] || 1; // 현재 페이지
-    const indexOfLastVehicle = currentPage * vehiclesPerPage;
-    const indexOfFirstVehicle = indexOfLastVehicle - vehiclesPerPage;
+    const isExpanded = expandedCompanies[manufacturer] || false // 현재 회사의 확장 상태
+    const currentPage = currentPages[manufacturer] || 1 // 현재 페이지
+    const indexOfLastVehicle = currentPage * vehiclesPerPage
+    const indexOfFirstVehicle = indexOfLastVehicle - vehiclesPerPage
 
-    const displayedVehicles = isExpanded ? vehicles.slice(indexOfFirstVehicle, indexOfLastVehicle) : vehicles.slice(0, 4);
+    const displayedVehicles = isExpanded
+      ? vehicles.slice(indexOfFirstVehicle, indexOfLastVehicle)
+      : vehicles.slice(0, 4)
 
-    const totalPages = Math.ceil(vehicles.length / vehiclesPerPage);
+    const totalPages = Math.ceil(vehicles.length / vehiclesPerPage)
 
     const vehicleContainerStyle = {
       ...styles.vehicleContainer,
       gridTemplateColumns: isExpanded ? 'repeat(4, 1fr)' : 'repeat(2, 1fr)',
-    };
+    }
 
     return (
       <div style={styles.card}>
         <div style={styles.header}>
-          <img src={getCountryFlagSrc(vehicles[0]?.battery_country)} alt={`${vehicles[0]?.battery_country} 국기`} style={styles.flag} />
+          <img
+            src={getCountryFlagSrc(vehicles[0]?.battery_country)}
+            alt={`${vehicles[0]?.battery_country} 국기`}
+            style={styles.flag}
+          />
           <h2>{manufacturer}</h2>
         </div>
         <div style={vehicleContainerStyle}>
@@ -111,7 +122,7 @@ function Carbattery() {
               key={vehicle.carId}
               style={styles.vehicleItem}
               onClick={() => handleVehicleClick(vehicle.car_num)} // 클릭 시 상세페이지로 이동
-              className="card">
+              className='card'>
               <img src={vehicle.image} alt={vehicle.name} style={styles.vehicleImage} />
               <div style={styles.vehicleText}>
                 <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -132,20 +143,24 @@ function Carbattery() {
         )}
         {isExpanded && totalPages > 1 && (
           <div style={{ textAlign: 'center', marginTop: '20px' }}>
-            <button onClick={() => handlePageChange(manufacturer, 'prev')} disabled={currentPage === 1}>
+            <button
+              onClick={() => handlePageChange(manufacturer, 'prev')}
+              disabled={currentPage === 1}>
               &lt;
             </button>
             <span>{` ${currentPage} / ${totalPages} `}</span>
-            <button onClick={() => handlePageChange(manufacturer, 'next')} disabled={currentPage === totalPages}>
+            <button
+              onClick={() => handlePageChange(manufacturer, 'next')}
+              disabled={currentPage === totalPages}>
               &gt;
             </button>
           </div>
         )}
       </div>
-    );
-  };
+    )
+  }
 
-  const isAnyCardExpanded = Object.values(expandedCompanies).some((expanded) => expanded); // 최소 하나의 카드가 확장된 상태인지 확인
+  const isAnyCardExpanded = Object.values(expandedCompanies).some((expanded) => expanded) // 최소 하나의 카드가 확장된 상태인지 확인
 
   return (
     <div>
@@ -153,13 +168,13 @@ function Carbattery() {
         <div style={styles.title}>전기차 배터리 조회</div>
         <div style={styles.checkboxContainer}>
           <input
-            type="checkbox"
-            id="made-in-Korea"
+            type='checkbox'
+            id='made-in-Korea'
             style={styles.checkbox}
             checked={showKoreanOnly}
             onChange={() => setShowKoreanOnly(!showKoreanOnly)}
           />
-          <label htmlFor="made-in-Korea">국산 배터리만 보기</label>
+          <label htmlFor='made-in-Korea'>국산 배터리만 보기</label>
         </div>
       </div>
 
@@ -172,20 +187,24 @@ function Carbattery() {
           {' '}
           {Object.entries(groupedVehicles).map(([manufacturer, vehicles]) => {
             // 다른 카드 숨기기: 현재 확장된 카드만 보여줌
-            const isExpanded = expandedCompanies[manufacturer] || false;
+            const isExpanded = expandedCompanies[manufacturer] || false
             if (Object.values(expandedCompanies).includes(true) && !isExpanded) {
-              return null;
+              return null
             }
             // 국산 배터리만 보기 상태에 따라 차량 필터링
-            const filteredVehicles = showKoreanOnly ? vehicles.filter((v) => v.battery_country === 'Korea') : vehicles;
+            const filteredVehicles = showKoreanOnly
+              ? vehicles.filter((v) => v.battery_country === 'Korea')
+              : vehicles
 
             // 필터링된 차량이 있는 경우에만 카드 표시
-            return filteredVehicles.length > 0 ? <Card key={manufacturer} manufacturer={manufacturer} vehicles={filteredVehicles} /> : null;
+            return filteredVehicles.length > 0 ? (
+              <Card key={manufacturer} manufacturer={manufacturer} vehicles={filteredVehicles} />
+            ) : null
           })}
         </div>
       </div>
     </div>
-  );
+  )
 }
 
 const styles = {
@@ -294,6 +313,6 @@ const styles = {
     backgroundColor: 'white', // 비활성화 상태 배경색
     color: 'black', // 비활성화 상태 글자색
   },
-};
+}
 
-export default Carbattery;
+export default Carbattery

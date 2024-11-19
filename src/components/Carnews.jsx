@@ -1,85 +1,85 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import React, { useEffect, useState } from 'react'
+import axios from 'axios'
 
 function Carnews() {
-  const [news, setNews] = useState([]);
-  const [searchTerm, setSearchTerm] = useState('');
-  const [modalVisible, setModalVisible] = useState(false);
-  const [selectedArticle, setSelectedArticle] = useState(null);
-  const [hoverState, setHoverState] = useState({}); // hover 상태를 관리하는 객체
+  const [news, setNews] = useState([])
+  const [searchTerm, setSearchTerm] = useState('')
+  const [modalVisible, setModalVisible] = useState(false)
+  const [selectedArticle, setSelectedArticle] = useState(null)
+  const [hoverState, setHoverState] = useState({}) // hover 상태를 관리하는 객체
 
   // 컴포넌트가 처음 렌더링될 때 뉴스를 가져오는 함수
   useEffect(() => {
     // 초기 화면 로드 시 전기차 관련 뉴스 데이터 가져오기
-    fetchNews('전기차');
+    fetchNews('전기차')
 
     const handleEscKey = (event) => {
       if (event.key === 'Escape') {
-        handleCloseModal();
+        handleCloseModal()
       }
-    };
+    }
     // ESC 키 리스너 등록
-    document.addEventListener('keydown', handleEscKey);
+    document.addEventListener('keydown', handleEscKey)
 
     // 컴포넌트가 언마운트될 때 이벤트 리스너 제거
     return () => {
-      document.removeEventListener('keydown', handleEscKey);
-    };
-  }, []);
+      document.removeEventListener('keydown', handleEscKey)
+    }
+  }, [])
 
   const fetchNews = async (query) => {
     try {
       const response = await axios.get('https://newsapi.org/v2/everything', {
         params: {
           q: query, // 검색어
-          apiKey: process.env.REACT_APP_NEWS_API_KEY, // News API에서 발급받은 API 키를 입력하세요
+          apiKey: import.meta.env.VITE_NEWS_API_KEY, // News API에서 발급받은 API 키를 입력하세요
           language: 'ko', // 한국어 기사만 가져오도록 설정
           sortBy: 'publishedAt', // 최신 뉴스 기준으로 정렬
         },
-      });
-      setNews(response.data.articles);
+      })
+      setNews(response.data.articles)
     } catch (error) {
-      console.error('뉴스를 가져오는 중 오류 발생:', error);
+      console.error('뉴스를 가져오는 중 오류 발생:', error)
     }
-  };
+  }
 
   const handleSearchChange = (event) => {
-    setSearchTerm(event.target.value);
-  };
+    setSearchTerm(event.target.value)
+  }
 
   const handleSearchSubmit = () => {
-    fetchNews(searchTerm); // 검색어에 맞는 기사를 가져옴
-  };
+    fetchNews(searchTerm) // 검색어에 맞는 기사를 가져옴
+  }
 
   const handleKeyPress = (event) => {
     if (event.key === 'Enter') {
-      handleSearchSubmit(); // Enter 키를 누르면 검색 실행
+      handleSearchSubmit() // Enter 키를 누르면 검색 실행
     }
-  };
+  }
 
   const handleShowModal = (article) => {
-    setSelectedArticle(article);
-    setModalVisible(true); // 모달을 띄운다
-  };
+    setSelectedArticle(article)
+    setModalVisible(true) // 모달을 띄운다
+  }
 
   const handleCloseModal = () => {
-    setModalVisible(false); // 모달을 닫는다
-    setSelectedArticle(null); // 선택된 기사 초기화
-  };
+    setModalVisible(false) // 모달을 닫는다
+    setSelectedArticle(null) // 선택된 기사 초기화
+  }
 
   const handleMouseEnter = (type, index) => {
     setHoverState((prevState) => ({
       ...prevState,
       [`${type}-${index}`]: true, // 특정 인덱스에 대한 hover 상태 설정
-    }));
-  };
+    }))
+  }
 
   const handleMouseLeave = (type, index) => {
     setHoverState((prevState) => ({
       ...prevState,
       [`${type}-${index}`]: false, // 특정 인덱스에 대한 hover 상태 초기화
-    }));
-  };
+    }))
+  }
 
   return (
     <div>
@@ -87,8 +87,8 @@ function Carnews() {
         <div style={styles.title}>전기차 관련뉴스</div>
         <div style={styles.searchBarContainer}>
           <input
-            type="text"
-            placeholder="전기차 관련 뉴스 검색어 입력"
+            type='text'
+            placeholder='전기차 관련 뉴스 검색어 입력'
             value={searchTerm}
             onChange={handleSearchChange}
             onKeyDown={handleKeyPress} // Enter 키 입력 감지
@@ -105,11 +105,11 @@ function Carnews() {
           <div key={index} style={styles.newsCard}>
             <img
               src={article.urlToImage}
-              alt="News"
+              alt='News'
               style={styles.newsImage}
               onClick={(e) => {
-                e.stopPropagation(); // 클릭 이벤트가 부모 요소로 전파되는 것을 막음
-                handleShowModal(article); // 이미지 클릭 시 모달 띄우기
+                e.stopPropagation() // 클릭 이벤트가 부모 요소로 전파되는 것을 막음
+                handleShowModal(article) // 이미지 클릭 시 모달 띄우기
               }}
             />
             <div style={styles.newsContent}>
@@ -121,8 +121,8 @@ function Carnews() {
                 onMouseEnter={() => handleMouseEnter('title', index)}
                 onMouseLeave={() => handleMouseLeave('title', index)}
                 onClick={(e) => {
-                  e.stopPropagation(); // 클릭 이벤트가 부모 요소로 전파되는 것을 막음
-                  handleShowModal(article); // 타이틀 클릭 시 모달 띄우기
+                  e.stopPropagation() // 클릭 이벤트가 부모 요소로 전파되는 것을 막음
+                  handleShowModal(article) // 타이틀 클릭 시 모달 띄우기
                 }}>
                 {article.title}
               </h3>
@@ -134,16 +134,16 @@ function Carnews() {
                 onMouseEnter={() => handleMouseEnter('description', index)}
                 onMouseLeave={() => handleMouseLeave('description', index)}
                 onClick={(e) => {
-                  e.stopPropagation(); // 클릭 이벤트가 부모 요소로 전파되는 것을 막음
-                  handleShowModal(article); // 내용 클릭 시 모달 띄우기
+                  e.stopPropagation() // 클릭 이벤트가 부모 요소로 전파되는 것을 막음
+                  handleShowModal(article) // 내용 클릭 시 모달 띄우기
                 }}>
                 {article.description}
               </p>
               <p style={styles.newsDate}>{new Date(article.publishedAt).toLocaleDateString()}</p>
               <button
                 onClick={(e) => {
-                  e.stopPropagation(); // 클릭 이벤트가 부모 요소로 전파되는 것을 막음
-                  handleShowModal(article); // '더보기' 버튼 클릭 시 모달 띄우기
+                  e.stopPropagation() // 클릭 이벤트가 부모 요소로 전파되는 것을 막음
+                  handleShowModal(article) // '더보기' 버튼 클릭 시 모달 띄우기
                 }}
                 style={styles.readMore}>
                 더보기
@@ -161,12 +161,18 @@ function Carnews() {
                 X
               </button>
             </div>
-            <iframe src={selectedArticle?.url} width="100%" height="600px" style={{ ...styles.iframe, border: 'none' }} title="News Article" />
+            <iframe
+              src={selectedArticle?.url}
+              width='100%'
+              height='600px'
+              style={{ ...styles.iframe, border: 'none' }}
+              title='News Article'
+            />
           </div>
         </div>
       )}
     </div>
-  );
+  )
 }
 
 const styles = {
@@ -307,6 +313,6 @@ const styles = {
     width: '100%',
     height: '100%',
   },
-};
+}
 
-export default Carnews;
+export default Carnews
