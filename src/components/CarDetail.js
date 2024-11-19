@@ -31,7 +31,7 @@ function CarDetail() {
     //   "ztoHundred": "8.5 sec"
     // },
     axios
-      .get('https://port-0-java-spr ingboot-m0uuimo09c0b9ce4.sel4.cloudtype.app/api/carDetail', {
+      .get('https://port-0-java-springboot-m0uuimo09c0b9ce4.sel4.cloudtype.app/api/carDetail', {
         params: {
           carId: car_num, // carId 전달
         },
