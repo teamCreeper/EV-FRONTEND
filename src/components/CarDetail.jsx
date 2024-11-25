@@ -1,21 +1,21 @@
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import axios from 'axios';
-import electricVehicles from './ElectricVehicles.js'; // 더미 데이터 가져오기
+import React, { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
+import axios from 'axios'
+import electricVehicles from './ElectricVehicles.js' // 더미 데이터 가져오기
 
 function CarDetail() {
-  const { car_num } = useParams(); // URL에서 car_num을 가져오기
-  const [vehicle, setVehicle] = useState(null);
-  const [vehicleDetails, setVehicleDetails] = useState([]);
-  const [selectedOption, setSelectedOption] = useState(null);
+  const { car_num } = useParams() // URL에서 car_num을 가져오기
+  const [vehicle, setVehicle] = useState(null)
+  const [vehicleDetails, setVehicleDetails] = useState([])
+  const [selectedOption, setSelectedOption] = useState(null)
 
   useEffect(() => {
     // 차량 기본 정보 설정
-    const foundVehicle = electricVehicles.find((v) => v.car_num === parseInt(car_num));
-    setVehicle(foundVehicle);
-    console.log('차량 정보:', foundVehicle);
+    const foundVehicle = electricVehicles.find((v) => v.car_num === parseInt(car_num))
+    setVehicle(foundVehicle)
+    console.log('차량 정보:', foundVehicle)
 
-    // 차량 상세 정보 요청
+    // 차량 상세 정보 요청 11/25 이전 명세서
     // { ex) carDetail/101 }
     //   "carId": 101,
     //   "batteryId": 1,
@@ -30,6 +30,39 @@ function CarDetail() {
     //   "batteryBrandCountry": "No Data",
     //   "ztoHundred": "8.5 sec"
     // },
+
+    // 차량 상세 정보 요청 11/25 이후 명세서
+    // {
+    //   "id": 1,
+    //   "carId": 101,
+    //   "carBasicInfo": {
+    //     "carId": 101,
+    //     "carName": "아이오닉5",
+    //     "carBrand": {
+    //       "brandId": 1,
+    //       "brandName": "현대"
+    //     }
+    //   },
+    //   "batteryInfo": {
+    //     "batteryId": "B101",
+    //     "batteryType": "Litium-ion",
+    //     "batteryBrand": {
+    //       "brandId": 1,
+    //       "brandName": "SK 온",
+    //       "brandCountry": "Korea"
+    //     },
+    //     "capacity": "63.0 kWh",
+    //     "charge_time": "6h 30m"
+    //   },
+    //   "carPrice": "4700",
+    //   "motoType": "RWD",
+    //   "useableBattery": "60 kWh",
+    //   "topSpeed": "185 km/h",
+    //   "carRange": "330 km",
+    //   "efficiency": "182 Wh/km",
+    //   "ztoHundred": "8.5 sec"
+    // },
+
     axios
       .get('https://port-0-java-springboot-m0uuimo09c0b9ce4.sel4.cloudtype.app/api/carDetail', {
         params: {
@@ -37,25 +70,25 @@ function CarDetail() {
         },
       })
       .then((response) => {
-        console.log('차량 상세 정보:', response.data);
-        setVehicleDetails(response.data);
-        setSelectedOption(response.data[0]); // 기본 옵션 선택
+        console.log('차량 상세 정보:', response.data)
+        setVehicleDetails(response.data)
+        setSelectedOption(response.data[0]) // 기본 옵션 선택
       })
       .catch((error) => {
-        console.error('차량 상세 정보 로드 실패:', error);
-      });
+        console.error('차량 상세 정보 로드 실패:', error)
+      })
 
     // 페이지 렌더링 시 스크롤을 맨 위로 이동시키는 useEffect
-    window.scrollTo({ top: 0, behavior: 'smooth' }); // 부드럽게 스크롤
-  }, [car_num]);
+    window.scrollTo({ top: 0, behavior: 'smooth' }) // 부드럽게 스크롤
+  }, [car_num])
 
   const handleOptionChange = (event) => {
-    const selectedIndex = event.target.value;
-    setSelectedOption(vehicleDetails[selectedIndex]);
-  };
+    const selectedIndex = event.target.value
+    setSelectedOption(vehicleDetails[selectedIndex])
+  }
 
   if (!vehicle) {
-    return <div>해당 차량 정보를 찾을 수 없습니다.</div>;
+    return <div>해당 차량 정보를 찾을 수 없습니다.</div>
   }
 
   return (
@@ -83,31 +116,17 @@ function CarDetail() {
         </div>
       </div>
       <div style={styles.CarImage}>
-        <img
-          src={vehicle.image}
-          alt={vehicle.name}
-          style={{ width: '800px', height: 'auto' }}
-        />
+        <img src={vehicle.image} alt={vehicle.name} style={{ width: '800px', height: 'auto' }} />
       </div>
 
       {/* 옵션 선택 드롭다운 */}
       <div style={styles.optionContainer}>
-        <label
-          htmlFor='carOptions'
-          style={styles.optionLabel}
-        >
+        <label htmlFor='carOptions' style={styles.optionLabel}>
           옵션 선택:
         </label>
-        <select
-          id='carOptions'
-          onChange={handleOptionChange}
-          style={styles.optionSelect}
-        >
+        <select id='carOptions' onChange={handleOptionChange} style={styles.optionSelect}>
           {vehicleDetails.map((detail, index) => (
-            <option
-              key={index}
-              value={index}
-            >
+            <option key={index} value={index}>
               {`${detail.motoType}, ${detail.useableBattery}, ${detail.carPrice} 만원`}
             </option>
           ))}
@@ -119,9 +138,9 @@ function CarDetail() {
           <div style={styles.title}>배터리 정보</div>
           {selectedOption ? (
             <div>
-              <p>배터리 이름: {selectedOption.batteryName}</p>
-              <p>배터리 브랜드: {selectedOption.batteryBrandName}</p>
-              <p>배터리 용량: {selectedOption.useableBattery}</p>
+              <p>배터리 이름: {selectedOption.batteryInfo.batteryType}</p>
+              <p>배터리 브랜드: {selectedOption.batteryInfo.batteryBrand.brandName}</p>
+              <p>배터리 용량: {selectedOption.batteryInfo.capacity}</p>
             </div>
           ) : (
             <p>배터리 정보를 불러오는 중입니다...</p>
@@ -160,7 +179,7 @@ function CarDetail() {
         </div>
       </div>
     </div>
-  );
+  )
 }
 
 const styles = {
@@ -234,6 +253,6 @@ const styles = {
     fontSize: '20px',
     fontFamily: 'JalnanGothic',
   },
-};
+}
 
-export default CarDetail;
+export default CarDetail
