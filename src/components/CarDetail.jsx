@@ -1,19 +1,19 @@
-import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
-import axios from 'axios'
-import electricVehicles from './ElectricVehicles.js' // 더미 데이터 가져오기
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
+import electricVehicles from './ElectricVehicles.js'; // 더미 데이터 가져오기
 
 function CarDetail() {
-  const { car_num } = useParams() // URL에서 car_num을 가져오기
-  const [vehicle, setVehicle] = useState(null)
-  const [vehicleDetails, setVehicleDetails] = useState([])
-  const [selectedOption, setSelectedOption] = useState(null)
+  const { car_num } = useParams(); // URL에서 car_num을 가져오기
+  const [vehicle, setVehicle] = useState(null);
+  const [vehicleDetails, setVehicleDetails] = useState([]);
+  const [selectedOption, setSelectedOption] = useState(null);
 
   useEffect(() => {
     // 차량 기본 정보 설정
-    const foundVehicle = electricVehicles.find((v) => v.car_num === parseInt(car_num))
-    setVehicle(foundVehicle)
-    console.log('차량 정보:', foundVehicle)
+    const foundVehicle = electricVehicles.find((v) => v.car_num === parseInt(car_num));
+    setVehicle(foundVehicle);
+    console.log('차량 정보:', foundVehicle);
 
     // 차량 상세 정보 요청
     // { ex) carDetail/101 }
@@ -37,25 +37,25 @@ function CarDetail() {
         },
       })
       .then((response) => {
-        console.log('차량 상세 정보:', response.data)
-        setVehicleDetails(response.data)
-        setSelectedOption(response.data[0]) // 기본 옵션 선택
+        console.log('차량 상세 정보:', response.data);
+        setVehicleDetails(response.data);
+        setSelectedOption(response.data[0]); // 기본 옵션 선택
       })
       .catch((error) => {
-        console.error('차량 상세 정보 로드 실패:', error)
-      })
+        console.error('차량 상세 정보 로드 실패:', error);
+      });
 
     // 페이지 렌더링 시 스크롤을 맨 위로 이동시키는 useEffect
-    window.scrollTo({ top: 0, behavior: 'smooth' }) // 부드럽게 스크롤
-  }, [car_num])
+    window.scrollTo({ top: 0, behavior: 'smooth' }); // 부드럽게 스크롤
+  }, [car_num]);
 
   const handleOptionChange = (event) => {
-    const selectedIndex = event.target.value
-    setSelectedOption(vehicleDetails[selectedIndex])
-  }
+    const selectedIndex = event.target.value;
+    setSelectedOption(vehicleDetails[selectedIndex]);
+  };
 
   if (!vehicle) {
-    return <div>해당 차량 정보를 찾을 수 없습니다.</div>
+    return <div>해당 차량 정보를 찾을 수 없습니다.</div>;
   }
 
   return (
@@ -64,8 +64,7 @@ function CarDetail() {
         <div style={styles.CartypetopCarname}>{vehicle.name}</div>
         <div style={styles.brandContainer}>
           <div>
-            {/* 차량 로고 car_num 200이하 or 300이상 400이하 일경우 == 현대 기아 제네시스 면 */}
-            {(car_num >= 200 && car_num < 300) || (car_num >= 400 && car_num < 500) ? (
+            {car_num > 800 ? (
               <img
                 src={vehicle.logo}
                 alt={vehicle.brand}
@@ -84,17 +83,31 @@ function CarDetail() {
         </div>
       </div>
       <div style={styles.CarImage}>
-        <img src={vehicle.image} alt={vehicle.name} style={{ width: '800px', height: 'auto' }} />
+        <img
+          src={vehicle.image}
+          alt={vehicle.name}
+          style={{ width: '800px', height: 'auto' }}
+        />
       </div>
 
       {/* 옵션 선택 드롭다운 */}
       <div style={styles.optionContainer}>
-        <label htmlFor='carOptions' style={styles.optionLabel}>
+        <label
+          htmlFor='carOptions'
+          style={styles.optionLabel}
+        >
           옵션 선택:
         </label>
-        <select id='carOptions' onChange={handleOptionChange} style={styles.optionSelect}>
+        <select
+          id='carOptions'
+          onChange={handleOptionChange}
+          style={styles.optionSelect}
+        >
           {vehicleDetails.map((detail, index) => (
-            <option key={index} value={index}>
+            <option
+              key={index}
+              value={index}
+            >
               {`${detail.motoType}, ${detail.useableBattery}, ${detail.carPrice} 만원`}
             </option>
           ))}
@@ -147,7 +160,7 @@ function CarDetail() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
 const styles = {
@@ -221,6 +234,6 @@ const styles = {
     fontSize: '20px',
     fontFamily: 'JalnanGothic',
   },
-}
+};
 
-export default CarDetail
+export default CarDetail;

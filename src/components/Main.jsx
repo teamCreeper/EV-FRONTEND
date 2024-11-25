@@ -1,19 +1,19 @@
-import React, { useEffect, useState, useCallback } from 'react'
-import { useNavigate } from 'react-router-dom'
-import axios from 'axios'
+import React, { useEffect, useState, useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
-import MainCar from './MainCar.jsx'
-import { Searchbar } from './Searchbar.jsx'
-import CarSwiper from './CarSwiper.jsx'
+import MainCar from './MainCar.jsx';
+import { Searchbar } from './Searchbar.jsx';
+import CarSwiper from './CarSwiper.jsx';
 
-import hyundailogo from '../assets/images/hyundailogo.png'
-import kialogo from '../assets/images/kialogo.png'
-import audilogo from '../assets/images/audilogo.png'
-import bmwlogo from '../assets/images/bmwlogo.png'
-import benzlogo from '../assets/images/benzlogo.png'
-
-import electricVehicles from './ElectricVehicles.js' // 더미 데이터 가져오기
-import SearchResult from './SearchResult.jsx'
+import hyundailogo from '../assets/images/hyundailogo.png';
+import kialogo from '../assets/images/kialogo.png';
+import audilogo from '../assets/images/audilogo.png';
+import bmwlogo from '../assets/images/bmwlogo.png';
+import benzlogo from '../assets/images/benzlogo.png';
+import genesislogo from '../assets/images/genesislogo.png';
+import electricVehicles from './ElectricVehicles.js'; // 더미 데이터 가져오기
+import SearchResult from './SearchResult.jsx';
 
 const brandNames = {
   0: '전체',
@@ -23,94 +23,91 @@ const brandNames = {
   4: '아우디',
   5: 'BMW',
   6: '벤츠',
-}
+};
 
 function Main({ setActiveMenu }) {
-  const [searchValue, setSearchValue] = useState('') // 검색어 상태
-  const [selectedBrand, setSelectedBrand] = useState('0') // 브랜드 선택, 초기값 '0' (전체)
-  const [searchResults, setSearchResults] = useState([]) // 검색 결과
-  const [loading, setLoading] = useState(false)
-  const [errorMessage, setErrorMessage] = useState('')
-  const [searchTerm, setSearchTerm] = useState('') // 검색 버튼 클릭 시 업데이트되는 검색어
-  const [hasSearched, setHasSearched] = useState(false) // 검색이 실행된 여부
+  const [searchValue, setSearchValue] = useState(''); // 검색어 상태
+  const [selectedBrand, setSelectedBrand] = useState('0'); // 브랜드 선택, 초기값 '0' (전체)
+  const [searchResults, setSearchResults] = useState([]); // 검색 결과
+  const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+  const [searchTerm, setSearchTerm] = useState(''); // 검색 버튼 클릭 시 업데이트되는 검색어
+  const [hasSearched, setHasSearched] = useState(false); // 검색이 실행된 여부
 
-  const hyundaiVehicles = electricVehicles.filter((vehicle) => vehicle.brand === 'Hyundai')
-  const kiaVehicles = electricVehicles.filter((vehicle) => vehicle.brand === 'Kia')
-  const audiVehicles = electricVehicles.filter((vehicle) => vehicle.brand === 'Audi')
-  const bmwVehicles = electricVehicles.filter((vehicle) => vehicle.brand === 'BMW')
-  const benzVehicles = electricVehicles.filter((vehicle) => vehicle.brand === 'Mercedes-Benz')
+  const hyundaiVehicles = electricVehicles.filter((vehicle) => vehicle.brand === 'Hyundai');
+  const kiaVehicles = electricVehicles.filter((vehicle) => vehicle.brand === 'Kia');
+  const audiVehicles = electricVehicles.filter((vehicle) => vehicle.brand === 'Audi');
+  const bmwVehicles = electricVehicles.filter((vehicle) => vehicle.brand === 'BMW');
+  const benzVehicles = electricVehicles.filter((vehicle) => vehicle.brand === 'Mercedes-Benz');
+  const genesisVehicles = electricVehicles.filter((vehicle) => vehicle.brand === 'Genesis');
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const handleCarClick = (carId) => {
-    setActiveMenu('CarDetail') // 차량 상세 페이지로 이동 시 Nav 상태 업데이트
-    console.log(`차량 상세페이지로 이동합니다:`)
-    navigate(`/carDetail/${carId}`)
-  }
+    setActiveMenu('CarDetail'); // 차량 상세 페이지로 이동 시 Nav 상태 업데이트
+    console.log(`차량 상세페이지로 이동합니다:`);
+    navigate(`/carDetail/${carId}`);
+  };
 
   const handleSearch = useCallback(() => {
-    setLoading(true)
-    setErrorMessage('')
+    setLoading(true);
+    setErrorMessage('');
     axios
       .get('https://port-0-java-springboot-m0uuimo09c0b9ce4.sel4.cloudtype.app/api/allCar')
       .then((response) => {
-        const vehicles = response.data
+        const vehicles = response.data;
         const filteredVehicles = vehicles.filter((vehicle) => {
-          const matchesBrand =
-            selectedBrand === '0' || vehicle.carBrand.brandId === parseInt(selectedBrand)
-          const matchesSearchValue = searchValue
-            ? vehicle.carName.toLowerCase().includes(searchValue.toLowerCase())
-            : true
-          return matchesBrand && matchesSearchValue
-        })
+          const matchesBrand = selectedBrand === '0' || vehicle.carBrand.brandId === parseInt(selectedBrand);
+          const matchesSearchValue = searchValue ? vehicle.carName.toLowerCase().includes(searchValue.toLowerCase()) : true;
+          return matchesBrand && matchesSearchValue;
+        });
 
         if (!filteredVehicles || filteredVehicles.length === 0) {
-          setErrorMessage('검색 결과가 없습니다.')
+          setErrorMessage('검색 결과가 없습니다.');
         } else {
           const vehiclesWithImages = filteredVehicles.map((vehicle) => {
-            const matchingVehicle = electricVehicles.find((v) => v.car_num === vehicle.carId)
+            const matchingVehicle = electricVehicles.find((v) => v.car_num === vehicle.carId);
             return {
               ...vehicle,
               name: matchingVehicle ? matchingVehicle.name : vehicle.carName,
               image: matchingVehicle ? matchingVehicle.image : null,
               logo: matchingVehicle ? matchingVehicle.logo : null,
-            }
-          })
-          setSearchResults(vehiclesWithImages)
+            };
+          });
+          setSearchResults(vehiclesWithImages);
         }
       })
       .catch((error) => {
-        setErrorMessage('검색에 실패했습니다. 다시 시도해주세요.')
+        setErrorMessage('검색에 실패했습니다. 다시 시도해주세요.');
       })
       .finally(() => {
-        setLoading(false)
-      })
-  }, [selectedBrand, searchValue])
+        setLoading(false);
+      });
+  }, [selectedBrand, searchValue]);
 
   const handleBrandChange = (brandId) => {
-    setSelectedBrand(brandId)
-    setSearchTerm(brandNames[brandId])
-    setHasSearched(true)
-  }
+    setSelectedBrand(brandId);
+    setSearchTerm(brandNames[brandId]);
+    setHasSearched(true);
+  };
 
   const handleSearchButtonClick = (searchTermFromSuggestion = null) => {
-    const term =
-      searchTermFromSuggestion || (searchValue.length > 0 ? searchValue : brandNames[selectedBrand])
-    setSearchTerm(term) // 검색어 업데이트
-    setHasSearched(true) // 검색 플래그 업데이트
-  }
+    const term = searchTermFromSuggestion || (searchValue.length > 0 ? searchValue : brandNames[selectedBrand]);
+    setSearchTerm(term); // 검색어 업데이트
+    setHasSearched(true); // 검색 플래그 업데이트
+  };
 
   useEffect(() => {
     if (hasSearched) {
-      handleSearch()
+      handleSearch();
     }
-  }, [selectedBrand, searchValue, hasSearched, handleSearch])
+  }, [selectedBrand, searchValue, hasSearched, handleSearch]);
 
   useEffect(() => {
     if (searchValue === '') {
-      setSearchTerm(brandNames[selectedBrand])
-    } else if (hasSearched) setSearchTerm(searchValue)
-  }, [searchValue, selectedBrand, hasSearched])
+      setSearchTerm(brandNames[selectedBrand]);
+    } else if (hasSearched) setSearchTerm(searchValue);
+  }, [searchValue, selectedBrand, hasSearched]);
 
   return (
     <div>
@@ -123,7 +120,10 @@ function Main({ setActiveMenu }) {
         onBrandChange={handleBrandChange}
         vehicles={electricVehicles} // 차량 데이터를 Searchbar에 전달
       />
-      <div id='car-swiper-section' style={styles.swiperContainer}>
+      <div
+        id='car-swiper-section'
+        style={styles.swiperContainer}
+      >
         {loading ? (
           <div>로딩 중...</div>
         ) : errorMessage ? (
@@ -137,18 +137,43 @@ function Main({ setActiveMenu }) {
         ) : !hasSearched ? (
           <>
             <div style={styles.allmodel}>전체 모델 보기</div>
-            <CarSwiper logo={hyundailogo} brand='Hyundai' images={hyundaiVehicles} />
-            <CarSwiper logo={kialogo} brand='Kia' images={kiaVehicles} />
-            <CarSwiper logo={benzlogo} brand='Benz' images={benzVehicles} />
-            <CarSwiper logo={bmwlogo} brand='BMW' images={bmwVehicles} />
-            <CarSwiper logo={audilogo} brand='Audi' images={audiVehicles} />
+            <CarSwiper
+              logo={hyundailogo}
+              brand='Hyundai'
+              images={hyundaiVehicles}
+            />
+            <CarSwiper
+              logo={genesislogo}
+              brand='Genesis'
+              images={genesisVehicles}
+            />
+            <CarSwiper
+              logo={kialogo}
+              brand='Kia'
+              images={kiaVehicles}
+            />
+            <CarSwiper
+              logo={benzlogo}
+              brand='Benz'
+              images={benzVehicles}
+            />
+            <CarSwiper
+              logo={bmwlogo}
+              brand='BMW'
+              images={bmwVehicles}
+            />
+            <CarSwiper
+              logo={audilogo}
+              brand='Audi'
+              images={audiVehicles}
+            />
           </>
         ) : (
           <div>검색 결과가 없습니다.</div>
         )}
       </div>
     </div>
-  )
+  );
 }
 
 const styles = {
@@ -166,6 +191,6 @@ const styles = {
     fontWeight: 400,
     fontFamily: 'JalnanGothic',
   },
-}
+};
 
-export default Main
+export default Main;
