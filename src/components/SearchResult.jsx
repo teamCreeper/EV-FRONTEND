@@ -33,7 +33,7 @@ function SearchResult({ results, searchTerm, onCarClick }) {
                       alt={vehicle.brand}
                       style={{
                         ...styles.vehicleLogo,
-                        width: vehicle.carBrand.brandId === 4 ? '15%' : '30%', // 테슬라 로고 사이즈 조정
+                        width: vehicle.carBrand.brandId === 4 ? '15%' : vehicle.carBrand.brandId === 5 ? '15%' : vehicle.carBrand.brandId === 6 ? '15%' : '30%', // 테슬라 로고 사이즈 조정
                       }}
                     />
                   )}

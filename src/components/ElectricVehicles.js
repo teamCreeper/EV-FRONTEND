@@ -7,7 +7,8 @@ import 기아로고_white from '../assets/images/kialogo.png';
 
 import 제네시스로고_black from '../assets/images/genesislogo2.png';
 import 제네시스로고_white from '../assets/images/genesislogo.png';
-import 아우디로고 from '../assets/images/audilogo.png';
+import 아우디로고_black from '../assets/images/audilogo.png';
+import 아우디로고_white from '../assets/images/audilogo2.png';
 import BMW로고 from '../assets/images/bmwlogo.png';
 import 벤츠로고 from '../assets/images/benzlogo.png';
 import 테슬라로고 from '../assets/images/teslalogo.png';
@@ -199,25 +200,25 @@ const electricVehicles = [
   },
 
   // brand: 'Tesla'
-  { car_num: 401, brandId: 4, brand: 'Tesla', name: '모델 3', image: 모델3, logo: 테슬라로고, lgoo2: 테슬라로고 },
-  { car_num: 402, brandId: 4, brand: 'Tesla', name: '모델 Y', image: 모델Y, logo: 테슬라로고, lgoo2: 테슬라로고 },
+  { car_num: 401, brandId: 4, brand: 'Tesla', name: '모델 3', image: 모델3, logo: 테슬라로고, logo2: 테슬라로고 },
+  { car_num: 402, brandId: 4, brand: 'Tesla', name: '모델 Y', image: 모델Y, logo: 테슬라로고, logo2: 테슬라로고 },
 
   // brand: 'Mercedes-Benz'
-  { car_num: 501, brandId: 5, brand: 'Mercedes-Benz', name: 'EQA', image: EQA, logo2: 벤츠로고 },
-  { car_num: 502, brandId: 5, brand: 'Mercedes-Benz', name: 'EQB', image: EQB, logo2: 벤츠로고 },
-  { car_num: 503, brandId: 5, brand: 'Mercedes-Benz', name: 'EQE', image: EQE, logo2: 벤츠로고 },
-  { car_num: 504, brandId: 5, brand: 'Mercedes-Benz', name: 'EQS', image: EQS, logo2: 벤츠로고 },
+  { car_num: 501, brandId: 5, brand: 'Mercedes-Benz', name: 'EQA', image: EQA, logo: 벤츠로고, logo2: 벤츠로고 },
+  { car_num: 502, brandId: 5, brand: 'Mercedes-Benz', name: 'EQB', image: EQB, logo: 벤츠로고, logo2: 벤츠로고 },
+  { car_num: 503, brandId: 5, brand: 'Mercedes-Benz', name: 'EQE', image: EQE, logo: 벤츠로고, logo2: 벤츠로고 },
+  { car_num: 504, brandId: 5, brand: 'Mercedes-Benz', name: 'EQS', image: EQS, logo: 벤츠로고, logo2: 벤츠로고 },
 
   // brand: 'BMW'
-  { car_num: 601, brandId: 6, brand: 'BMW', name: 'i4', image: i4, logo2: BMW로고 },
-  { car_num: 602, brandId: 6, brand: 'BMW', name: 'iX', image: iX, logo2: BMW로고 },
-  { car_num: 603, brandId: 6, brand: 'BMW', name: 'i5', image: i5, logo2: BMW로고 },
-  { car_num: 604, brandId: 6, brand: 'BMW', name: 'i7', image: i7, logo2: BMW로고 },
+  { car_num: 601, brandId: 6, brand: 'BMW', name: 'i4', image: i4, logo: BMW로고, logo2: BMW로고 },
+  { car_num: 602, brandId: 6, brand: 'BMW', name: 'iX', image: iX, logo: BMW로고, logo2: BMW로고 },
+  { car_num: 603, brandId: 6, brand: 'BMW', name: 'i5', image: i5, logo: BMW로고, logo2: BMW로고 },
+  { car_num: 604, brandId: 6, brand: 'BMW', name: 'i7', image: i7, logo: BMW로고, logo2: BMW로고 },
   //{ car_num: 605, brandId: 6, brand: 'BMW', name: 'iX3', image: iX3, logo2: BMW로고 },
 
   // brand: 'Audi'
-  { car_num: 701, brandId: 7, brand: 'Audi', name: 'Q4', image: Q4Etron, logo2: 아우디로고 },
-  { car_num: 702, brandId: 7, brand: 'Audi', name: '이트론 GT', image: EtronGT, logo2: 아우디로고 },
+  { car_num: 701, brandId: 7, brand: 'Audi', name: 'Q4', image: Q4Etron, logo: 아우디로고_white, logo2: 아우디로고_black },
+  { car_num: 702, brandId: 7, brand: 'Audi', name: '이트론 GT', image: EtronGT, logo: 아우디로고_white, logo2: 아우디로고_black },
 
   // ------------------------------
   // { car_num: 901, brand: 'Polestar', name: '폴스타2', image: '../assets/images/폴스타2.png' },
