@@ -31,7 +31,10 @@ function SearchResult({ results, searchTerm, onCarClick }) {
                     <img
                       src={matchingVehicle.logo}
                       alt={vehicle.brand}
-                      style={styles.vehicleLogo}
+                      style={{
+                        ...styles.vehicleLogo,
+                        width: vehicle.carBrand.brandId === 4 ? '15%' : '30%', // 테슬라 로고 사이즈 조정
+                      }}
                     />
                   )}
                   <p>
