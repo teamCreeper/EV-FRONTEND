@@ -94,6 +94,7 @@ const styles = {
     justifyContent: 'space-between', // 양쪽 끝으로 정렬
     alignItems: 'center',
     whiteSpace: 'nowrap', // 텍스트를 한 줄로 유지
+    height: '30px',
   },
   brandContainer: {
     display: 'flex', // flexbox 적용
