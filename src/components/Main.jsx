@@ -14,12 +14,14 @@ import benzlogo from '../assets/images/benzlogo.png';
 import genesislogo from '../assets/images/genesislogo.png';
 import electricVehicles from './ElectricVehicles.js'; // 더미 데이터 가져오기
 import SearchResult from './SearchResult.jsx';
+import teslalogo from '../assets/images/teslalogo.png';
 
 const brandNames = {
   0: '전체',
   1: '현대',
   2: '제네시스',
   3: '기아',
+  4: '테슬라',
   4: '아우디',
   5: 'BMW',
   6: '벤츠',
@@ -40,6 +42,7 @@ function Main({ setActiveMenu }) {
   const bmwVehicles = electricVehicles.filter((vehicle) => vehicle.brand === 'BMW');
   const benzVehicles = electricVehicles.filter((vehicle) => vehicle.brand === 'Mercedes-Benz');
   const genesisVehicles = electricVehicles.filter((vehicle) => vehicle.brand === 'Genesis');
+  const teslaVehicles = electricVehicles.filter((vehicle) => vehicle.brand === 'Tesla');
 
   const navigate = useNavigate();
 
@@ -151,6 +154,11 @@ function Main({ setActiveMenu }) {
               logo={kialogo}
               brand='Kia'
               images={kiaVehicles}
+            />
+            <CarSwiper
+              logo={teslalogo}
+              brand='Tesla'
+              images={teslaVehicles}
             />
             <CarSwiper
               logo={benzlogo}

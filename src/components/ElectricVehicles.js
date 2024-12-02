@@ -1,54 +1,58 @@
 // Brand logo:
-import 현대로고_black from '../assets/images/hyundailogo2.png'
-import 현대로고_white from '../assets/images/hyundailogo.png'
+import 현대로고_black from '../assets/images/hyundailogo2.png';
+import 현대로고_white from '../assets/images/hyundailogo.png';
 
-import 기아로고_black from '../assets/images/kialogo2.png'
-import 기아로고_white from '../assets/images/kialogo.png'
+import 기아로고_black from '../assets/images/kialogo2.png';
+import 기아로고_white from '../assets/images/kialogo.png';
 
-import 제네시스로고_black from '../assets/images/genesislogo2.png'
-import 제네시스로고_white from '../assets/images/genesislogo.png'
-import 아우디로고 from '../assets/images/audilogo.png'
-import BMW로고 from '../assets/images/bmwlogo.png'
-import 벤츠로고 from '../assets/images/benzlogo.png'
+import 제네시스로고_black from '../assets/images/genesislogo2.png';
+import 제네시스로고_white from '../assets/images/genesislogo.png';
+import 아우디로고 from '../assets/images/audilogo.png';
+import BMW로고 from '../assets/images/bmwlogo.png';
+import 벤츠로고 from '../assets/images/benzlogo.png';
+import 테슬라로고 from '../assets/images/teslalogo.png';
 
 // Hyundai model:
-import 아이오닉5 from '../assets/images/아이오닉5.png'
-import 아이오닉6 from '../assets/images/아이오닉6.png'
-import 코나일렉트릭 from '../assets/images/코나일렉트릭.png'
-import 포터EV from '../assets/images/포터EV.png'
-import 캐스퍼 from '../assets/images/CASPER.png'
+import 아이오닉5 from '../assets/images/아이오닉5.png';
+import 아이오닉6 from '../assets/images/아이오닉6.png';
+import 코나일렉트릭 from '../assets/images/코나일렉트릭.png';
+import 포터EV from '../assets/images/포터EV.png';
+import 캐스퍼 from '../assets/images/CASPER.png';
 
-import 아이오닉일렉트릭 from '../assets/images/아이오닉일렉트릭.png'
-import 봉고EV from '../assets/images/봉고EV.png'
+import 아이오닉일렉트릭 from '../assets/images/아이오닉일렉트릭.png';
+import 봉고EV from '../assets/images/봉고EV.png';
 
-import GV60 from '../assets/images/GV60.png'
-import ElectrifiedGV70 from '../assets/images/Electrified GV70.png'
-import ElectrifiedG80 from '../assets/images/Electrified G80.png'
+import GV60 from '../assets/images/GV60.png';
+import ElectrifiedGV70 from '../assets/images/Electrified GV70.png';
+import ElectrifiedG80 from '../assets/images/Electrified G80.png';
 
 // Kia model:
-import EV3 from '../assets/images/EV3.png'
-import EV6 from '../assets/images/EV6.png'
-import EV9 from '../assets/images/EV9.png'
-import NiroEV from '../assets/images/NiroEV.png'
-import SoulEV from '../assets/images/SoulEV.png'
+import EV3 from '../assets/images/EV3.png';
+import EV6 from '../assets/images/EV6.png';
+import EV9 from '../assets/images/EV9.png';
+import NiroEV from '../assets/images/NiroEV.png';
+import SoulEV from '../assets/images/SoulEV.png';
 
+// Tesla model:
+import 모델3 from '../assets/images/모델3.png';
+import 모델Y from '../assets/images/모델Y.png';
 // Mercedes-Benz model:
-import EQA from '../assets/images/EQA.png'
-import EQB from '../assets/images/EQB.png'
-import EQS from '../assets/images/EQS.png'
-import EQE from '../assets/images/EQE.png'
+import EQA from '../assets/images/EQA.png';
+import EQB from '../assets/images/EQB.png';
+import EQS from '../assets/images/EQS.png';
+import EQE from '../assets/images/EQE.png';
 
 // BMW model:
-import iX3 from '../assets/images/BMW ix3.png'
-import i4 from '../assets/images/BMW i4.png'
-// import i5 from '../assets/images/BMW i5.png'; // 오류떠서 잠시 주석처리
-import i7 from '../assets/images/BMW i7.png'
-import iX from '../assets/images/BMW iX.png'
+//import iX3 from '../assets/images/BMW ix3.png';
+import i4 from '../assets/images/BMW i4.png';
+import i5 from '../assets/images/BMW i5.png'; // 오류떠서 잠시 주석처리
+import i7 from '../assets/images/BMW i7.png';
+import iX from '../assets/images/BMW iX.png';
 
 // Audi model:
-import Q4Etron from '../assets/images/Q4 E-tron.png'
-import Etron from '../assets/images/E-tron.png'
-import EtronGT from '../assets/images/E-tron GT.png'
+import Q4Etron from '../assets/images/Q4 E-tron.png';
+import Etron from '../assets/images/E-tron.png';
+import EtronGT from '../assets/images/E-tron GT.png';
 
 const electricVehicles = [
   // brand: 'HYUNDAI' DB와 연동된 데이터 (우선)
@@ -195,8 +199,8 @@ const electricVehicles = [
   },
 
   // brand: 'Tesla'
-  { car_num: 401, brandId: 4, brand: 'Tesla', name: '모델3', image: '../assets/images/모델3.png' },
-  { car_num: 402, brandId: 4, brand: 'Tesla', name: '모델Y', image: '../assets/images/모델Y.png' },
+  { car_num: 401, brandId: 4, brand: 'Tesla', name: '모델 3', image: 모델3, logo: 테슬라로고, lgoo2: 테슬라로고 },
+  { car_num: 402, brandId: 4, brand: 'Tesla', name: '모델 Y', image: 모델Y, logo: 테슬라로고, lgoo2: 테슬라로고 },
 
   // brand: 'Mercedes-Benz'
   { car_num: 501, brandId: 5, brand: 'Mercedes-Benz', name: 'EQA', image: EQA, logo2: 벤츠로고 },
@@ -207,13 +211,13 @@ const electricVehicles = [
   // brand: 'BMW'
   { car_num: 601, brandId: 6, brand: 'BMW', name: 'i4', image: i4, logo2: BMW로고 },
   { car_num: 602, brandId: 6, brand: 'BMW', name: 'iX', image: iX, logo2: BMW로고 },
-  { car_num: 603, brandId: 6, brand: 'BMW', name: 'iX3', image: iX3, logo2: BMW로고 },
+  { car_num: 603, brandId: 6, brand: 'BMW', name: 'i5', image: i5, logo2: BMW로고 },
   { car_num: 604, brandId: 6, brand: 'BMW', name: 'i7', image: i7, logo2: BMW로고 },
+  //{ car_num: 605, brandId: 6, brand: 'BMW', name: 'iX3', image: iX3, logo2: BMW로고 },
 
   // brand: 'Audi'
-  { car_num: 701, brandId: 7, brand: 'Audi', name: 'Q4 이트론', image: Q4Etron, logo2: 아우디로고 },
-  { car_num: 702, brandId: 7, brand: 'Audi', name: '이트론', image: Etron, logo2: 아우디로고 },
-  { car_num: 703, brandId: 7, brand: 'Audi', name: '이트론 GT', image: EtronGT, logo2: 아우디로고 },
+  { car_num: 701, brandId: 7, brand: 'Audi', name: 'Q4', image: Q4Etron, logo2: 아우디로고 },
+  { car_num: 702, brandId: 7, brand: 'Audi', name: '이트론 GT', image: EtronGT, logo2: 아우디로고 },
 
   // ------------------------------
   // { car_num: 901, brand: 'Polestar', name: '폴스타2', image: '../assets/images/폴스타2.png' },
@@ -225,6 +229,6 @@ const electricVehicles = [
   // { car_num: 1402, brand: 'Chevrolet', name: '볼트 EUV', image: '../assets/images/볼트 EUV.png' },
   // { car_num: 1501, brand: 'Peugeot', name: 'e-2008', image: '../assets/images/e-2008.png' },
   // { car_num: 1601, brand: 'BYD', name: '이모션', image: '../assets/images/이모션.png' },
-]
+];
 
-export default electricVehicles
+export default electricVehicles;

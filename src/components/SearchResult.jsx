@@ -1,5 +1,5 @@
-import React from 'react'
-import electricVehicles from './ElectricVehicles.js' // 더미 데이터 가져오기
+import React from 'react';
+import electricVehicles from './ElectricVehicles.js'; // 더미 데이터 가져오기
 
 function SearchResult({ results, searchTerm, onCarClick }) {
   return (
@@ -8,7 +8,7 @@ function SearchResult({ results, searchTerm, onCarClick }) {
 
       <div style={styles.resultContainer}>
         {results.map((vehicle) => {
-          const matchingVehicle = electricVehicles.find((v) => v.name === vehicle.name)
+          const matchingVehicle = electricVehicles.find((v) => v.name === vehicle.name);
 
           return (
             <div
@@ -18,7 +18,11 @@ function SearchResult({ results, searchTerm, onCarClick }) {
               className='card' // 애니메이션 효과를 위한 클래스 추가
             >
               {matchingVehicle && matchingVehicle.image && (
-                <img src={matchingVehicle.image} alt={vehicle.name} style={styles.vehicleImage} />
+                <img
+                  src={matchingVehicle.image}
+                  alt={vehicle.name}
+                  style={styles.vehicleImage}
+                />
               )}
               <div style={styles.vehicleInfo}>
                 <h3>{vehicle.name}</h3>
@@ -37,16 +41,24 @@ function SearchResult({ results, searchTerm, onCarClick }) {
                       ? 'Genesis'
                       : vehicle.carBrand.brandId === 3
                       ? 'Kia'
+                      : vehicle.carBrand.brandId === 4
+                      ? 'Tesla'
+                      : vehicle.carBrand.brandId === 5
+                      ? 'Mercedes-Benz'
+                      : vehicle.carBrand.brandId === 6
+                      ? 'BMW'
+                      : vehicle.carBrand.brandId === 7
+                      ? 'Audi'
                       : '브랜드정보없음'}
                   </p>
                 </div>
               </div>
             </div>
-          )
+          );
         })}
       </div>
     </div>
-  )
+  );
 }
 
 const styles = {
@@ -98,7 +110,7 @@ const styles = {
     marginLeft: '30px',
     fontSize: '50px',
   },
-}
+};
 
 // CSS를 추가하여 마우스 오버 시 카드 스타일을 변경
 const cardHoverStyles = `
@@ -107,12 +119,12 @@ const cardHoverStyles = `
     background-color: #f0f0f0;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
   }
-`
+`;
 
 // 스타일 요소 추가
-const styleSheet = document.createElement('style')
-styleSheet.type = 'text/css'
-styleSheet.innerText = cardHoverStyles
-document.head.appendChild(styleSheet)
+const styleSheet = document.createElement('style');
+styleSheet.type = 'text/css';
+styleSheet.innerText = cardHoverStyles;
+document.head.appendChild(styleSheet);
 
-export default SearchResult
+export default SearchResult;
