@@ -90,32 +90,51 @@ export function Searchbar({ value, onChange, onSearch, selectedBrand, onBrandCha
   }, []);
 
   return (
-    <form style={styles.searchbar} onSubmit={handleSubmit}>
+    <form
+      style={styles.searchbar}
+      onSubmit={handleSubmit}
+    >
       <span style={styles.search}>전기차 모델 검색</span>
 
       <div style={styles.inputGroup}>
-        <button type="button" style={styles.refreshBtn} onClick={handleRefreshClick}>
-          <img src={refreshImg} style={{ height: '30px' }} alt="refresh" />
+        <button
+          type='button'
+          style={styles.refreshBtn}
+          onClick={handleRefreshClick}
+        >
+          <img
+            src={refreshImg}
+            style={{ height: '30px' }}
+            alt='refresh'
+          />
         </button>
-        <select style={styles.dropdown} value={selectedBrand} onChange={(e) => onBrandChange(e.target.value)}>
-          <option value="0">전체</option>
-          <option value="1">현대</option>
-          <option value="2">제네시스</option>
-          <option value="3">기아</option>
-          <option value="4">아우디</option>
-          <option value="5">BMW</option>
-          <option value="6">벤츠</option>
+        <select
+          style={styles.dropdown}
+          value={selectedBrand}
+          onChange={(e) => onBrandChange(e.target.value)}
+        >
+          <option value='0'>전체</option>
+          <option value='1'>현대</option>
+          <option value='2'>제네시스</option>
+          <option value='3'>기아</option>
+          <option value='4'>테슬라</option>
+          <option value='5'>벤츠</option>
+          <option value='6'>BMW</option>
+          <option value='7'>아우디</option>
         </select>
 
         <input
-          type="search"
+          type='search'
           style={styles.input1}
           value={value}
           onChange={onChange}
           onFocus={() => setShowSuggestions(true)} // 입력 시 자동완성 목록 표시
           onKeyDown={handleKeyDown} // 키보드 이벤트 처리
         />
-        <button type="submit" style={styles.searchBtn}>
+        <button
+          type='submit'
+          style={styles.searchBtn}
+        >
           검색
         </button>
         {showSuggestions && suggestions.length > 0 && (
@@ -132,7 +151,8 @@ export function Searchbar({ value, onChange, onSearch, selectedBrand, onBrandCha
                 }}
                 onClick={() => handleSuggestionClick(suggestion)}
                 onMouseEnter={() => handleSuggestionMouseEnter(index)}
-                onMouseLeave={handleSuggestionMouseLeave}>
+                onMouseLeave={handleSuggestionMouseLeave}
+              >
                 {suggestion}
               </li>
             ))}
