@@ -15,12 +15,14 @@
     "react-router-dom": "^6.26.2",
     "styled-components": "^6.1.13",
     "swiper": "^11.1.12",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "yarn": "^1.22.22"
   },
   "scripts": {
     "start": "vite",
+    "serve": "vite preview",
     "build": "vite build",
-    "serve": "vite preview"
+    "preview": "vite preview --port 3000"
   },
   "eslintConfig": {
     "extends": [
