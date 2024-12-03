@@ -1,6 +1,5 @@
 # 프로젝트 이름: Project EV
 
-**설명:**
 Project EV는 다양한 전기차 모델에 대한 정보를 제공하는 웹 애플리케이션입니다. 사용자는 전기차 모델을 검색하고, 각 모델에 대한 상세 정보와 배터리 정보를 확인할 수 있으며, 전기차 관련 최신 뉴스를 제공받을 수 있습니다.
 
 ## 주요 기능
@@ -12,27 +11,23 @@ Project EV는 다양한 전기차 모델에 대한 정보를 제공하는 웹 �
 
 ### 2. **전기차 모델 검색**
 
-- **검색 결과 표시**: 사용자가 입력한 검색어에 맞는 전기차 모델들이 리스트 형식으로 표시됩니다.
-- **모델 클릭 시 상세 페이지로 이동**: 각 검색 결과 카드에서 모델을 클릭하면 해당 차량의 상세 페이지로 이동합니다.
+- **검색 결과 표시**: 사용자가 입력한 검색어에 맞는 전기차 모델들이 리스트 형식으로 표시됩니다. 
+- **모델 클릭 시 상세 페이지로 이동**: 각 검색 결과 카드에서 모델을 클릭하면 해당 차량의 상세 페이지로 이동합니다. 
 
 ### 3. **전기차 상세 정보 조회**
 
-- **차량 옵션 선택**: 차량 상세 페이지에서 사용자는 다양한 옵션(배터리 용량, 주행 거리 등)을 선택하여 각 옵션에 대한 정보를 확인할 수 있습니다.
-- **제원 정보 제공**: 배터리 용량, 주행 거리, 최고 속도, 모터 타입 등 차량에 대한 자세한 제원을 제공하여 사용자가 차량의 성능을 이해할 수 있도록 합니다.
+- **차량 옵션 선택**: 차량 상세 페이지에서 사용자는 다양한 옵션(배터리 용량, 주행 거리 등)을 선택하여 각 옵션에 대한 정보를 확인할 수 있습니다. 
+- **제원 정보 제공**: 배터리 용량, 주행 거리, 최고 속도, 모터 타입 등 차량에 대한 자세한 제원을 제공하여 사용자가 차량의 성능을 이해할 수 있도록 합니다. 
 
 ### 4. **전기차 관련 뉴스 조회**
 
 - **최신 뉴스 제공**: 전기차와 관련된 최신 뉴스 기사를 제공합니다. 사용자는 뉴스 페이지를 통해 전기차 산업의 동향과 최신 기술에 대한 정보를 얻을 수 있습니다.
 
-### 5. **네비게이션 바**
-
-- **동적 로고 및 스타일 변경**: 각 페이지에 따라 네비게이션 바의 로고와 색상이 동적으로 변경됩니다. 예를 들어, 상세 페이지에서는 로고와 네비게이션 색상이 흰색으로 바뀝니다.
-
 ## 기술 스택
 
-- **Frontend**: React.js, CSS 애니메이션을 이용한 인터랙션 개선
+- **Frontend**: vite, React.js, css 애니메이션을 이용한 인터랙션 개선
 - **Backend**: Java Spring Boot (API 호출을 통해 전기차 정보 제공)
-- **Deployment**: Netlify를 이용한 프론트엔드 배포, 클라우드 서버에서 백엔드 호스팅
+- **Deployment**: github.io 프론트엔드 배포, 클라우드 서버에서 백엔드 호스팅
 
 ## 설치 및 실행 방법
 
@@ -45,11 +40,16 @@ Project EV는 다양한 전기차 모델에 대한 정보를 제공하는 웹 �
    cd frontend
    npm install
    ```
-3. 애플리케이션을 로컬에서 실행합니다.
+3. 개발 서버를 실행합니다.
    ```bash
-   npm start
+   npm run dev
    ```
-4. 백엔드 서버는 클라우드에서 이미 실행되고 있으므로 별도의 실행 작업이 필요하지 않습니다.
+4. 빌드 및 배포
+   ```bash
+   npm run build
+   npm run preview
+   ```
+5. 백엔드 서버는 클라우드에서 이미 실행되고 있으므로 별도의 실행 작업이 필요하지 않습니다.
 
 ## 사용된 API
 
@@ -109,7 +109,7 @@ Project EV는 다양한 전기차 모델에 대한 정보를 제공하는 웹 �
 const response = await axios.get('https://newsapi.org/v2/everything', {
         params: {
           q: query, // 검색어
-          apiKey: process.env.REACT_APP_NEWS_API_KEY // News API에서 발급받은 키
+          apiKey: process.env.VITE_NEWS_API_KEY // News API에서 발급받은 키
           language: 'ko', // 한국어 기사만
           sortBy: 'publishedAt', // 최신 뉴스 기준 정렬
         },
@@ -121,45 +121,53 @@ const response = await axios.get('https://newsapi.org/v2/everything', {
 
 ```
 /EV-FRONTEND
-├── public
-│   └── index.html
+│   
 ├── src
 │   ├── components
-│   │   ├── Main.js
-│   │   ├── MainCar.js
-│   │   ├── Nav.js
-│   │   ├── Searchbar.js
-│   │   ├── SearchResult.js
-│   │   ├── CarSwiper.js
-│   │   ├── CarDetail.js
-│   │   ├── Carbattery.js
-│   │   ├── Carnews.js
-│   │   ├── Footer.js
+│   │   ├── Main.jsx
+│   │   ├── MainCar.jsx
+│   │   ├── Nav.jsx
+│   │   ├── Searchbar.jsx
+│   │   ├── SearchResult.jsx
+│   │   ├── CarSwiper.jsx
+│   │   ├── CarDetail.jsx
+│   │   ├── Carbattery.jsx
+│   │   ├── Carnews.jsx
+│   │   ├── Footer.jsx
 │   │   └── ElectricVehicles.js
 │   ├── assets
 │   │   ├── fonts
 │   │   └── images
-│   ├── App.js
-│   └── index.js
+│   ├── App.jsx
+│   └── index.html
+├── .env
+├── .gitignore
+├── index.html // vite Migration 때문에 index.html을 최상단으로
 ├── package.json
 └── README.md
 ```
 
 ## 스크린샷
 
-주요 기능에 대한 스크린샷은 아래와 같습니다.
-
 - 메인 페이지
-  ![스크린샷 2024-11-18 16.05.16.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/c7519e7c-2280-4239-80a5-3ff597a11dcf/9e83bd12-80c9-40fb-8454-793780066aed/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2024-11-18_16.05.16.png)
 
-![스크린샷 2024-11-18 16.05.10.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/c7519e7c-2280-4239-80a5-3ff597a11dcf/ca4c58c5-cb6f-4e91-9c91-78a02b931222/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2024-11-18_16.05.10.png)
+![메인1](https://github.com/user-attachments/assets/1fa5f59a-a4b0-4648-bba3-82552bd463bd) |![메인2](https://github.com/user-attachments/assets/ee6a82c5-ae74-49e1-b2ec-8ef941546836)
+--- | --- | 
 
 - 검색 결과 페이지
-  ![스크린샷 2024-11-18 16.05.38.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/c7519e7c-2280-4239-80a5-3ff597a11dcf/009439ab-2b99-437a-8238-1994287d97cc/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2024-11-18_16.05.38.png)
+
+![전체검색](https://github.com/user-attachments/assets/c07571b7-2925-497e-9f94-97aacd9edab9) |![제네시스검색](https://github.com/user-attachments/assets/98c0704c-4627-49c5-8c97-5d0766a13d2f)
+--- | --- | 
 
 - 차량 상세 페이지
 
+
+![차량상세](https://github.com/user-attachments/assets/9df91429-8399-4823-a6dc-64be6f4b5480) |![차량제원상세](https://github.com/user-attachments/assets/675443df-fee2-4593-bb75-b004dd497109)
+--- | --- | 
+
 - 배터리 조회 페이지
+![배터리조회](https://github.com/user-attachments/assets/18e733e6-e78f-4602-bc71-67de3a4a5476)
 
 - 뉴스 페이지
-  ![스크린샷 2024-11-18 16.05.59.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/c7519e7c-2280-4239-80a5-3ff597a11dcf/8e5168ff-0da9-4df8-be96-8308dea8dfed/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2024-11-18_16.05.59.png)
+![차량뉴스](https://github.com/user-attachments/assets/5dc01556-aeaa-4116-b293-ab8dfebaadc0) |![뉴스모달](https://github.com/user-attachments/assets/4f869792-c55c-43fd-aabf-cc514bd7670b)
+--- | --- | 
