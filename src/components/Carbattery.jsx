@@ -145,13 +145,15 @@ function Carbattery() {
           <div style={{ textAlign: 'center', marginTop: '20px' }}>
             <button
               onClick={() => handlePageChange(manufacturer, 'prev')}
-              disabled={currentPage === 1}>
+              disabled={currentPage === 1}
+              style={styles.paginationButton}>
               &lt;
             </button>
             <span>{` ${currentPage} / ${totalPages} `}</span>
             <button
               onClick={() => handlePageChange(manufacturer, 'next')}
-              disabled={currentPage === totalPages}>
+              disabled={currentPage === totalPages}
+              style={styles.paginationButton}>
               &gt;
             </button>
           </div>
