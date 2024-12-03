@@ -169,5 +169,6 @@ const response = await axios.get('https://newsapi.org/v2/everything', {
 ![배터리조회](https://github.com/user-attachments/assets/18e733e6-e78f-4602-bc71-67de3a4a5476)
 
 - 뉴스 페이지
+
 ![차량뉴스](https://github.com/user-attachments/assets/5dc01556-aeaa-4116-b293-ab8dfebaadc0) |![뉴스모달](https://github.com/user-attachments/assets/4f869792-c55c-43fd-aabf-cc514bd7670b)
 --- | --- | 
